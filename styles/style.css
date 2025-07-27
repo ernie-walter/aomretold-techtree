@@ -160,12 +160,12 @@ main {
 /* --------------------------- FONTS ---------------------------*/
 @font-face {
     font-family: 'Constan';
-    src: url('fonts/constan.tff') format('truetype'),
+    src: url('fonts/constan.ttf') format('truetype');
 }
-@font-face {
+/* @font-face {
     font-family: 'Segoe UI';
-    src: url('fonts/segoeui.tff') format('truetype'),
-}
+    src: url('fonts/segoeui.tff') format('truetype');
+} */
     /* font-family: 'Constan';
     src: url('fonts/constan.tff') format('truetype'),
 
