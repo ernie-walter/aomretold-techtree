@@ -4,7 +4,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Constan', sans-serif;
     background: #3d3d3d;
     color: white;
     max-width: 100vw;
@@ -16,6 +16,7 @@ header {
     color: white;
     padding: 15px;
     text-align: center;
+    font-family: 'Constan', sans-serif;
 }
 
 footer {
@@ -79,11 +80,12 @@ main {
 }
 
 .sidebar-footer {
+    background-color: #4CAF50;
     margin-top: auto;
     padding: 20px 0 20px 0;
     text-align: center;
     font-size: 0.9em;
-    color: #bbb;
+    color: #222;
 }
 
 .sidebar a {
@@ -153,4 +155,39 @@ main {
 .unit:hover {
     background: #555;
     border-color: gold;
+}
+
+/* --------------------------- FONTS ---------------------------*/
+@font-face {
+    font-family: 'Constan';
+    src: url('fonts/constan.tff') format('truetype'),
+}
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('fonts/segoeui.tff') format('truetype'),
+}
+    /* font-family: 'Constan';
+    src: url('fonts/constan.tff') format('truetype'),
+
+    font-family: 'Constan';
+    src: url('fonts/constan.tff') format('truetype'),
+
+    font-family: 'Constan';
+    src: url('fonts/constan.tff') format('truetype'), */
+
+
+h1 {
+  font-family: 'Constan', serif;
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-family: 'Constan', serif;
+  font-size: 2rem;
+}
+
+p {
+  font-family: 'Constan', serif;
+  font-size: 1rem;
+  line-height: 1.6;
 }
