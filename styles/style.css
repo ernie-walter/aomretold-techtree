@@ -159,9 +159,10 @@ main {
 
 /* --------------------------- FONTS ---------------------------*/
 @font-face {
-    font-family: 'Constan';
-    src: url('fonts/constan.ttf') format('truetype');
+  font-family: 'Constan';
+  src: url('fonts/Constantia.woff2') format('woff2');
 }
+
 /* @font-face {
     font-family: 'Segoe UI';
     src: url('fonts/segoeui.tff') format('truetype');
@@ -177,7 +178,7 @@ main {
 
 
 h1 {
-  font-family: 'Constan', serif;
+  font-family: 'Constan' , serif;
   font-size: 2.5rem;
 }
 
