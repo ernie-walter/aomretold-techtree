@@ -84,7 +84,7 @@ main {
 .sidebar-footer {
     background-color: #4CAF50;
     margin-top: auto;
-    padding: 20px 0 20px 0;
+    padding: 0px 0 0px 0;
     text-align: center;
     font-size: 0.9em;
     color: #222;
@@ -297,7 +297,7 @@ main {
   --font-sans: 'Segoe', sans-serif;
   --font-serif: 'Constantia', serif;
   
-  --text-color: #333;
+  --text-color: #ccc;
   --font-size-base: 16px;
   --line-height-base: 1.6;
   
@@ -328,12 +328,12 @@ h2{
 
 @font-face {
   font-family: 'Constantia';
-  src: url('fonts/Constantia.woff2') format('woff2');
+  src: url("..fonts/Constantia.woff2") format('woff2');
 }
 
 @font-face {
     font-family: 'Segoe';
-    src: url('fonts/segoeui.woff2') format('woff2');
+    src: url("..fonts/segoeui.woff2") format('woff2');
 }
 
 /* @font-face {
