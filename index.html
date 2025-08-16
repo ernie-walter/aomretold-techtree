@@ -26,19 +26,7 @@
             </ul>
         </nav>
 
-        <!-- <nav class="navbar">
-            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                ☰
-            </button>
-            <ul class="nav-links">
-                <li><p><a href="#">Greek</a></p></li>
-                <li><p><a href="#">Norse</a></p></li>
-                <li><p><a href="#">Egyptian</a></p></li>
-                <li><p><a href="#">Atlantian</a></p></li>
-                <li><p><a href="#">Chinese</a></p></li>
-            </ul>
-        </nav> -->
-    
+
          <div class="sidebar-text">
             <h2>About</h2>
             <p>This is a reconstruction of the Tech Tree from the amazing game, Age of Mythology Retold. <br> A work in progress!</p>
@@ -57,15 +45,67 @@
     </nav>
 
 
-
-
-
     <div class="content">
         <header>
             <h1>AGE OF MYTHOLOGY RETOLD TECH TREE</h1>
         </header>
         <main>
-            <div class="viewport" id="viewport">
+            .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    /* Each grid item */
+    .grid-item {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .grid-item img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: block;
+    }
+
+    /* Tooltip */
+    .tooltip {
+      visibility: hidden;
+      opacity: 0;
+      background-color: rgba(0,0,0,0.8);
+      color: #fff;
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 6px;
+      position: absolute;
+      bottom: 110%; /* position above the image */
+      left: 50%;
+      transform: translateX(-50%);
+      transition: opacity 0.3s;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    /* Arrow below tooltip */
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%; /* at the bottom of tooltip */
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: rgba(0,0,0,0.8) transparent transparent transparent;
+    }
+
+    /* Show tooltip on hover */
+    .grid-item:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }   
+            <!-- <div class="viewport" id="viewport">
                 <div class="tree-container" id="tree">
                     <div class="unit" style="grid-column: 1; grid-row: 1;">Militia</div>
                     <div class="unit" style="grid-column: 2; grid-row: 1;">Man-at-Arms</div>
@@ -73,7 +113,7 @@
                     <div class="unit" style="grid-column: 4; grid-row: 1;">Two-Handed Swordsman</div>
                     <div class="unit" style="grid-column: 5; grid-row: 1;">Champion</div>
                 </div>
-            </div>
+            </div> -->
         </main>
     <script src="scripts/main.js"></script>
 
