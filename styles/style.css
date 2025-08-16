@@ -46,7 +46,7 @@ main {
     flex-direction: column;
     height: 100vh; /* Ensures sidebar fills the viewport */
     width: 200px;
-    background-image: url('/images/ornatetexture.png');
+    background-image: url('images/ornatetexture.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
