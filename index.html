@@ -6,6 +6,7 @@
     <title>AOM Retold Tech Tree</title>
     <link rel="stylesheet" href="styles/style.css">
     <script src="main.js"></script>
+    
 </head>
 <body>
     <nav class="sidebar">
@@ -50,61 +51,22 @@
             <h1>AGE OF MYTHOLOGY RETOLD TECH TREE</h1>
         </header>
         <main>
-            .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
+    
+<div class="grid">
+    <div class="grid-item">
+      <img src="https://via.placeholder.com/200x150" alt="Example 1">
+      <div class="tooltip">This is the first image</div>
+    </div>
+    <div class="grid-item">
+      <img src="https://via.placeholder.com/200x150/555" alt="Example 2">
+      <div class="tooltip">Another description here</div>
+    </div>
+    <div class="grid-item">
+      <img src="https://via.placeholder.com/200x150/888" alt="Example 3">
+      <div class="tooltip">Third image details</div>
+    </div>
+  </div>
 
-    /* Each grid item */
-    .grid-item {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .grid-item img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: block;
-    }
-
-    /* Tooltip */
-    .tooltip {
-      visibility: hidden;
-      opacity: 0;
-      background-color: rgba(0,0,0,0.8);
-      color: #fff;
-      text-align: center;
-      padding: 8px 12px;
-      border-radius: 6px;
-      position: absolute;
-      bottom: 110%; /* position above the image */
-      left: 50%;
-      transform: translateX(-50%);
-      transition: opacity 0.3s;
-      white-space: nowrap;
-      z-index: 10;
-    }
-
-    /* Arrow below tooltip */
-    .tooltip::after {
-      content: "";
-      position: absolute;
-      top: 100%; /* at the bottom of tooltip */
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 6px;
-      border-style: solid;
-      border-color: rgba(0,0,0,0.8) transparent transparent transparent;
-    }
-
-    /* Show tooltip on hover */
-    .grid-item:hover .tooltip {
-      visibility: visible;
-      opacity: 1;
-    }   
             <!-- <div class="viewport" id="viewport">
                 <div class="tree-container" id="tree">
                     <div class="unit" style="grid-column: 1; grid-row: 1;">Militia</div>
