@@ -4,7 +4,6 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    /* font-family: 'Constan', sans-serif; */
     background: #3d3d3d;
     color: white;
     max-width: 100vw;
@@ -16,7 +15,6 @@ header {
     color: white;
     padding: 15px;
     text-align: center;
-    /* font-family: 'Constan', sans-serif; */
 }
 
 footer {
@@ -34,11 +32,6 @@ nav {
 nav a {
     margin: 20px;
     text-decoration: none;
-    color: #4CAF50;
-}
-
-nav a:hover {
-    text-decoration: underline;
 }
 
 main {
@@ -70,10 +63,6 @@ main {
     margin: 0;
 }
 
-.sidebar li {
-    margin: 0px 0;
-}
-
 .sidebar-text {
     margin: 10px 30px 10px 30px;
     text-align: left;
@@ -82,7 +71,7 @@ main {
 }
 
 .sidebar-footer {
-    background-color: #4CAF50;
+    background-color: #111;
     margin-top: auto;
     padding: 0px 0 0px 0;
     text-align: center;
@@ -99,7 +88,8 @@ main {
 }
 
 .sidebar a:hover {
-    background: #4CAF50;
+    background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
+    color: #222;
 }
 
 /* Base styles */
@@ -146,25 +136,6 @@ main {
     min-height: 100vh;
 }
 
-.viewport {
-    width: 100%;
-    height: auto;
-    overflow-x: auto;
-    position: relative;
-}
-
-.tree-container {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-auto-rows: 120px;
-    gap: 20px;
-    padding: 40px;
-    background: linear-gradient(to bottom, #1e1e1e, #333);
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100vw;
-}
 /* --------------------------- TECH TREE ITEMS ---------------------------*/
 .building {
     background: #333;
@@ -205,24 +176,23 @@ main {
 .grid-column {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 
 /* Each row lays out multiple icons horizontally */
 .icon-row {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   justify-content: flex-start;
 }
 
-/*  Icon items 
-.icon-item {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
+.inline-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
 }
-
-.icon-item img {
+/* 
+.inline-icon img {
   width: 48px;
   height: 48px;
   border-radius: 4px;
@@ -267,7 +237,6 @@ main {
   bottom: 110%; /* position above the image */
   left: 50%;
   transform: translateX(-50%);
-  transition: opacity 0.3s;
   white-space: nowrap;
   z-index: 10;
 }
@@ -313,6 +282,13 @@ p {
   color: var(--text-color);
 }
 
+p2 {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base* 0.9);
+  line-height: var(--line-height-base);
+  color: var(--text-color);
+}
+
 h1 {
     font-family: var(--font-serif);
     font-size: var(--font-size-h1);
@@ -328,12 +304,12 @@ h2{
 
 @font-face {
   font-family: 'Constantia';
-  src: url("..fonts/Constantia.woff2") format('woff2');
+  src: url("../fonts/Constantia.woff2") format('woff2');
 }
 
 @font-face {
     font-family: 'Segoe';
-    src: url("..fonts/segoeui.woff2") format('woff2');
+    src: url("../fonts/segoeui.woff2") format('woff2');
 }
 
 /* @font-face {
