@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add frame based on type
     if (type) {
       const frame = document.createElement("img");
-      frame.src = `images/Frames/Frame_${type}.png`; // adjust path to your naming
+      frame.src = `images/Frames/Frame_${type}.png`;
       frame.classList.add("frame");
       wrapper.appendChild(frame);
     }
