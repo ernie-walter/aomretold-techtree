@@ -5,22 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AOM Retold Tech Tree</title>
     <link rel="stylesheet" href="styles/style.css">
-    <script src="main.js"></script>
+    <script src="scripts/main.js" defer></script>
     
 </head>
 <body>
     <nav class="sidebar">
-        <nav class="navbar">
-            <ul class="nav">
-                <li><p><a href="#">Greek</a></p></li>
-                <!-- <li><p><a href="#">Norse</a></p></li>
-                <li><p><a href="#">Egyptian</a></p></li>
-                <li><p><a href="#">Atlantean</a></p></li>
-                <li><p><a href="#">Chinese</a></p></li> -->
-            </ul>
-        </nav>
+        <div class="sidebar-text">
+            <h2> Civilisation</h2>
+            
+            <select id="MinorGodToggle">
+                <option value="Zeus">Zeus</option>
+                <!-- Zeus = hide Ares, Aphrodite, Artemis -->
+                <option value="Poseidon">Poseidon</option>
+                <!-- Poseidon = hide Athena, Apollo, Hera -->
+                <option value="Hades">Hades</option>
+                <!-- Hades = hide Hermes, Dionysius, Hera -->
+            </select>
 
-
+            <h2> Player Colour</h2>
+            <select id="PlayerColourToggle">
+                <option value="">Select</option>
+                <option value="#3232ff">1</option>
+                <option value="#ff0000">2</option>
+                <option value="#ffff19">3</option>
+                <option value="#36ff32">4</option>
+                <option value="#32edff">5</option>
+                <option value="#ff00ff">6</option>
+                <option value="#ff9721">7</option>
+                <option value="#8e1942">8</option>
+                <option value="#00bc7a">9</option>
+                <option value="#ff9b7a">10</option>
+                <option value="#900cfc">11</option>
+                <option value="#757474">12</option>
+                <option value="#774538">Neutral</option>
+            </select>
+        </div>
+    
         <div class="sidebar-text">
             <h2>About</h2>
             <p>This is a reconstruction of the Tech Tree from the amazing game, Age of Mythology Retold. <br> A work in progress!</p>
@@ -39,12 +59,8 @@
         <div class="sidebar-footer">
             <p>&copy; 2025 erniewalter</p>
         </div>
-
-
     </nav>
 
-
-    
     <div class="content">
         <header>
             <!-- <img src="images/Top_Logo.png"> -->
@@ -52,9 +68,10 @@
         </header>
         <main>
             <div class="grid">
-                <div class="grid-column"> <!-- Age I -->
+                 <!-- Age I -->
+                <div class="grid-column Age I">
                     <div class="icon-row"> <!-- Age Symbol -->
-                        <div class="icon-wrapper">
+                        <div class="icon-wrapper no-background">
                             <img src="images/Shared Techs/archaic_age_icon.png" class="icon">
                             <p class="tooltip">Archaic Age</p>
                         </div>
@@ -69,10 +86,12 @@
                             <p class="tooltip">Olympian Parentage</p>
                         </div>
                     </div>
+
                     <div class="icon-row"> <!-- blank row -->
-                        <div class="icon-wrapper">
+                        <div class="icon-wrapper no-background">
                         </div>
                     </div>
+
                     <div class="icon-row"> <!-- Town Centre -->
                         <div class="icon-wrapper">
                             <img src="images/Greek Buildings/town_center_greek_icon.png" class="icon">
@@ -95,6 +114,7 @@
                             <p class="tooltip">Jason</p>
                         </div>
                     </div>
+                    
                     <div class="icon-row"> <!-- Granary -->
                          <div class="icon-wrapper">
                             <img src="images/Shared Buildings/granary_icon.png" class="icon">
@@ -104,11 +124,10 @@
                         <div class="icon-wrapper">
                             <img src="images/Shared Techs/husbandry_icon.png" class="icon">
                             <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Granary</p>
+                            <p class="tooltip">Husbandry</p>
                         </div>
-                        
-                        
                     </div>
+
                     <div class="icon-row"> <!-- Storehouse -->
                          <div class="icon-wrapper">
                             <img src="images/Greek Buildings/storehouse_icon.png" class="icon">
@@ -125,17 +144,16 @@
                             <img src="images/Frames/Frame_Techs.png" class="frame">
                             <p class="tooltip">Pickaxe</p>
                         </div>
-                        
                     </div>
+
                     <div class="icon-row"> <!-- House -->
                          <div class="icon-wrapper">
                             <img src="images/Shared Buildings/house_icon.png" class="icon">
                             <img src="images/Frames/Frame_Building.png" class="frame">
                             <p class="tooltip">House</p>
-                        </div>
-                        
-                        
+                         </div>
                     </div>
+
                     <div class="icon-row"> <!-- Dock -->
                          <div class="icon-wrapper">
                             <img src="images/Shared Buildings/dock_icon.png" class="icon">
@@ -146,10 +164,9 @@
                             <img src="images/Greek Units/fishing_ship_greek_icon.png" class="icon">
                             <img src="images/Frames/Frame_Unit.png" class="frame">
                             <p class="tooltip">Fishing Ship</p>
-                        </div>
-                        
-                        
+                        </div>   
                     </div>
+
                     <div class="icon-row"> <!-- Temple -->
                          <div class="icon-wrapper">
                             <img src="images/Shared Buildings/temple_icon.png" class="icon">
@@ -161,60 +178,298 @@
                             <img src="images/Frames/Frame_MythUnit.png" class="frame">
                             <p class="tooltip">Pegasus</p>
                         </div>
-                        
                     </div> 
+
                     <div class="icon-row"> <!-- Wall -->
                          <div class="icon-wrapper">
                             <img src="images/Shared Buildings/wooden_wall_icon.png" class="icon">
                             <img src="images/Frames/Frame_Building.png" class="frame">
                             <p class="tooltip">Wall</p>
                         </div>
-                        
-                        
                     </div> 
                 </div>
 
-                <!-- Age II -->
-                <div class="grid-column">
-                    <div class="icon-row">
-                        <div class="icon-item">
-                            <img src="https://via.placeholder.com/48" alt="Icon A">
-                            <span class="tooltip">Icon A</span>
-                        </div>
-                        <div class="icon-item">
-                            <img src="https://via.placeholder.com/48" alt="Icon B">
-                            <span class="tooltip">Icon B</span>
+                <!-- Age II Base -->
+                <div class="grid-column Age II Base">
+                    <div class="icon-row"> <!-- Age Symbol -->
+                        <div class="icon-wrapper no-background">
+                            <img src="images/Shared Techs/classical_age_icon.png" class="icon">
+                            <p class="tooltip">Classical Age</p>
                         </div>
                     </div>
+                        
+                    <div class="icon-row"> <!-- blank row -->
+                        <div class="icon-wrapper no-background">
+                        </div>
+                    </div>
+                    
+                    <div class="icon-row"> <!-- Town Centre -->
+                         <div class="icon-wrapper">
+                            <img src="images/Greek Units/heracles_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Hero.png" class="frame">
+                            <p class="tooltip">Heracles</p>
+                        </div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Granary -->
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/plow_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Plow</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/hunting_equipment_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Survival Equipment</p>
+                        </div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Storehouse -->
+                        <div class="icon-wrapper no-background">            
+                        </div>
+                    </div>
+
+                     <div class="icon-row"> <!-- Armory -->
+                         <div class="icon-wrapper">
+                            <img src="images/Shared Buildings/armory_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Building.png" class="frame">
+                            <p class="tooltip">Armory</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/copper_weapons_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Copper Weapons</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/copper_armor_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Copper Armor</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/copper_shields_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Copper Shields</p>
+                        </div>
+                        
+                    </div> 
+
+                    <div class="icon-row"> <!-- Dock -->
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/trireme_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Unit.png" class="frame">
+                            <p class="tooltip">Trireme</p>
+                        </div>   
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/pentekonter_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Unit.png" class="frame">
+                            <p class="tooltip">Pentekonter</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/juggernaut_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Unit.png" class="frame">
+                            <p class="tooltip">Juggernaut</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/transport_ship_greek_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Unit.png" class="frame">
+                            <p class="tooltip">Transport Ship</p>
+                        </div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Temple -->
+                         <div class="icon-wrapper no-background"></div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Wall -->
+                         <div class="icon-wrapper">
+                            <img src="images/Greek Techs/stone_wall_greek_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Stone Wall</p>
+                        </div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Military Academy -->
+                         <div class="icon-wrapper">
+                            <img src="images/Greek Buildings/military_academy_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Building.png" class="frame">
+                            <p class="tooltip">Military Academy</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/hoplite_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Unit.png" class="frame">
+                            <p class="tooltip">Hoplite</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/medium_infantry_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Medium Infantry</p>
+                        </div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Archery Range -->
+                         <div class="icon-wrapper">
+                            <img src="images/Greek Buildings/archery_range_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Building.png" class="frame">
+                            <p class="tooltip">Archery Range</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/toxotes_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Unit.png" class="frame">
+                            <p class="tooltip">Toxotes</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/medium_archers_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Medium Archers</p>
+                        </div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Stable -->
+                         <div class="icon-wrapper">
+                            <img src="images/Greek Buildings/stable_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Building.png" class="frame">
+                            <p class="tooltip">Stable</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/hippeus_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Unit.png" class="frame">
+                            <p class="tooltip">Hippeus</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/medium_cavalry_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Medium Cavalry</p>
+                        </div>
+                    </div> 
+
+                     <div class="icon-row"> <!-- Tower -->
+                         <div class="icon-wrapper">
+                            <img src="images/Shared Buildings/sentry_tower_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Building.png" class="frame">
+                            <p class="tooltip">Sentry Tower</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Techs/watch_tower_greek_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Watch Towers</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Shared Techs/signal_fires_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Signal Fires</p>
+                        </div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Market -->
+                         <div class="icon-wrapper">
+                            <img src="images/Shared Buildings/market_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Building.png" class="frame">
+                            <p class="tooltip">Market</p>
+                        </div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Farm -->
+                         <div class="icon-wrapper">
+                            <img src="images/Shared Buildings/farm_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Building.png" class="frame">
+                            <p class="tooltip">Farm</p>
+                        </div>
+                    </div> 
+
                 </div>
+            
+                
+                <!-- Age II Minor Gods -->
+                <div class="grid-column Age II Minor Gods">
+                    <div class="icon-row"> 
+                            <div class="icon-wrapper">
+                                <img src="images/God Powers/restoration_icon.png" class="icon">
+                                <img src="images/Frames/Frame_GodPower.png" class="frame">
+                                <p class="tooltip">Restoration</p>
+                            </div>
+                    </div>
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
+
+                    <div class="icon-row"> <!-- Temple -->
+                         <div class="icon-wrapper">
+                            <img src="images/Greek Units/minotaur_icon.png" class="icon">
+                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
+                            <p class="tooltip">Minotaur</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Techs/labyrinth_of_minos_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Labyrinth of Minos</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/centaur_icon.png" class="icon">
+                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
+                            <p class="tooltip">Centaur</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Techs/sylvan_lore_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Sylvan Lore</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Units/cyclops_icon.png" class="icon">
+                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
+                            <p class="tooltip">Cyclops</p>
+                        </div>
+                        <div class="icon-wrapper">
+                            <img src="images/Greek Techs/will_of_kronos_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Will of Kronos</p>
+                        </div>
+
+                    </div> 
+
+
+                    
+                </div>
+
+                
+                    
 
                 <!-- Age III -->
                 <div class="grid-column">
-                    <div class="icon-row">
-                        <div class="icon-item">
-                            <img src="https://via.placeholder.com/48" alt="Icon X">
-                            <span class="tooltip">Icon X</span>
-                        </div>
-                        <div class="icon-item">
-                            <img src="https://via.placeholder.com/48" alt="Icon Y">
-                            <span class="tooltip">Icon Y</span>
-                        </div>
-                        <div class="icon-item">
-                            <img src="https://via.placeholder.com/48" alt="Icon Z">
-                            <span class="tooltip">Icon Z</span>
+                    <div class="icon-row"> <!-- Age Symbol -->
+                        <div class="icon-wrapper no-background">
+                            <img src="images/Shared Techs/heroic_age_icon.png" class="icon">
+                            <p class="tooltip">Heroic Age</p>
                         </div>
                     </div>
+                    
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
                 </div>
                 
 
                 <!-- Age IV -->
                 <div class="grid-column">
-                    <div class="icon-row">
-                        <div class="icon-item">
-                            <img src="https://via.placeholder.com/48" alt="Icon Q">
-                            <span class="tooltip">Icon Q</span>
+                    <div class="icon-row"> <!-- Age Symbol -->
+                        <div class="icon-wrapper no-background">
+                            <img src="images/Shared Techs/mythic_age_icon.png" class="icon">
+                            <p class="tooltip">Mythic Age</p>
                         </div>
                     </div>
+                    
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
+                </div>
+
+                 <!-- Age V -->
+                <div class="grid-column">
+                    <div class="icon-row"> <!-- Age Symbol -->
+                        <div class="icon-wrapper no-background">
+                            <img src="images/Shared Techs/wonder_age_icon.png" class="icon">
+                            <p class="tooltip">Wonder Age</p>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </main>

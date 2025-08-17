@@ -1,19 +1,12 @@
 // This file is intentionally left blank.
-  document.addEventListener('DOMContentLoaded', function () {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
+ 
+// Player Colour Dropdown Selection
+const dropdown = document.getElementById("PlayerColourToggle");
+const wrappers = document.querySelectorAll(".icon-wrapper:not(.no-background)");
 
-    hamburger.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen);
-    });
-
-    // Optional: close menu when a link is clicked (mobile only)
-    document.querySelectorAll('.nav-links a').forEach(link =>
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', false);
-      })
-    );
+dropdown.addEventListener("change", function () {
+  const color = this.value || "#ffffff"; // will now use hex code
+  wrappers.forEach(wrapper => {
+    wrapper.style.backgroundColor = color;
   });
-
+});

@@ -17,23 +17,6 @@ header {
     text-align: center;
 }
 
-footer {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    max-width: 100%;
-}
-
-nav {
-    margin: 0;
-}
-
-nav a {
-    margin: 20px;
-    text-decoration: none;
-}
-
 main {
     padding: 20px;
     flex: 1;
@@ -57,12 +40,6 @@ main {
     top: 0;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0px;
-    margin: 0;
-}
-
 .sidebar-text {
     margin: 10px 30px 10px 30px;
     text-align: left;
@@ -78,49 +55,9 @@ main {
     font-size: 0.9em;
     color: #222;
 }
+/* --------------------------- DROPDOWN --------------------------*/
 
-.sidebar a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    display: block;
-    border-radius: 4px;
-}
 
-.sidebar a:hover {
-    background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
-    color: #222;
-}
-
-/* Base styles */
-.navbar {
-  display: flex;
-  
-  justify-content: space-between;
-  align-items: center;
-  background: none;
-  padding: 10px 16px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  padding: 8px;
-}
-
-.nav-links a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-}
 
 /* --------------------------- CONTENT ---------------------------*/
 .content {
@@ -137,33 +74,6 @@ main {
 }
 
 /* --------------------------- TECH TREE ITEMS ---------------------------*/
-.building {
-    background: #333;
-    border: 2px solid #999;
-    border-radius: 8px;
-    text-align: center;
-    padding: 20px;
-    cursor: pointer;
-}
-
-.building:hover {
-    background: #555;
-    border-color: gold;
-}
-
-.unit {
-    background: #333;
-    border: 2px solid #999;
-    border-radius: 8px;
-    text-align: center;
-    padding: 20px;
-    cursor: pointer;
-}
-
-.unit:hover {
-    background: #555;
-    border-color: gold;
-}
 
 /* Row of flexible columns */
 .grid {
@@ -191,18 +101,15 @@ main {
   height: 16px;
   vertical-align: middle;
 }
-/* 
-.inline-icon img {
-  width: 48px;
-  height: 48px;
-  border-radius: 4px;
-  display: block;
-} */
 
 .icon-wrapper {
   position: relative;
-  width: 60px;      /* match frame size */
-  height: 60px;
+  width: 50px;      /* match frame size */
+  height: 50px;
+  background-color: #ffffff; /* default background */
+}
+.icon-wrapper.no-background {
+  background-color: transparent; 
 }
 
 .icon {
@@ -222,7 +129,6 @@ main {
   left: 0;
   pointer-events: none; /* so clicks pass through */
 }
-
 
 /* Tooltip */
 .tooltip {
@@ -258,7 +164,6 @@ main {
   visibility: visible;
   opacity: 1;
 }   
-
 
 
 /* --------------------------- FONTS ---------------------------*/
@@ -301,7 +206,6 @@ h2{
   font-weight: bold;
 }
 
-
 @font-face {
   font-family: 'Constantia';
   src: url("../fonts/Constantia.woff2") format('woff2');
@@ -311,59 +215,3 @@ h2{
     font-family: 'Segoe';
     src: url("../fonts/SegoeUI.woff2") format('woff2');
 }
-
-/* @font-face {
-    font-family: 'Frame';
-    src: url('../fonts/framd.ttf') format('trueType');
-}
-
-@font-face {
-    font-family: 'Georgia';
-    src: url('../fonts/georgia.ttf') format('trueType');
-}
-
-@font-face {
-    font-family: 'extra';
-    src: url('../fonts/tt1141m_.ttf') format('trueType');
-}
-
-@font-face {
-    font-family: 'MtCorvsa';
-    src: url('../fonts/mtcorsva.ttf') format('trueType');
-} */
-
-/* h1 {
-  font-family: 'Constantia' , serif;
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-family: 'Constantia', serif;
-  font-size: 1.5rem;
-}
-
-h3 {
-  font-family: 'Segoe', serif;
-  font-size: 2rem;
-}
-
-h4 {
-  font-family: 'Segoe', serif;
-  font-size: 2rem;
-}
-
-h5 {
-  font-family: 'extra', serif;
-  font-size: 2rem;}
-h6 {
-  font-family: 'MtCorvsa', serif;
-  font-size: 2rem;}
-h7 {
-  font-family: 'Segoe', serif;
-  font-size: 2rem;}
-
-p {
-  font-family: 'Segoe', serif;
-  font-size: 1rem;
-  line-height: 1.6;
-} */
