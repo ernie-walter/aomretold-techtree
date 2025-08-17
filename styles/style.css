@@ -130,6 +130,16 @@ main {
   pointer-events: none; /* so clicks pass through */
 }
 
+.god-overlay {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  width: 35%;
+  height: 35%;
+  border-radius: 50%;
+  border: 1px solid #333;
+}
+
 /* Tooltip */
 .tooltip {
   visibility: hidden;

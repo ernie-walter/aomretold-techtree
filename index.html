@@ -16,11 +16,8 @@
             <select id="MajorGodToggle">
                 <option value="all">All</option>
                 <option value="zeus">Zeus</option>
-                <!-- Zeus = hide Ares, Aphrodite, Artemis -->
                 <option value="poseidon">Poseidon</option>
-                <!-- Poseidon = hide Athena, Apollo, Hera -->
                 <option value="hades">Hades</option>
-                <!-- Hades = hide Hermes, Dionysius, Hera -->
             </select>
 
             <h2> Player Colour</h2>
@@ -49,12 +46,12 @@
 
         <div class="sidebar-text">
             <h2>Key</h2>
-                    <p2><img src="images/Frames/IconLegend_Building.png" class="inline-icon"> Building</p2><br>
-                    <p2><img src="images/Frames/IconLegend_Improvement.png"class="inline-icon"> Tech</p2><br>
-                    <p2><img src="images/Frames/IconLegend_GodPower.png"class="inline-icon"> God Power</p2><br>
-                    <p2><img src="images/Frames/IconLegend_Unit.png"class="inline-icon"> Unit</p2><br>
-                    <p2><img src="images/Frames/IconLegend_HeroUnit.png"class="inline-icon"> Hero</p2><br>
-                    <p2><img src="images/Frames/IconLegend_MythUnit.png"class="inline-icon"> Myth Unit</p2>
+                <p2><img src="images/Frames/IconLegend_GodPower.png"class="inline-icon"> God Power</p2><br>        
+                <p2><img src="images/Frames/IconLegend_Building.png" class="inline-icon"> Building</p2><br>
+                <p2><img src="images/Frames/IconLegend_HeroUnit.png"class="inline-icon"> Hero</p2><br>
+                <p2><img src="images/Frames/IconLegend_Unit.png"class="inline-icon"> Unit</p2><br>
+                <p2><img src="images/Frames/IconLegend_MythUnit.png"class="inline-icon"> Myth Unit</p2><br>
+                <p2><img src="images/Frames/IconLegend_Improvement.png"class="inline-icon"> Tech</p2>
         </div>
 
         <div class="sidebar-footer">
@@ -124,24 +121,20 @@
                             <img src="images/Frames/Frame_Unit.png" class="frame">
                             <p class="tooltip">Villager</p>
                         </div>
-                        <div class="icon-wrapper">
+                        <div class="icon-wrapper" data-type="unit">
                             <img src="images/Greek Units/kataskopos_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
                             <p class="tooltip">Kataskopos</p>
                         </div>
-                        <div class="icon-wrapper god" data-god="zeus">
+                        <div class="icon-wrapper god" data-type="hero" data-god="zeus">
                             <img src="images/Greek Units/jason_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Hero.png" class="frame">
                             <p class="tooltip">Jason</p>
                         </div>
-                        <div class="icon-wrapper god" data-god="poseidon">
+                        <div class="icon-wrapper god" data-type="hero" data-god="poseidon">
                             <img src="images/Greek Units/theseus_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Hero.png" class="frame">
                             <p class="tooltip">Theseus</p>
                         </div>
-                        <div class="icon-wrapper god" data-god="hades">
+                        <div class="icon-wrapper god" data-type="hero" data-god="hades">
                             <img src="images/Greek Units/ajax_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Hero.png" class="frame">
                             <p class="tooltip">Ajax</p>
                         </div>
                     </div>

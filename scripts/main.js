@@ -35,3 +35,40 @@ dropdownMajor.addEventListener('change', () => {
     }
   });
 });
+
+// Icon Overlay for Minor God-specific techs/units
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".icon-wrapper[data-god]").forEach(wrapper => {
+    const god = wrapper.dataset.god; // e.g. "athena"
+    
+    // Create overlay img
+    const overlay = document.createElement("img");
+    overlay.src = `images/God Pictures/${god}_icon.png`; // adjust path if needed
+    overlay.classList.add("god-overlay");
+    
+    wrapper.appendChild(overlay);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".icon-wrapper").forEach(wrapper => {
+    const type = wrapper.dataset.type;  // e.g. "tech", "unit", "building"
+    const god  = wrapper.dataset.god;   // e.g. "athena" (might be undefined)
+
+    // Add frame based on type
+    if (type) {
+      const frame = document.createElement("img");
+      frame.src = `images/Frames/Frame_${type}.png`; // adjust path to your naming
+      frame.classList.add("frame");
+      wrapper.appendChild(frame);
+    }
+
+    // Add god overlay if applicable
+    if (god) {
+      const overlay = document.createElement("img");
+      overlay.src = `images/God Pictures/${god}_icon.png`;
+      overlay.classList.add("god-overlay");
+      wrapper.appendChild(overlay);
+    }
+  });
+});
