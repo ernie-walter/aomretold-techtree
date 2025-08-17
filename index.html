@@ -13,12 +13,13 @@
         <div class="sidebar-text">
             <h2> Civilisation</h2>
             
-            <select id="MinorGodToggle">
-                <option value="Zeus">Zeus</option>
+            <select id="MajorGodToggle">
+                <option value="all">All</option>
+                <option value="zeus">Zeus</option>
                 <!-- Zeus = hide Ares, Aphrodite, Artemis -->
-                <option value="Poseidon">Poseidon</option>
+                <option value="poseidon">Poseidon</option>
                 <!-- Poseidon = hide Athena, Apollo, Hera -->
-                <option value="Hades">Hades</option>
+                <option value="hades">Hades</option>
                 <!-- Hades = hide Hermes, Dionysius, Hera -->
             </select>
 
@@ -75,15 +76,35 @@
                             <img src="images/Shared Techs/archaic_age_icon.png" class="icon">
                             <p class="tooltip">Archaic Age</p>
                         </div>
-                         <div class="icon-wrapper">
+                        <div class="icon-wrapper god" data-god="zeus">
                             <img src="images/God Powers/bolt_icon.png" class="icon">
                             <img src="images/Frames/Frame_GodPower.png" class="frame">
                             <p class="tooltip">Bolt</p>
                         </div>
-                        <div class="icon-wrapper">
+                        <div class="icon-wrapper god" data-god="zeus">
                             <img src="images/Greek Techs/olympian_parentage_icon.png" class="icon">
                             <img src="images/Frames/Frame_Techs.png" class="frame">
                             <p class="tooltip">Olympian Parentage</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="poseidon">
+                            <img src="images/God Powers/lure_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Lure</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="poseidon">
+                            <img src="images/Greek Techs/lord_of_horses_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Lord of Horses</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hades">
+                            <img src="images/God Powers/sentinel_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Sentinel</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hades">
+                            <img src="images/Greek Techs/vaults_of_erebus_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Vault of Erebus</p>
                         </div>
                     </div>
 
@@ -108,10 +129,20 @@
                             <img src="images/Frames/Frame_Unit.png" class="frame">
                             <p class="tooltip">Kataskopos</p>
                         </div>
-                        <div class="icon-wrapper">
+                        <div class="icon-wrapper god" data-god="zeus">
                             <img src="images/Greek Units/jason_icon.png" class="icon">
                             <img src="images/Frames/Frame_Hero.png" class="frame">
                             <p class="tooltip">Jason</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="poseidon">
+                            <img src="images/Greek Units/theseus_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Hero.png" class="frame">
+                            <p class="tooltip">Theseus</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hades">
+                            <img src="images/Greek Units/ajax_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Hero.png" class="frame">
+                            <p class="tooltip">Ajax</p>
                         </div>
                     </div>
                     
@@ -152,6 +183,11 @@
                             <img src="images/Frames/Frame_Building.png" class="frame">
                             <p class="tooltip">House</p>
                          </div>
+                         <div class="icon-wrapper god" data-god="poseidon">
+                            <img src="images/Greek Units/militia_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Unit.png" class="frame">
+                            <p class="tooltip">Militia</p>
+                        </div>
                     </div>
 
                     <div class="icon-row"> <!-- Dock -->
@@ -164,7 +200,12 @@
                             <img src="images/Greek Units/fishing_ship_greek_icon.png" class="icon">
                             <img src="images/Frames/Frame_Unit.png" class="frame">
                             <p class="tooltip">Fishing Ship</p>
-                        </div>   
+                        </div>
+                        <div class="icon-wrapper god" data-god="poseidon">
+                            <img src="images/Greek Units/hippocampus_icon.png" class="icon">
+                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
+                            <p class="tooltip">Hippocampus </p>
+                        </div>
                     </div>
 
                     <div class="icon-row"> <!-- Temple -->
@@ -173,10 +214,15 @@
                             <img src="images/Frames/Frame_Building.png" class="frame">
                             <p class="tooltip">Temple</p>
                         </div>
-                         <div class="icon-wrapper">
+                        <div class="icon-wrapper">
                             <img src="images/Greek Units/pegasus_icon.png" class="icon">
                             <img src="images/Frames/Frame_MythUnit.png" class="frame">
                             <p class="tooltip">Pegasus</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hades">
+                            <img src="images/Greek Units/hades_shade_icon.png" class="icon">
+                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
+                            <p class="tooltip">Shade of Hades</p>
                         </div>
                     </div> 
 
@@ -189,25 +235,47 @@
                     </div> 
                 </div>
 
-                <!-- Age II Base -->
+                <!-- Age II -->
                 <div class="grid-column Age II Base">
                     <div class="icon-row"> <!-- Age Symbol -->
                         <div class="icon-wrapper no-background">
                             <img src="images/Shared Techs/classical_age_icon.png" class="icon">
                             <p class="tooltip">Classical Age</p>
                         </div>
-                    </div>
-                        
-                    <div class="icon-row"> <!-- blank row -->
-                        <div class="icon-wrapper no-background">
+                        <div class="icon-wrapper god" data-god="athena">
+                            <img src="images/God Powers/restoration_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Restoration</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="ares">
+                            <img src="images/God Powers/pestilence_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Pestilence</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hermes">
+                            <img src="images/God Powers/ceasefire_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Ceasefire</p>
                         </div>
                     </div>
+                        
+                    <div class="icon-row"> <!-- blank row --><div class="icon-wrapper no-background"></div></div>
                     
                     <div class="icon-row"> <!-- Town Centre -->
-                         <div class="icon-wrapper">
+                         <div class="icon-wrapper god" data-god="zeus">
                             <img src="images/Greek Units/heracles_icon.png" class="icon">
                             <img src="images/Frames/Frame_Hero.png" class="frame">
                             <p class="tooltip">Heracles</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="poseidon">
+                            <img src="images/Greek Units/atalanta_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Hero.png" class="frame">
+                            <p class="tooltip">Atalanta</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hades">
+                            <img src="images/Greek Units/achilles_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Hero.png" class="frame">
+                            <p class="tooltip">Achilles</p>
                         </div>
                     </div> 
 
@@ -277,8 +345,42 @@
                     </div>
 
                     <div class="icon-row"> <!-- Temple -->
-                         <div class="icon-wrapper no-background"></div>
-                    </div> 
+                         <div class="icon-wrapper god" data-god="athena">
+                            <img src="images/Greek Units/minotaur_icon.png" class="icon">
+                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
+                            <p class="tooltip">Minotaur</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="athena">
+                            <img src="images/Greek Techs/labyrinth_of_minos_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Labyrinth of Minos</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hermes">
+                            <img src="images/Greek Units/centaur_icon.png" class="icon">
+                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
+                            <p class="tooltip">Centaur</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hermes">
+                            <img src="images/Greek Techs/sylvan_lore_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Sylvan Lore</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="ares">
+                            <img src="images/Greek Units/cyclops_icon.png" class="icon">
+                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
+                            <p class="tooltip">Cyclops</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="ares">
+                            <img src="images/Greek Techs/will_of_kronos_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Will of Kronos</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hermes">
+                            <img src="images/Greek Techs/winged_messenger_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Winged Messenger</p>
+                        </div>
+                    </div>  
 
                     <div class="icon-row"> <!-- Wall -->
                          <div class="icon-wrapper">
@@ -304,6 +406,26 @@
                             <img src="images/Frames/Frame_Techs.png" class="frame">
                             <p class="tooltip">Medium Infantry</p>
                         </div>
+                        <div class="icon-wrapper god" data-god="athena">
+                            <img src="images/Greek Techs/aegis_shield_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Aegis Shield</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="athena">
+                            <img src="images/Greek Techs/sarissa_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Sarissa</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="ares">
+                            <img src="images/Greek Techs/phobos_spear_of_panic_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Phobos' Spear of Panic</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="ares">
+                            <img src="images/Greek Techs/deimos_sword_of_dread_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Deimos' Sword of Dread</p>
+                        </div>
                     </div> 
 
                     <div class="icon-row"> <!-- Archery Range -->
@@ -322,6 +444,11 @@
                             <img src="images/Frames/Frame_Techs.png" class="frame">
                             <p class="tooltip">Medium Archers</p>
                         </div>
+                        <div class="icon-wrapper god" data-god="ares">
+                            <img src="images/Greek Techs/enyos_bow_of_horror_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Enyo's Bow of Horror</p>
+                        </div>
                     </div> 
 
                     <div class="icon-row"> <!-- Stable -->
@@ -339,6 +466,11 @@
                             <img src="images/Shared Techs/medium_cavalry_icon.png" class="icon">
                             <img src="images/Frames/Frame_Techs.png" class="frame">
                             <p class="tooltip">Medium Cavalry</p>
+                        </div>
+                        <div class="icon-wrapper god" data-god="hermes">
+                            <img src="images/Greek Techs/spirited_charge_icon.png" class="icon">
+                            <img src="images/Frames/Frame_Techs.png" class="frame">
+                            <p class="tooltip">Spirited Charge</p>
                         </div>
                     </div> 
 
@@ -377,65 +509,7 @@
                     </div> 
 
                 </div>
-            
-                
-                <!-- Age II Minor Gods -->
-                <div class="grid-column Age II Minor Gods">
-                    <div class="icon-row"> 
-                            <div class="icon-wrapper">
-                                <img src="images/God Powers/restoration_icon.png" class="icon">
-                                <img src="images/Frames/Frame_GodPower.png" class="frame">
-                                <p class="tooltip">Restoration</p>
-                            </div>
-                    </div>
-                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
-                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
-                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
-                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
-                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
-                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
-
-                    <div class="icon-row"> <!-- Temple -->
-                         <div class="icon-wrapper">
-                            <img src="images/Greek Units/minotaur_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Minotaur</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Techs/labyrinth_of_minos_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Labyrinth of Minos</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/centaur_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Centaur</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Techs/sylvan_lore_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Sylvan Lore</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/cyclops_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Cyclops</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Techs/will_of_kronos_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Will of Kronos</p>
-                        </div>
-
-                    </div> 
-
-
-                    
-                </div>
-
-                
-                    
-
+        
                 <!-- Age III -->
                 <div class="grid-column">
                     <div class="icon-row"> <!-- Age Symbol -->
