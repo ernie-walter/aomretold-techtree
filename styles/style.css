@@ -106,7 +106,7 @@ main {
   position: relative;
   width: 55px;      /* match frame size */
   height: 55px;
-  background-color: #ffffff; /* default background */
+  
 }
 .icon-wrapper.no-background {
   background-color: transparent; 
@@ -119,6 +119,7 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);  /* center inside frame */
+  background-color: #ffffff; /* default background */
 }
 
 .frame {

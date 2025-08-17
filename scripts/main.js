@@ -2,10 +2,10 @@
  
 // Player Colour Dropdown Selection
 const dropdownColour = document.getElementById("PlayerColourToggle");
-const wrappers = document.querySelectorAll(".icon-wrapper:not(.no-background)");
+const wrappers = document.querySelectorAll(".icon:not(.no-background)");
 
 dropdownColour.addEventListener("change", function () {
-  const color = this.value || "#ffffff"; // will now use hex code
+  const color = this.value || "#ffffff"; 
   wrappers.forEach(wrapper => {
     wrapper.style.backgroundColor = color;
   });
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add frame based on type
     if (type) {
       const frame = document.createElement("img");
-      frame.src = `images/Frames/Frame_${type}.png`;
+      frame.src = `images/Frames/Frame_${type}.png`; // adjust path to your naming
       frame.classList.add("frame");
       wrapper.appendChild(frame);
     }
