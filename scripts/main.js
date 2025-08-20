@@ -7,7 +7,7 @@ const wrappers = document.querySelectorAll(".icon:not(.no-background)");
 dropdownColour.addEventListener("change", function () {
   const color = this.value || "#ffffff"; 
   wrappers.forEach(wrapper => {
-    wrapper.style.backgroundColor = color;
+    wrapper.style.backgroundColor = color;b  
   });
 });
 
