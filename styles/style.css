@@ -55,6 +55,14 @@ main {
     font-size: 0.9em;
     color: #222;
 }
+
+/* used for the sidebar legend */
+.inline-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
 /* --------------------------- DROPDOWN --------------------------*/
 
 
@@ -94,12 +102,6 @@ main {
   display: flex;
   gap: 6px;
   justify-content: flex-start;
-}
-
-.inline-icon {
-  width: 16px;
-  height: 16px;
-  vertical-align: middle;
 }
 
 .icon-wrapper {
