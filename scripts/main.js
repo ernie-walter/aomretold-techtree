@@ -131,7 +131,7 @@ async function populateUnitWrapper(wrapper) {
     iconDiv.classList.add("icon");
     wrapper.appendChild(iconDiv);
   }
-  iconDiv.style.backgroundImage = `url(https://raw.githubusercontent.com/ernie-walter/aomretold-techtree/images/${data.icon.replace(/\\\\/g, "/")})`;
+  iconDiv.style.backgroundImage = `url('ernie-walter.github.io/aomretold-techtree/images/${data.icon.replace(/\\/g, "/")}')`;
 
   // --- Category for frame ---
   wrapper.dataset.type = data.category.toUpperCase().replace(" ", "");
@@ -148,7 +148,7 @@ async function populateUnitWrapper(wrapper) {
     wrapper.appendChild(frameImg);
   }
 
-  console.log("Populating:", unitName, "icon URL:", data.icon.replace(/\\\\/g, "/"));
+  console.log("Populating:", unitName, "icon URL:", data.icon.replace(/\\/g, "/"));
 
 }
 
