@@ -1,90 +1,65 @@
-// Big function to fetch unit data
-import fetch from "node-fetch";
-import { XMLParser } from "fast-xml-parser";
+// getUnitData function to fetch unit data from XML file
+
+// uncomment this to use the getUnitData function in a Node.js environment
+// import fetch from "node-fetch"; 
+// import { XMLParser } from "fast-xml-parser";
 
 async function getUnitData(unitName) {
   const response = await fetch("https://raw.githubusercontent.com/ernie-walter/aomretold-techtree/main/gamefiles/proto.xml");
   const xmlString = await response.text();
 
-  const parser = new XMLParser({
-    ignoreAttributes: false,
-    attributeNamePrefix: "",
-    textNodeName: "#text"
-  });
-  const jsonObj = parser.parse(xmlString);
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(xmlString, "application/xml");
 
-  const units = jsonObj.proto.unit;
-  if (!units) return null;
-
-  const unitArray = Array.isArray(units) ? units : [units];
-  const unit = unitArray.find(u => u.name === unitName);
-  if (!unit) return null;
-
-  // --- Category ---
-  let rawTypes = [];
-  if (unit.unittype) {
-    rawTypes = Array.isArray(unit.unittype) ? unit.unittype.map(t => t["#text"] || t) : [unit.unittype["#text"] || unit.unittype];
+  const unit = xmlDoc.querySelector(`unit[name="${unitName}"]`);
+  if (!unit) {
+    // console.error(`Unit "${unitName}" not found`);
+    return null;
   }
+
+  // Determine category
+  const rawTypes = Array.from(unit.querySelectorAll("unittype")).map(u => u.textContent.trim());
   let category = "Unknown";
   if (rawTypes.includes("Hero")) category = "Hero";
   else if (rawTypes.includes("MythUnit")) category = "Myth Unit";
   else if (rawTypes.includes("Building")) category = "Building";
-  else if (rawTypes.some(t => ["Unit", "MilitaryUnit", "Civilian"].includes(t))) category = "Unit";
+  else if (rawTypes.includes("Unit") || rawTypes.includes("MilitaryUnit") || rawTypes.includes("Civilian")) {
+    category = "Unit";
+  }
 
-  // --- Cost ---
+  // Costs
   const cost = {};
-  if (unit.cost) {
-    const costArray = Array.isArray(unit.cost) ? unit.cost : [unit.cost];
-    costArray.forEach(c => {
-      const type = c.resourcetype || c["@_resourcetype"];
-      cost[type] = c["#text"];
-    });
-  }
+  unit.querySelectorAll("cost").forEach(c => {
+    cost[c.getAttribute("resourcetype")] = c.textContent.trim();
+  });
 
-  // --- Armor ---
+  // Armor
   const armor = {};
-  if (unit.armor) {
-    const armorArray = Array.isArray(unit.armor) ? unit.armor : [unit.armor];
-    armorArray.forEach(a => armor[a.type] = a.value);
-  }
+  unit.querySelectorAll("armor").forEach(a => {
+    armor[a.getAttribute("type")] = a.getAttribute("value");
+  });
 
-  // --- Attacks ---
+  // Attacks
   const extractAttack = (actionName) => {
-    if (!unit.protoaction) return null;
-    const actions = Array.isArray(unit.protoaction) ? unit.protoaction : [unit.protoaction];
-    const action = actions.find(a => a.name === actionName);
+    const action = Array.from(unit.querySelectorAll("protoaction"))
+      .find(a => a.querySelector("name")?.textContent.trim() === actionName);
     if (!action) return null;
 
-    const attack = { rof: action.rof, damage: {}, bonus: {} };
-
-    if (action.damage) {
-      const dmgArray = Array.isArray(action.damage) ? action.damage : [action.damage];
-      dmgArray.forEach(d => attack.damage[d.type] = d["#text"]);
-    }
-
-    if (action.damagebonus) {
-      const bonusArray = Array.isArray(action.damagebonus) ? action.damagebonus : [action.damagebonus];
-      bonusArray.forEach(b => attack.bonus[b.type] = b["#text"]);
-    }
-
+    const attack = { rof: action.querySelector("rof")?.textContent, damage: {}, bonus: {} };
+    action.querySelectorAll("damage").forEach(d => attack.damage[d.getAttribute("type")] = d.textContent);
+    action.querySelectorAll("damagebonus").forEach(d => attack.bonus[d.getAttribute("type")] = d.textContent);
     return attack;
   };
 
   return {
     name: unitName,
-    icon: unit.icon,
+    icon: unit.querySelector("icon")?.textContent.trim(),
     category,
     cost,
     armor,
-    population: unit.populationcount,
-    maxVelocity: unit.maxvelocity,
+    population: unit.querySelector("populationcount")?.textContent,
+    maxVelocity: unit.querySelector("maxvelocity")?.textContent,
     handAttack: extractAttack("HandAttack"),
     rangedAttack: extractAttack("RangedAttack")
   };
 }
-
-// Example usage in Node.js
-(async () => {
-  const data = await getUnitData("House");
-  console.log(data);
-})();
