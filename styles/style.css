@@ -84,14 +84,14 @@ main {
 /* --------------------------- TECH TREE ITEMS ---------------------------*/
 
 /* Row of flexible columns */
-.grid {
+.age-columns-grid {
   display: flex;
   gap: 40px;
   justify-content: flex-start; /* keep columns tight to content */
 }
 
 /* Each column only as wide as its content */
-.grid-column {
+.age-column {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -107,8 +107,8 @@ main {
 
 .icon-wrapper {
   position: relative;
-  width: 55px;      /* match frame size */
-  height: 55px;
+  width: 50px;      /* match frame size */
+  height: 50px;
   
 }
 .icon-wrapper.no-background {

@@ -36,8 +36,28 @@ async function buildUnitIndex() {
   
 }
 
-function getUnitDataFromNode(node) {
+function getUnitDataFromNode(node, wrapper) {
   if (!node) return null;
+
+  const name = node.getAttribute("name");
+
+  // --- displayName ---
+  let displayName;
+  if (wrapper && wrapper.hasAttribute("displayName")) {
+    displayName = wrapper.getAttribute("displayName");
+  } else {
+    displayName = name;
+    const suffixes = ["Greek", "Egyptian", "Norse", "Atlantean", "Chinese"];
+    for (const suffix of suffixes) {
+      if (displayName.endsWith(suffix)) {
+        displayName = displayName.slice(0, -suffix.length);
+        break;
+      }
+    }
+  }
+
+  // Insert spaces before capital letters (except first letter)
+  displayName = displayName.replace(/([a-z])([A-Z])/g, "$1 $2");
 
   // Category is already computed in index if desired
   const rawTypes = Array.from(node.querySelectorAll('unittype')).map(u => u.textContent.trim());
@@ -47,6 +67,7 @@ function getUnitDataFromNode(node) {
   else if (rawTypes.includes('Building')) category = 'Building';
   else if (rawTypes.includes('Unit') || rawTypes.includes('MilitaryUnit') || rawTypes.includes('Civilian')) category = 'Unit';
   else if (rawTypes.includes('Tech') || node.tagName.toLowerCase() === 'tech') category = 'Techs';
+  else if (rawTypes.includes('GodPower') || node.tagName.toLowerCase() === 'effects') category = 'God Power';
 
   // Costs
   const cost = {};
@@ -79,6 +100,7 @@ function getUnitDataFromNode(node) {
 
   return {
     name: node.getAttribute('name'),
+    displayName,
     icon: node.querySelector('icon')?.textContent.trim() || null,
     category,
     cost,

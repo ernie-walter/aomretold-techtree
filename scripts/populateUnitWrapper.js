@@ -9,7 +9,7 @@ async function populateUnitWrapper(wrapper, unitIndex) {
     return;
   }
 
-  const data = getUnitDataFromNode(unitNodeObj.node);
+  const data = getUnitDataFromNode(unitNodeObj.node, wrapper);
 
   // --- Icon ---
   let iconDiv = wrapper.querySelector('.icon');
@@ -40,6 +40,6 @@ async function populateUnitWrapper(wrapper, unitIndex) {
   }
 
    // --- Tooltip ---
-  wrapper.title = `${unitName}\nCategory: ${data.category}\nPopulation: ${data.population}`;
+  wrapper.title = `${data.displayName}\nCategory: ${data.category}\nPopulation: ${data.population}`;
 
 }

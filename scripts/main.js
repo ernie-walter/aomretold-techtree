@@ -42,12 +42,12 @@ const majorToMinorMap = {
 
 // Filtering out icons based on Major God selection
 const dropdownMajor = document.getElementById('MajorGodToggle');
-const iconsGod = document.querySelectorAll('.icon-wrapper[data-god]');
+const iconsCiv = document.querySelectorAll('.icon-wrapper[data-civ]');
 dropdownMajor.addEventListener('change', () => {
   const selectedMajor = dropdownMajor.value;
 
-  iconsGod.forEach(icon => {
-    const minorGod = icon.dataset.god;
+  iconsCiv.forEach(icon => {
+    const minorGod = icon.dataset.civ;
 
     if (selectedMajor === "all" || (majorToMinorMap[selectedMajor] || []).includes(minorGod)) {
       icon.style.display = "block";  // show
@@ -68,9 +68,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Add god overlays
   wrappers.forEach(wrapper => {
-    if (!wrapper.dataset.god) return;
+    if (!wrapper.dataset.civ) return;
 
-    const god = wrapper.dataset.god;
+    const god = wrapper.dataset.civ;
     if (!god) return; // skip if no data-god
 
     // list of pantheons to skip
@@ -78,8 +78,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (skipGods.includes(god.toLowerCase())) return; // skip pantheon overlays
   if (wrapper.querySelector(".god-overlay")) return; // prevent duplicates
-
-    // if (god === "greek", "egyptian", "norse", "atlantean", "chinese") return;
 
     const overlay = document.createElement("img");
     overlay.src = `images/God Pictures/${god}_icon.png`;

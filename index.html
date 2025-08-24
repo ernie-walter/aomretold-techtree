@@ -68,419 +68,394 @@
             <h1>AGE OF MYTHOLOGY TECH TREE</h1>
         </header>
         <main>
-            <div class="grid">
+            <div class="age-columns-grid">
+
                  <!-- Age I -->
-                <div class="grid-column Age I">
+                <div class="age-column Age I">
                     <div class="icon-row"> <!-- Age Symbol -->
                         <div class="icon-wrapper no-background">
                             <img src="images/Shared Techs/archaic_age_icon.png" class="icon">
-                            <p class="tooltip">Archaic Age</p>
-                        </div>
-                        <div class="icon-wrapper god" data-type="GodPower" data-god="zeus">
+                            <p class="tooltip">Archaic Age</p></div>
+                        <div class="icon-wrapper" data-civ="zeus">
                             <img src="images/God Powers/bolt_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
                             <p class="tooltip">Bolt</p></div>
-                        <div class="icon-wrapper god" data-type="Techs" data-god="zeus">
-                            <img src="images/Greek Techs/olympian_parentage_icon.png" class="icon">
-                            <p class="tooltip">Olympian Parentage</p></div>
-                        <div class="icon-wrapper god" data-type="GodPower" data-god="poseidon">
+                        <div class="icon-wrapper" data-civ="poseidon">
                             <img src="images/God Powers/lure_icon.png" class="icon">
-                            <p class="tooltip">Lure</p> </div>
-                        <div class="icon-wrapper god" data-type="Techs" data-god="poseidon">
-                            <img src="images/Greek Techs/lord_of_horses_icon.png" class="icon">
-                            <p class="tooltip">Lord of Horses</p></div>
-                        <div class="icon-wrapper god" data-type="GodPower" data-god="hades">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Lure</p></div>
+                        <div class="icon-wrapper" data-civ="hades">
                             <img src="images/God Powers/sentinel_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
                             <p class="tooltip">Sentinel</p></div>
-                        <div class="icon-wrapper god" data-god="hades">
-                            <img src="images/Greek Techs/vaults_of_erebus_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Vault of Erebus</p>
-                        </div>
                     </div>
 
-                    <div class="icon-row"> <!-- blank row -->
-                        <div class="icon-wrapper no-background">
-                        </div>
-                    </div>
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div>
 
                     <div class="icon-row"> <!-- Town Centre -->
-                        <div class="icon-wrapper" name="TownCenter" data-god="greek"></div>
-                        <div class="icon-wrapper" name="VillagerGreek" data-god="greek"></div>
-                        <div class="icon-wrapper" name="Kataskopos" data-god="greek"></div>
-                        <div class="icon-wrapper" name="Jason" data-god="zeus"></div>
-                        <div class="icon-wrapper" name="Theseus" data-god="poseidon"></div>
-                        <div class="icon-wrapper" name="Ajax" data-god="hades"></div>
+                        <div class="icon-wrapper" name="TownCenter" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="VillagerGreek" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="Kataskopos" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="Jason" data-civ="zeus"></div>
+                        <div class="icon-wrapper" name="Theseus" data-civ="poseidon"></div>
+                        <div class="icon-wrapper" name="Ajax" data-civ="hades"></div>
                     </div>
                     
                     <div class="icon-row"> <!-- Granary -->
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Buildings/granary_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Granary</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/husbandry_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Husbandry</p>
-                        </div>
+                        <div class="icon-wrapper" name="Granary"></div>
+                        <div class="icon-wrapper" name="Husbandry"></div>
                     </div>
 
                     <div class="icon-row"> <!-- Storehouse -->
-                         <div class="icon-wrapper">
-                            <img src="images/Greek Buildings/storehouse_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Storehouse</p>
-                        </div>
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Techs/hand_axe_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Hand Axe</p>
-                        </div>
+                        <div class="icon-wrapper" name="Storehouse" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="HandAxe"></div>
                         <div class="icon-wrapper" name="Pickaxe"></div>
+                        <div class="icon-wrapper" name="VaultsOfErebus" displayName="Vault of Erebus" data-civ="hades"></div>
                     </div>
 
                     <div class="icon-row"> <!-- House -->
                         <div class="icon-wrapper" name="House"></div>
-                        <div class="icon-wrapper" name="Militia" data-god="poseidon"></div>
+                        <div class="icon-wrapper" name="Militia" data-civ="poseidon"></div>
                     </div>
 
                     <div class="icon-row"> <!-- Dock -->
-                         <div class="icon-wrapper" name="Dock"></div>
-                         <div class="icon-wrapper" name="FishingShipGreek" data-god="greek"></div>
-                        <div class="icon-wrapper god" data-god="poseidon">
-                            <img src="images/Greek Units/hippocampus_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Hippocampus </p>
-                        </div>
+                        <div class="icon-wrapper" name="Dock"></div>
+                        <div class="icon-wrapper" name="FishingShipGreek" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="Hippocampus" data-civ="poseidon"></div>
                     </div>
 
                     <div class="icon-row"> <!-- Temple -->
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Buildings/temple_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Temple</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/pegasus_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Pegasus</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="hades">
-                            <img src="images/Greek Units/hades_shade_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Shade of Hades</p>
-                        </div>
+                        <div class="icon-wrapper" name="Temple"></div>
+                        <div class="icon-wrapper" name="Pegasus" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="HadesShade" data-civ="hades"></div>
+                        <div class="icon-wrapper" name="OlympianParentage" data-civ="zeus"></div>
                     </div> 
 
                     <div class="icon-row"> <!-- Wall -->
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Buildings/wooden_wall_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Wall</p>
-                        </div>
+                        <div class="icon-wrapper" name="WallShort" displayName="Wooden Wall"></div>
                     </div> 
                 </div>
 
                 <!-- Age II -->
-                <div class="grid-column Age II Base">
+                <div class="age-column Age II">
                     <div class="icon-row"> <!-- Age Symbol -->
                         <div class="icon-wrapper no-background">
                             <img src="images/Shared Techs/classical_age_icon.png" class="icon">
-                            <p class="tooltip">Classical Age</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="athena">
+                            <p class="tooltip">Classical Age</p></div>
+                        <div class="icon-wrapper" data-civ="athena">
                             <img src="images/God Powers/restoration_icon.png" class="icon">
                             <img src="images/Frames/Frame_GodPower.png" class="frame">
-                            <p class="tooltip">Restoration</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="ares">
+                            <p class="tooltip">Restoration</p></div>
+                        <div class="icon-wrapper" data-civ="ares">
                             <img src="images/God Powers/pestilence_icon.png" class="icon">
                             <img src="images/Frames/Frame_GodPower.png" class="frame">
-                            <p class="tooltip">Pestilence</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="hermes">
+                            <p class="tooltip">Pestilence</p></div>
+                        <div class="icon-wrapper" data-civ="hermes">
                             <img src="images/God Powers/ceasefire_icon.png" class="icon">
                             <img src="images/Frames/Frame_GodPower.png" class="frame">
-                            <p class="tooltip">Ceasefire</p>
-                        </div>
+                            <p class="tooltip">Ceasefire</p></div>
                     </div>
                         
-                    <div class="icon-row"> <!-- blank row --><div class="icon-wrapper no-background"></div></div>
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div>
                     
                     <div class="icon-row"> <!-- Town Centre -->
-                         <div class="icon-wrapper god" data-god="zeus">
-                            <img src="images/Greek Units/heracles_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Hero.png" class="frame">
-                            <p class="tooltip">Heracles</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="poseidon">
-                            <img src="images/Greek Units/atalanta_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Hero.png" class="frame">
-                            <p class="tooltip">Atalanta</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="hades">
-                            <img src="images/Greek Units/achilles_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Hero.png" class="frame">
-                            <p class="tooltip">Achilles</p>
-                        </div>
+                       <div class="icon-wrapper" name="Heracles" data-civ="zeus"></div>
+                       <div class="icon-wrapper" name="Theseus" data-civ="poseidon"></div>
+                       <div class="icon-wrapper" name="Achilles" data-civ="hades"></div>
+                       <div class="icon-wrapper" name="Masons"></div>
                     </div> 
 
                     <div class="icon-row"> <!-- Granary -->
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/plow_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Plow</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/hunting_equipment_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Survival Equipment</p>
-                        </div>
+                        <div class="icon-wrapper" name="Plow"></div>
+                        <div class="icon-wrapper" name="HuntingEquipment" displayName="SurvivalEquipment"></div>
                     </div>
 
-                    <div class="icon-row"> <!-- Storehouse -->
-                        <div class="icon-wrapper no-background">            
-                        </div>
-                    </div>
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div>
 
-                     <div class="icon-row"> <!-- Armory -->
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Buildings/armory_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Armory</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/copper_weapons_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Copper Weapons</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/copper_armor_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Copper Armor</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/copper_shields_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Copper Shields</p>
-                        </div>
-                        
+                    <div class="icon-row"> <!-- Armory -->
+                        <div class="icon-wrapper" name="Armory"></div>
+                        <div class="icon-wrapper" name="CopperWeapons"></div>
+                        <div class="icon-wrapper" name="CopperArmor"></div>
+                        <div class="icon-wrapper" name="CopperShields"></div>                       
                     </div> 
 
                     <div class="icon-row"> <!-- Dock -->
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/trireme_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Trireme</p>
-                        </div>   
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/pentekonter_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Pentekonter</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/juggernaut_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Juggernaut</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/transport_ship_greek_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Transport Ship</p>
-                        </div>
+                        <div class="icon-wrapper" name="Trireme" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="Pentekonter" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="Juggernaut" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="TransportShipGreek" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="EnclosedDeck"></div>
+                        <div class="icon-wrapper" name="PurseSeine"></div>
+                        <div class="icon-wrapper" name="HeroicFleet"></div>
                     </div>
 
                     <div class="icon-row"> <!-- Temple -->
-                         <div class="icon-wrapper god" data-god="athena">
-                            <img src="images/Greek Units/minotaur_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Minotaur</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="athena">
-                            <img src="images/Greek Techs/labyrinth_of_minos_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Labyrinth of Minos</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="hermes">
-                            <img src="images/Greek Units/centaur_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Centaur</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="hermes">
-                            <img src="images/Greek Techs/sylvan_lore_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Sylvan Lore</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="ares">
-                            <img src="images/Greek Units/cyclops_icon.png" class="icon">
-                            <img src="images/Frames/Frame_MythUnit.png" class="frame">
-                            <p class="tooltip">Cyclops</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="ares">
-                            <img src="images/Greek Techs/will_of_kronos_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Will of Kronos</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="hermes">
-                            <img src="images/Greek Techs/winged_messenger_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Winged Messenger</p>
-                        </div>
+                        <div class="icon-wrapper" name="Minotaur" data-civ="athena"></div> 
+                        <div class="icon-wrapper" name="LabyrinthOfMinos" data-civ="athena"></div> 
+                        <div class="icon-wrapper" name="Centaur" data-civ="hermes"></div> 
+                        <div class="icon-wrapper" name="SylvanLore" data-civ="hermes"></div> 
+                        <div class="icon-wrapper" name="Cyclops" data-civ="ares"></div>
+                        <div class="icon-wrapper" name="WillOfKronos" data-civ="ares"></div>
+                        <div class="icon-wrapper" name="WingedMessenger" data-civ="hermes"></div>
                     </div>  
 
                     <div class="icon-row"> <!-- Wall -->
-                         <div class="icon-wrapper">
-                            <img src="images/Greek Techs/stone_wall_greek_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Stone Wall</p>
-                        </div>
+                        <div class="icon-wrapper" name="StoneWall" data-civ="greek"></div>
                     </div> 
 
                     <div class="icon-row"> <!-- Military Academy -->
-                         <div class="icon-wrapper">
-                            <img src="images/Greek Buildings/military_academy_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Military Academy</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/hoplite_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Hoplite</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/medium_infantry_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Medium Infantry</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="athena">
-                            <img src="images/Greek Techs/aegis_shield_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Aegis Shield</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="athena">
-                            <img src="images/Greek Techs/sarissa_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Sarissa</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="ares">
-                            <img src="images/Greek Techs/phobos_spear_of_panic_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Phobos' Spear of Panic</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="ares">
-                            <img src="images/Greek Techs/deimos_sword_of_dread_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Deimos' Sword of Dread</p>
-                        </div>
+                        <div class="icon-wrapper" name="MilitaryAcademy" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="Hoplite" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="MediumInfantry" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="AegisShield" data-civ="athena"></div> 
+                        <div class="icon-wrapper" name="Sarissa" data-civ="athena"></div>
+                        <div class="icon-wrapper" name="PhobosSpearOfPanic" displayName="Phobos' Spear of Panic" data-civ="ares"></div>
+                        <div class="icon-wrapper" name="DeimosSwordOfDread" displayName="Deimos' Sword of Dread" data-civ="ares"></div>
                     </div> 
 
                     <div class="icon-row"> <!-- Archery Range -->
-                         <div class="icon-wrapper">
-                            <img src="images/Greek Buildings/archery_range_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Archery Range</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/toxotes_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Toxotes</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/medium_archers_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Medium Archers</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="ares">
-                            <img src="images/Greek Techs/enyos_bow_of_horror_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Enyo's Bow of Horror</p>
-                        </div>
+                        <div class="icon-wrapper" name="ArcheryRange" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="Toxotes" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="MediumArchers" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="EnyosBowOfHorror" displayName="Enyo's Bow of Horror" data-civ="ares"></div>
                     </div> 
 
                     <div class="icon-row"> <!-- Stable -->
-                         <div class="icon-wrapper">
-                            <img src="images/Greek Buildings/stable_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Stable</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Units/hippeus_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Hippeus</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/medium_cavalry_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Medium Cavalry</p>
-                        </div>
-                        <div class="icon-wrapper god" data-god="hermes">
-                            <img src="images/Greek Techs/spirited_charge_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Spirited Charge</p>
-                        </div>
+                        <div class="icon-wrapper" name="Stable" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="Hippeus" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="MediumCavalry" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="SpiritedCharge" data-civ="hermes"></div>
+                        <div class="icon-wrapper" name="LordOfHorses" displayName="Lord of Horses" data-civ="poseidon"></div>
                     </div> 
 
                      <div class="icon-row"> <!-- Tower -->
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Buildings/sentry_tower_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Sentry Tower</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Techs/watch_tower_greek_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Watch Towers</p>
-                        </div>
-                        <div class="icon-wrapper">
-                            <img src="images/Shared Techs/signal_fires_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Techs.png" class="frame">
-                            <p class="tooltip">Signal Fires</p>
-                        </div>
+                        <div class="icon-wrapper" name="SentryTower"></div>  
+                        <div class="icon-wrapper" name="SignalFires"></div>
+                        <div class="icon-wrapper" name="WatchTower" data-civ="greek"></div>  
+                        <div class="icon-wrapper" name="Crenellations"></div>
                     </div> 
 
                     <div class="icon-row"> <!-- Market -->
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Buildings/market_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Market</p>
-                        </div>
-                    </div> 
+                        <div class="icon-wrapper" name="Market"></div>
+                    </div>
 
                     <div class="icon-row"> <!-- Farm -->
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Buildings/farm_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Farm</p>
-                        </div>
-                    </div> 
+                        <div class="icon-wrapper" name="Farm"></div>
+                    </div>
 
                 </div>
         
                 <!-- Age III -->
-                <div class="grid-column">
+                <div class="age-column Age III">
                     <div class="icon-row"> <!-- Age Symbol -->
                         <div class="icon-wrapper no-background">
                             <img src="images/Shared Techs/heroic_age_icon.png" class="icon">
-                            <p class="tooltip">Heroic Age</p>
-                        </div>
+                            <p class="tooltip">Heroic Age</p></div>
+                        <div class="icon-wrapper" data-civ="apollo">
+                            <img src="images/God Powers/underworld_passage_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Underworld Passage</p></div>
+                        <div class="icon-wrapper" data-civ="dionysus">
+                            <img src="images/God Powers/bronze_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Bronze</p></div>
+                        <div class="icon-wrapper" data-civ="aphrodite">
+                            <img src="images/God Powers/curse_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Curse</p></div>
                     </div>
+                        
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div>
                     
-                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
-                </div>
-                
+                    <div class="icon-row"> <!-- Town Centre -->
+                        <div class="icon-wrapper" name="Odysseus" data-civ="zeus"></div>
+                        <div class="icon-wrapper" name="Hippolyta" data-civ="poseidon"></div>
+                        <div class="icon-wrapper" name="Chiron" data-civ="hades"></div>
+                        <div class="icon-wrapper" name="Architects"></div>
+                        <div class="icon-wrapper" name="FortifiedTownCenter"></div>
+                    </div> 
 
+                    <div class="icon-row"> <!-- Granary -->
+                        <div class="icon-wrapper" name="Irrigation"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Storehouse -->
+                        <div class="icon-wrapper" name="BowSaw"></div>
+                        <div class="icon-wrapper" name="ShaftMine"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Armory -->
+                        <div class="icon-wrapper" name="BronzeWeapons"></div>
+                        <div class="icon-wrapper" name="BronzeArmor"></div>
+                        <div class="icon-wrapper" name="BronzeShields"></div>                       
+                    </div> 
+
+                    <div class="icon-row"> <!-- Dock -->
+                        <div class="icon-wrapper" name="Scylla"></div>
+                        <div class="icon-wrapper" name="HeavyWarships"></div>
+                        <div class="icon-wrapper" name="SaltAmphora"></div>
+                        <div class="icon-wrapper" name="Anastrophe" data-civ="apollo"></div>
+                        <div class="icon-wrapper" name="ChthonicRites" data-civ="dionysus"></div>
+                        <div class="icon-wrapper" name="Argonauts" data-civ="aphrodite"></div>
+                        <div class="icon-wrapper" name="TheArgo" data-civ="aphrodite"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Temple -->
+                        <div class="icon-wrapper" name="Manticore" data-civ="apollo"></div> 
+                        <div class="icon-wrapper" name="TempleOfHealing" displayName="Temple of Healing"data-civ="apollo"></div> 
+                        <div class="icon-wrapper" name="Oracle" data-civ="apollo"></div> 
+                        <div class="icon-wrapper" name="Hydra" data-civ="dionysus"></div> 
+                        <div class="icon-wrapper" name="Dionysia" data-civ="dionysus"></div> 
+                        <div class="icon-wrapper" name="NemeanLion" data-civ="aphrodite"></div> 
+                        <div class="icon-wrapper" name="RoarOfOrthus" displayName="Roar of Orthus" data-civ="aphrodite"></div> 
+                    </div>  
+
+                    <div class="icon-row"> <!-- Wall -->
+                        <div class="icon-wrapper" name="FortifiedWall" data-civ="greek"></div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Military Academy -->
+                        <div class="icon-wrapper" name="Hypaspist" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="HeavyInfantry" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="LevyInfantry" data-civ="greek"></div> 
+                    </div> 
+
+                    <div class="icon-row"> <!-- Archery Range -->
+                        <div class="icon-wrapper" name="Peltast" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="HeavyArchers" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="LevyRangedSoldiers" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="SunRay" data-civ="apollo"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Stable -->
+                        <div class="icon-wrapper" name="Prodromos" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="HeavyCavalry" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="LevyCavalry" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="ThracianHorses" data-civ="dionysus"></div>
+                    </div> 
+
+                     <div class="icon-row"> <!-- Tower -->
+                        <div class="icon-wrapper" name="CarrierPigeons"></div>
+                        <div class="icon-wrapper" name="GuardTower" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="BoilingOil"></div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Market -->
+                        <div class="icon-wrapper" name="CaravanGreek"></div>
+                        <div class="icon-wrapper" name="TaxCollectors"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Fortress -->
+                        <div class="icon-wrapper" name="Fortress" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="Petrobolos" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="DraftHorses"></div>
+                    </div> 
+
+                </div>
                 <!-- Age IV -->
-                <div class="grid-column">
+                <div class="age-column Age IV">
                     <div class="icon-row"> <!-- Age Symbol -->
                         <div class="icon-wrapper no-background">
                             <img src="images/Shared Techs/mythic_age_icon.png" class="icon">
-                            <p class="tooltip">Mythic Age</p>
-                        </div>
+                            <p class="tooltip">Mythic Age</p></div>
+                        <div class="icon-wrapper" data-civ="hephaestus">
+                            <img src="images/God Powers/plenty_vault_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Plenty</p></div>
+                        <div class="icon-wrapper" data-civ="artemis">
+                            <img src="images/God Powers/earthquake_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Earthquake</p></div>
+                        <div class="icon-wrapper" data-civ="hera">
+                            <img src="images/God Powers/lightning_storm_icon.png" class="icon">
+                            <img src="images/Frames/Frame_GodPower.png" class="frame">
+                            <p class="tooltip">Lightning Storm</p></div>
                     </div>
+                        
+                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div>
                     
-                    <div class="icon-row"><div class="icon-wrapper no-background"></div></div> <!-- blank --> 
-                </div>
+                    <div class="icon-row"> <!-- Town Centre -->
+                        <div class="icon-wrapper" name="Bellerophon" data-civ="zeus"></div>
+                        <div class="icon-wrapper" name="Polyphemus" data-civ="poseidon"></div>
+                        <div class="icon-wrapper" name="Perseus" data-civ="hades"></div>
+                        <div class="icon-wrapper" name="SecretsOfTheTitans"></div>
+                        <div class="icon-wrapper" name="TitanGate"></div>
+                        <div class="icon-wrapper" name="TitanCerberus" displayName="Titan" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="Wonder"></div>
+                    </div> 
 
+                    <div class="icon-row"> <!-- Granary -->
+                        <div class="icon-wrapper" name="FloodControl"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Storehouse -->
+                        <div class="icon-wrapper" name="Carpenters"></div>
+                        <div class="icon-wrapper" name="Quarry"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Armory -->
+                        <div class="icon-wrapper" name="IronWeapons"></div>
+                        <div class="icon-wrapper" name="IronArmor"></div>
+                        <div class="icon-wrapper" name="IronShields"></div>
+                        <div class="icon-wrapper" name="OlympianWeapons" data-civ="hephaestus"></div>
+                        <div class="icon-wrapper" name="ForgeOfOlympus" displayName="Forge of Olympus" data-civ="hephaestus"></div>
+                    </div> 
+
+                    <div class="icon-row"> <!-- Dock -->
+                        <div class="icon-wrapper" name="Carcinos"></div>
+                        <div class="icon-wrapper" name="ChampionWarships"></div>
+                        <div class="icon-wrapper" name="ConscriptSailors"></div>                        
+                    </div>
+
+                    <div class="icon-row"> <!-- Temple -->
+                        <div class="icon-wrapper" name="Omniscience"></div> 
+                        <div class="icon-wrapper" name="Colossus" data-civ="hephaestus"></div> 
+                        <div class="icon-wrapper" name="HandOfTalos" displayName="Hand of Talos" data-civ="hephaestus"></div> 
+                        <div class="icon-wrapper" name="ShoulderOfTalos" displayName="Shoulder of Talos" data-civ="hephaestus"></div> 
+                        <div class="icon-wrapper" name="Chimera" data-civ="artemis"></div> 
+                        <div class="icon-wrapper" name="FlamesOfTyphon" displayName="Flames of Typhon" data-civ="artemis"></div> 
+                        <div class="icon-wrapper" name="Medusa" data-civ="hera"></div> 
+                        <div class="icon-wrapper" name="FaceOfTheGorgon" displayName="Face of the Gorgon" data-civ="hera"></div> 
+                        <div class="icon-wrapper" name="MonstrousRage" data-civ="hera"></div> 
+                    </div>  
+
+                    <div class="icon-row"> <div class="icon-wrapper no-background"></div><!-- Wall --></div> 
+
+                    <div class="icon-row"> <!-- Military Academy -->
+                        <div class="icon-wrapper" name="ChampionInfantry" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="ConscriptInfantry" data-civ="greek"></div> 
+                    </div> 
+
+                    <div class="icon-row"> <!-- Archery Range -->
+                        <div class="icon-wrapper" name="ChampionArchers" displayName="Champion Ranged Soldiers"></div>
+                        <div class="icon-wrapper" name="ConscriptRangedSoldiers"></div>
+                        <div class="icon-wrapper" name="ShaftsOfPlague" displayName="Shafts of Plague" data-civ="artemis"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Stable -->
+                        <div class="icon-wrapper" name="ChampionCavalry" data-civ="greek"></div>
+                        <div class="icon-wrapper" name="ConscriptCavalry" data-civ="greek"></div>
+                    </div> 
+
+                     <div class="icon-row"> <!-- Tower --> </div><div class="icon-wrapper no-background" ></div>
+
+                    <div class="icon-row"> <!-- Market -->
+                        <div class="icon-wrapper" name="Coinage"></div>
+                        <div class="icon-wrapper" name="Ambassadors"></div>
+                    </div>
+
+                    <div class="icon-row"> <!-- Fortress -->
+                        <div class="icon-wrapper" name="Helepolis" data-civ="greek"></div> 
+                        <div class="icon-wrapper" name="Engineers"></div>
+                        <div class="icon-wrapper" name="AdvancedFortifications"></div>
+                        <div class="icon-wrapper" name="Myrmidon" data-civ="zeus"></div> 
+                        <div class="icon-wrapper" name="Hetairos" data-civ="poseidon"></div> 
+                        <div class="icon-wrapper" name="Gastraphetoros" data-civ="hades"></div> 
+                        <div class="icon-wrapper" name="BeastSlayer" data-civ="artemis"></div> 
+                        <div class="icon-wrapper" name="ArgivePatronage" data-civ="hera"></div> 
+                    </div> 
+                </div>
+                
                  <!-- Age V -->
                 <div class="grid-column">
                     <div class="icon-row"> <!-- Age Symbol -->
@@ -489,7 +464,6 @@
                             <p class="tooltip">Wonder Age</p>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </main>
