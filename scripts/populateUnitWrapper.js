@@ -34,7 +34,7 @@ async function populateUnitWrapper(wrapper, unitIndex) {
   const existingFrame = wrapper.querySelector('.frame');
   if (!existingFrame) {
     const frame = document.createElement('img');
-    frame.src = `images/Frames/Frame_${data.category}.png`;
+    frame.src = `../images/Frames/Frame_${data.category}.png`;
     frame.classList.add('frame');
     wrapper.appendChild(frame);
   }
