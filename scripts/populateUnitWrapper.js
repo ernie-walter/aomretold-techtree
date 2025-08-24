@@ -28,13 +28,13 @@ async function populateUnitWrapper(wrapper, unitIndex) {
     img.style.objectFit = "contain";
     iconDiv.appendChild(img);
   }
-  img.src = `/images/${data.icon.replace(/\\/g, "/")}`;
+  img.src = `../images/${data.icon.replace(/\\/g, "/")}`;
 
   // --- Frame overlay ---
   const existingFrame = wrapper.querySelector('.frame');
   if (!existingFrame) {
     const frame = document.createElement('img');
-    frame.src = `/images/Frames/Frame_${data.category}.png`;
+    frame.src = `../images/Frames/Frame_${data.category}.png`;
     frame.classList.add('frame');
     wrapper.appendChild(frame);
   }
