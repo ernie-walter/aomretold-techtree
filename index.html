@@ -20,11 +20,12 @@
                 <option value="zeus">Zeus</option>
                 <option value="poseidon">Poseidon</option>
                 <option value="hades">Hades</option>
+                <!-- <option value="Ra">Ra</option> -->
             </select>
 
             <h2> Player Colour</h2>
             <select id="PlayerColourToggle">
-                <option value="">Select</option>
+                <option value="#774538">Select</option>
                 <option value="#3232ff">1</option>
                 <option value="#ff0000">2</option>
                 <option value="#ffff19">3</option>
@@ -37,7 +38,7 @@
                 <option value="#ff9b7a">10</option>
                 <option value="#900cfc">11</option>
                 <option value="#757474">12</option>
-                <option value="#774538">Neutral</option>
+                <option value="#ffffff">White</option>
             </select>
         </div>
     
@@ -103,32 +104,12 @@
                     </div>
 
                     <div class="icon-row"> <!-- Town Centre -->
-                        <div class="icon-wrapper">
-                            <img src="images/Greek Buildings/town_center_greek_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Town Centre</p>
-                        </div>
-                         <div class="icon-wrapper">
-                            <img src="images/Greek Units/villager_greek_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Villager</p>
-                        </div>
-                        <div class="icon-wrapper" data-type="Unit">
-                            <img src="images/Greek Units/kataskopos_icon.png" class="icon">
-                            <p class="tooltip">Kataskopos</p>
-                        </div>
-                        <div class="icon-wrapper god" data-type="Hero" data-god="zeus">
-                            <img src="images/Greek Units/jason_icon.png" class="icon">
-                            <p class="tooltip">Jason</p>
-                        </div>
-                        <div class="icon-wrapper god" data-type="Hero" data-god="poseidon">
-                            <img src="images/Greek Units/theseus_icon.png" class="icon">
-                            <p class="tooltip">Theseus</p>
-                        </div>
-                        <div class="icon-wrapper god" data-type="Hero" data-god="hades">
-                            <img src="images/Greek Units/ajax_icon.png" class="icon">
-                            <p class="tooltip">Ajax</p>
-                        </div>
+                        <div class="icon-wrapper" name="TownCenter" data-god="greek"></div>
+                        <div class="icon-wrapper" name="VillagerGreek" data-god="greek"></div>
+                        <div class="icon-wrapper" name="Kataskopos" data-god="greek"></div>
+                        <div class="icon-wrapper" name="Jason" data-god="zeus"></div>
+                        <div class="icon-wrapper" name="Theseus" data-god="poseidon"></div>
+                        <div class="icon-wrapper" name="Ajax" data-god="hades"></div>
                     </div>
                     
                     <div class="icon-row"> <!-- Granary -->
@@ -164,16 +145,8 @@
                     </div>
 
                     <div class="icon-row"> <!-- Dock -->
-                         <div class="icon-wrapper">
-                            <img src="images/Shared Buildings/dock_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Building.png" class="frame">
-                            <p class="tooltip">Dock</p>
-                        </div>
-                         <div class="icon-wrapper">
-                            <img src="images/Greek Units/fishing_ship_greek_icon.png" class="icon">
-                            <img src="images/Frames/Frame_Unit.png" class="frame">
-                            <p class="tooltip">Fishing Ship</p>
-                        </div>
+                         <div class="icon-wrapper" name="Dock"></div>
+                         <div class="icon-wrapper" name="FishingShipGreek" data-god="greek"></div>
                         <div class="icon-wrapper god" data-god="poseidon">
                             <img src="images/Greek Units/hippocampus_icon.png" class="icon">
                             <img src="images/Frames/Frame_MythUnit.png" class="frame">

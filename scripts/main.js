@@ -21,19 +21,23 @@
 
 // Player Colour Dropdown Selection
 const dropdownColour = document.getElementById("PlayerColourToggle");
-const wrappers = document.querySelectorAll(".icon:not(.no-background)");
+
 dropdownColour.addEventListener("change", function () {
+
   const color = this.value || "#ffffff"; 
+  const wrappers = document.querySelectorAll(".icon:not(.no-background)");
   wrappers.forEach(wrapper => {
+    //wrapper.querySelector('.background-layer').style.backgroundColor = color;
     wrapper.style.backgroundColor = color; 
   });
 });
 
 // Minor God Mapping
 const majorToMinorMap = {
-  zeus: ["zeus", "athena", "hermes", "apollo", "dionysus", "hephaestus", "hera"],
-  poseidon: ["poseidon", "ares", "hermes", "aphrodite", "dionysus", "hephaestus", "artemis"],
-  hades: ["hades", "ares", "athena", "aphrodite", "apollo", "hephaestus", "artemis"],
+  zeus: ["greek", "zeus", "athena", "hermes", "apollo", "dionysus", "hephaestus", "hera"],
+  poseidon: ["greek", "poseidon", "ares", "hermes", "aphrodite", "dionysus", "hephaestus", "artemis"],
+  hades: ["greek", "hades", "ares", "athena", "aphrodite", "apollo", "hephaestus", "artemis"],
+  // ra: ["egyptian", "ra", "isis", "set", "horus", "thoth", "bast", "sekmet"],
 };
 
 // Filtering out icons based on Major God selection
@@ -67,7 +71,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!wrapper.dataset.god) return;
 
     const god = wrapper.dataset.god;
-    if (wrapper.querySelector(".god-overlay")) return; // prevent duplicates
+    if (!god) return; // skip if no data-god
+
+    // list of pantheons to skip
+  const skipGods = ["greek", "egyptian", "norse", "atlantean", "chinese"];
+
+  if (skipGods.includes(god.toLowerCase())) return; // skip pantheon overlays
+  if (wrapper.querySelector(".god-overlay")) return; // prevent duplicates
+
+    // if (god === "greek", "egyptian", "norse", "atlantean", "chinese") return;
 
     const overlay = document.createElement("img");
     overlay.src = `images/God Pictures/${god}_icon.png`;
@@ -75,27 +87,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     wrapper.appendChild(overlay);
   });
 });
-
-
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//   const wrappers = document.querySelectorAll(".icon-wrapper");
-
-//   // Populate all wrappers
-//   for (const wrapper of wrappers) {
-//     await populateUnitWrapper(wrapper);
-//   }
-
-//   // Add god overlays
-//   wrappers.forEach(wrapper => {
-//     if (!wrapper.dataset.god) return;
-
-//     const god = wrapper.dataset.god;
-//     if (wrapper.querySelector(".god-overlay")) return; // prevent duplicates
-
-//     const overlay = document.createElement("img");
-//     overlay.src = `images/God Pictures/${god}_icon.png`;
-//     overlay.classList.add("god-overlay");
-//     wrapper.appendChild(overlay);
-//   });
-// });
