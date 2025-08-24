@@ -1,43 +1,21 @@
 body {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    background: #3d3d3d;
-    color: white;
-    max-width: 100vw;
-    overflow-x: hidden;
 }
-
-header {
-    background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
-    color: white;
-    padding: 15px;
-    text-align: center;
-}
-
-main {
-    padding: 20px;
-    flex: 1;
-}
-
 /* --------------------------- SIDEBAR ---------------------------*/
-
 .sidebar {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Ensures sidebar fills the viewport */
-    width: 200px;
+    height: 100vh;          /* Ensures sidebar fills the viewport */
+    width: 20vw;            /* Fixed width for sidebar */
+    overflow-y: auto;       /* scrolls vertically if content overflows */
+    background: #3d3d3d;
     background-image: url('../images/ornatetexture.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* padding-top: 30px; */
-    min-height: 100vh;
     position: fixed;
-    left: 0;
-    top: 0;
 }
 
 .sidebar-text {
@@ -56,30 +34,59 @@ main {
     color: #222;
 }
 
-/* used for the sidebar legend */
-.inline-icon {
+.inline-icon {    /* used for the sidebar legend */
   width: 16px;
   height: 16px;
   vertical-align: middle;
 }
 
-/* --------------------------- DROPDOWN --------------------------*/
-
-
-
 /* --------------------------- CONTENT ---------------------------*/
 .content {
-    margin-left: 200px; /* Same as sidebar width */
+    margin-left: 20vw; /* Same as sidebar width */
+    padding: 0;
+    display: flex;
+    overflow: auto;
     background-image: url('../images/Background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    flex: 1;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
+header {
+    left: 20vw;
+    width: 80vw;
+    height: 100px;
+    position: fixed;
+    background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
+    color: white;
+
+    display: flex;              /* enable flexbox */
+    justify-content: center;    /* center horizontally */
+    align-items: center;        /* center vertically */
+  
+    z-index: 1000;
+}
+
+main {
+  display: flex;
+  margin-top: 100px; /* push body content below header */
+  padding: 20px;
+  flex: 1;
+}
+
+/* --------------------------- DROPDOWN --------------------------*/
+
+.columns {
+  display: flex;
+  gap: 20px;   /* space between columns */
+      display: flex;              /* enable flexbox */
+    justify-content: center;    /* center horizontally */
+    align-items: center;        /* center vertically */
+}
+
+.columns > div {
+  flex: 1;     /* make them equal width */
+}
+
 
 /* --------------------------- TECH TREE ITEMS ---------------------------*/
 
@@ -103,7 +110,6 @@ main {
   gap: 6px;
   justify-content: flex-start;
 }
-
 
 .icon-wrapper {
   position: relative;
@@ -154,7 +160,7 @@ main {
   padding: 8px 12px;
   border-radius: 6px;
   position: absolute;
-  bottom: 110%; /* position above the image */
+  bottom: -140%; /* position below the image */
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
@@ -165,10 +171,11 @@ main {
 .tooltip::after {
   content: "";
   position: absolute;
-  top: 100%; /* at the bottom of tooltip */
-  left: 50%;
+  bottom: 100%; /* at the bottom of tooltip */  
   transform: translateX(-50%);
-  border-width: 6px;
+  transform: rotate(180deg);
+  border-width: 8px;
+  left: 45%;
   border-style: solid;
   border-color: rgba(0,0,0,0.8) transparent transparent transparent;
 }
@@ -189,7 +196,7 @@ main {
   --font-size-base: 16px;
   --line-height-base: 1.6;
   
-  --font-size-h1: 2.5rem;
+  --font-size-h1: 2rem;
   --font-size-h2: 1.5rem;
   --font-size-small: 0.9rem;
 }
@@ -209,6 +216,7 @@ p2 {
 }
 
 h1 {
+    margin: 0;
     font-family: var(--font-serif);
     font-size: var(--font-size-h1);
     font-weight: bold;
