@@ -42,6 +42,6 @@ async function populateUnitWrapper(wrapper, unitIndex) {
   }
 
    // --- Tooltip ---
-  wrapper.title = `${data.displayName}\nCategory: ${data.category}\nPopulation: ${data.population}`;
+  wrapper.title = `${data.displayName}\nCategory: ${data.category}\n${data.armor}\nPopulation: ${data.population}`;
 
 }
