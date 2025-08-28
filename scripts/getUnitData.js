@@ -72,15 +72,29 @@ function getUnitDataFromNode(node, wrapper) {
   // Costs
   const cost = {};
   node.querySelectorAll('cost').forEach(c => {
-    const res = c.getAttribute('resourcetype');
-    cost[res] = c.textContent.trim();
+  const res = c.getAttribute('resourcetype');
+  const rawCost = c.textContent.trim();
+  const numCost = Number(rawCost);  // Parse as number if possible
+  cost[res] = isNaN(numCost) ? rawCost : numCost.toString();   // If numeric, format to remove trailing zeros, else keep as string
   });
-
+  const costString = Object.entries(cost)     // Convert cost object to readable string
+  .map(([res, val]) => `${res}: ${val}`)
+  .join(", ");
+  
   // Armor
   const armor = {};
   node.querySelectorAll('armor').forEach(a => {
-    armor[a.getAttribute('type')] = a.getAttribute('value');
+  armor[a.getAttribute('type')] = a.getAttribute('value');
+  // console.log(armor);
+  const arm = a.getAttribute('type');
+  const rawArm = a.getAttribute('value');
+  const numArm = Number(rawArm);  // Parse as number if possible
+  armor[arm] = (numArm * 100).toString().replace(/\.0+$/, "") + "%";
+  //armor[arm]  = isNaN(numArm) ? rawArm : numArm.toString();   // If numeric, format to remove trailing zeros, else keep as string
   });
+  const armorString = Object.entries(armor)     // Convert cost object to readable string
+  .map(([arm, val]) => `${arm}: ${val}`)
+  .join(", ");
 
   // Population & Max Velocity
   const population = node.querySelector('populationcount')?.textContent || null;
@@ -104,7 +118,9 @@ function getUnitDataFromNode(node, wrapper) {
     icon: node.querySelector('icon')?.textContent.trim() || null,
     category,
     cost,
+    costString,
     armor,
+    armorString,
     population,
     maxVelocity,
     handAttack: extractAttack('HandAttack'),

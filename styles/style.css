@@ -28,7 +28,7 @@ body {
 .sidebar-footer {
     background-color: #111;
     margin-top: auto;
-    padding: 0px 0 0px 0;
+    padding: 0px 0 10px 0;
     text-align: center;
     font-size: 0.9em;
     color: #222;
@@ -216,10 +216,24 @@ p {
 
 p2 {
   font-family: var(--font-sans);
-  font-size: var(--font-size-base* 0.9);
+  font-size: 14px;
   line-height: var(--line-height-base);
   color: var(--text-color);
 }
+
+p3 {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: var(--line-height-base);
+  color: #888;
+}
+
+a {
+  color: #666;              
+  text-decoration: underline;
+}
+
+
 
 h1 {
     margin: 0;
