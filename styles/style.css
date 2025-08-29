@@ -34,6 +34,14 @@ body {
     color: #222;
 }
 
+.inline-icon {    /* used for the sidebar legend */
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+/* ----------------------- TOOLTIP PANEL -----------------------*/
+
 #panel {
   border: 1px solid #ccc;
   padding: 10px;
@@ -54,20 +62,18 @@ body {
   align-items: center;
   gap: 4px;
   margin: 2px 0;
+  font-family: var(--font-sans);
+  font-weight: 600;
 }
 
 .panel-icon {
-  width: 16px;
-  height: 16px;
-}
-
-
-
-.inline-icon {    /* used for the sidebar legend */
-  width: 16px;
-  height: 16px;
+  width: 30px;
+  height: 30px;
   vertical-align: middle;
 }
+
+
+
 
 /* --------------------------- CONTENT ---------------------------*/
 .content {
@@ -104,6 +110,10 @@ main {
 
 /* --------------------------- DROPDOWN --------------------------*/
 
+
+
+
+/* ---------------------------– HEADER ---------------------------*/
 .columns {
   display: flex;
   gap: 20px;   /* space between columns */
