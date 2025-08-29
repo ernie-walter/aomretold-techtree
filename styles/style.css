@@ -34,6 +34,35 @@ body {
     color: #222;
 }
 
+#panel {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px;
+  min-height: flex;
+  background: #f9f9f9;
+}
+
+#panel-description .icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.panel-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 2px 0;
+}
+
+.panel-icon {
+  width: 16px;
+  height: 16px;
+}
+
+
+
 .inline-icon {    /* used for the sidebar legend */
   width: 16px;
   height: 16px;

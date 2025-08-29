@@ -85,7 +85,6 @@ function getUnitDataFromNode(node, wrapper) {
   const armor = {};
   node.querySelectorAll('armor').forEach(a => {
   armor[a.getAttribute('type')] = a.getAttribute('value');
-  // console.log(armor);
   const arm = a.getAttribute('type');
   const rawArm = a.getAttribute('value');
   const numArm = Number(rawArm);  // Parse as number if possible
@@ -98,7 +97,7 @@ function getUnitDataFromNode(node, wrapper) {
 
   // Population & Max Velocity
   const population = node.querySelector('populationcount')?.textContent || null;
-  const maxVelocity = node.querySelector('maxvelocity')?.textContent || null;
+  const speed = node.querySelector('maxvelocity')?.textContent || null;
 
   // Extract attacks
   const extractAttack = (actionName) => {
@@ -122,7 +121,7 @@ function getUnitDataFromNode(node, wrapper) {
     armor,
     armorString,
     population,
-    maxVelocity,
+    speed,
     handAttack: extractAttack('HandAttack'),
     rangedAttack: extractAttack('RangedAttack')
   };

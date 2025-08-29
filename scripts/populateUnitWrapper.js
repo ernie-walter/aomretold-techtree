@@ -1,7 +1,7 @@
 // populateUnitWrapper populates an icon wrapper with unit data
 async function populateUnitWrapper(wrapper, unitIndex) {
   const unitName = wrapper.getAttribute('name');
-  const god = wrapper.dataset.god; // optional
+  
 
   const unitNodeObj = unitIndex[unitName];
   if (!unitNodeObj) {
@@ -10,6 +10,7 @@ async function populateUnitWrapper(wrapper, unitIndex) {
   }
 
   const data = getUnitDataFromNode(unitNodeObj.node, wrapper);
+
 
   // --- Icon ---
   let iconDiv = wrapper.querySelector('.icon');
@@ -28,7 +29,7 @@ async function populateUnitWrapper(wrapper, unitIndex) {
     img.style.objectFit = "contain";
     iconDiv.appendChild(img);
   }
-  //img.src = `../aomretold-techtree/images/${data.icon.replace(/\\/g, "/")}`;
+
   img.src = `images/${data.icon.replace(/\\/g, "/")}`;
 
   // --- Frame overlay ---
@@ -40,8 +41,8 @@ async function populateUnitWrapper(wrapper, unitIndex) {
     frame.classList.add('frame');
     wrapper.appendChild(frame);
   }
-
    // --- Tooltip ---
   wrapper.title = `${data.displayName}\nCategory: ${data.category}\n${data.costString}\n${data.armorString}\nPopulation: ${data.population}`;
-
+  
+  return data;
 }
