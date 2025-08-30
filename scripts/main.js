@@ -150,19 +150,38 @@ document.addEventListener("DOMContentLoaded", async () => {
           span.appendChild(document.createTextNode(val + " "));         // Add the cost value text to the span
           panelDescription.appendChild(span);                     // Add that span to the panel description.
         }
+        
       }
+
+      // === Train Time ===
+      if (data.trainTime) {
+        const span = document.createElement("span");
+        span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
+        span.style.display = "inline";                              // ensure it's inline
+        if (ICONS.Train_time) {
+          const img = document.createElement("img");
+          img.src = ICONS.Train_time.src;
+          img.classList.add("panel-icon");
+          span.appendChild(img);
+        }
+        span.appendChild(document.createTextNode(data.trainTime + "s "));
+        panelDescription.appendChild(span);
+        panelDescription.appendChild(document.createElement("br"));
+      }
+
 
       // === Population ===
       if (data.population) {
         const span = document.createElement("span");
         span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
+        span.style.display = "inline";                              // ensure it's inline
         if (ICONS.Population) {
           const img = document.createElement("img");
           img.src = ICONS.Population.src;
           img.classList.add("panel-icon");
           span.appendChild(img);
         }
-        span.appendChild(document.createTextNode(data.population));
+        span.appendChild(document.createTextNode(data.population + " "));
         panelDescription.appendChild(span);
       }
 
@@ -170,6 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (data.speed) {
         const span = document.createElement("span");
         span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
+        span.style.display = "inline";                              // ensure it's inline
         if (ICONS.Speed) {
           const img = document.createElement("img");
           img.src = ICONS.Speed.src;
@@ -177,9 +197,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           img.classList.add("panel-icon");
           span.appendChild(img);
         }
-        span.appendChild(document.createTextNode(data.speed));
+        span.appendChild(document.createTextNode(data.speed + " "));
         panelDescription.appendChild(span);
+        panelDescription.appendChild(document.createElement("br"));
       }
+
 
       // === Armor ===
       if (data.armor) {
@@ -195,8 +217,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
           span.appendChild(document.createTextNode(data.armor[type] + " "));
           panelDescription.appendChild(span);
-          
         }
+        panelDescription.appendChild(document.createElement("br"));
       }
       
       // wrapper.addEventListener("mouseleave", () => {

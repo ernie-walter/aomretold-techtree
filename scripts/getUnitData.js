@@ -95,9 +95,11 @@ function getUnitDataFromNode(node, wrapper) {
   .map(([arm, val]) => `${arm}: ${val}`)
   .join(", ");
 
-  // Population & Max Velocity
+  // Population, Speed, Train Time, HP
   const population = node.querySelector('populationcount')?.textContent || null;
-  const speed = node.querySelector('maxvelocity')?.textContent || null;
+  const speed = Number(node.querySelector('maxvelocity')?.textContent) || null;
+  const trainTime = Number(node.querySelector('trainpoints')?.textContent) || null;
+  const hitPoints = Number(node.querySelector('maxhitpoints')?.textContent) || null;
 
   // Extract attacks
   const extractAttack = (actionName) => {
@@ -117,10 +119,12 @@ function getUnitDataFromNode(node, wrapper) {
     icon: node.querySelector('icon')?.textContent.trim() || null,
     category,
     cost,
-    costString,
+    //costString,
     armor,
-    armorString,
+    //armorString,
     population,
+    trainTime,
+    hitPoints,
     speed,
     handAttack: extractAttack('HandAttack'),
     rangedAttack: extractAttack('RangedAttack')
