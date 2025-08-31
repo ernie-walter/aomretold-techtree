@@ -101,17 +101,104 @@ function getUnitDataFromNode(node, wrapper) {
   const trainTime = Number(node.querySelector('trainpoints')?.textContent) || null;
   const hitPoints = Number(node.querySelector('maxhitpoints')?.textContent) || null;
 
-  // Extract attacks
-  const extractAttack = (actionName) => {
-    const action = Array.from(node.querySelectorAll('protoaction'))
-      .find(a => a.querySelector('name')?.textContent.trim() === actionName);
-    if (!action) return null;
+  // // Extract attacks
+  // const extractAttack = (actionName) => {
+  //   const action = Array.from(node.querySelectorAll('protoaction'))
+  //     .find(a => a.querySelector('name')?.textContent.trim() === actionName);
+  //   if (!action) return null;
 
-    const attack = { rof: action.querySelector('rof')?.textContent, damage: {}, bonus: {} };
-    action.querySelectorAll('damage').forEach(d => attack.damage[d.getAttribute('type')] = d.textContent);
-    action.querySelectorAll('damagebonus').forEach(d => attack.bonus[d.getAttribute('type')] = d.textContent);
-    return attack;
-  };
+  //   const attack = { rof: action.querySelector('rof')?.textContent, damage: {}, bonus: {} };
+  //   action.querySelectorAll('damage').forEach(d => attack.damage[d.getAttribute('type')] = d.textContent);
+  //   action.querySelectorAll('damagebonus').forEach(d => attack.bonus[d.getAttribute('type')] = d.textContent);
+  //   return attack;
+  // };
+
+  // == NEW ATTACK EXTRACTION ===
+
+  // === Attacks ===
+  const attacks = {};
+  const protoactions = Array.from(wrapper.querySelectorAll("protoaction"));
+
+  // pick default protoactions (any non-empty <defaultattack>)
+  let chosen = protoactions.filter(a => a.querySelector("defaultattack")?.textContent.trim() !== "");
+
+  // fallback to first protoaction if none
+  if (chosen.length === 0 && protoactions.length > 0) chosen = [protoactions[0]];
+
+  // parse each chosen protoaction
+  chosen.forEach(act => {
+    const name = act.querySelector("name")?.textContent.trim() || "Attack";
+    const atk = {};
+
+    // numeric/simple fields
+    ["rof","maxrange","numberprojectiles","damagearea"].forEach(f => {
+      const el = act.querySelector(f);
+      if (el) {
+        const n = Number(el.textContent.trim());
+        atk[f] = isNaN(n) ? el.textContent.trim() : n.toString();
+      }
+    });
+
+    // damage types
+    act.querySelectorAll("damage").forEach(d => {
+      const n = Number(d.textContent.trim());
+      atk[d.getAttribute("type")] = isNaN(n) ? d.textContent.trim() : n.toString();
+    });
+
+    // bonus damage
+    act.querySelectorAll("damagebonus").forEach(b => {
+      const n = Number(b.textContent.trim());
+      atk[`bonus_${b.getAttribute("type")}`] = isNaN(n) ? b.textContent.trim() : n.toString();
+    });
+
+    attacks[name] = atk;
+  });
+
+
+
+//   // === Attack section ===
+//   // Already determined defaults or fallback
+// let protoactions = Array.from(wrapper.querySelectorAll("protoaction"));
+
+// // pick default ones
+// let defaults = protoactions.filter(a => a.querySelector("defaultattack")?.textContent.trim() === "1");
+
+// // fallback to first protoaction if no defaults
+// if (defaults.length === 0 && protoactions.length > 0) {
+//   defaults = [protoactions[0]];
+// }
+//   const attacks = [];
+//   defaults.forEach(action => {
+//     const isDefault = action.querySelector("defaultattack")?.textContent.trim() === "1";
+//     if (!isDefault) return; // skip if not a default attack
+//     const attack = {
+//       name: action.querySelector("name")?.textContent.trim(),
+//       rof: parseFloat(action.querySelector("rof")?.textContent) || null,
+//       range: parseFloat(action.querySelector("maxrange")?.textContent) || null,
+//       default: !!action.querySelector("defaultattack"),
+//       projectile: action.querySelector("projectile")?.textContent.trim() || null,
+//       numProjectiles: parseInt(action.querySelector("numberprojectiles")?.textContent) || null,
+//       area: parseFloat(action.querySelector("damagearea")?.textContent) || null,
+//       damage: {},
+//       bonus: []
+//     };
+
+//     // collect all damage values (Hack, Pierce, Crush, Divine, etc.)
+//     action.querySelectorAll("damage").forEach(dmg => {
+//       const type = dmg.getAttribute("type");
+//       const val = parseFloat(dmg.textContent);
+//       attack.damage[type] = val;
+//     });
+
+//     // collect all bonus damages
+//     action.querySelectorAll("damagebonus").forEach(bonus => {
+//       const vsType = bonus.getAttribute("type");
+//       const val = parseFloat(bonus.textContent);
+//       attack.bonus.push({ vs: vsType, value: val });
+//     });
+
+//     attacks.push(attack);
+//   });
 
   return {
     name: node.getAttribute('name'),
@@ -126,7 +213,8 @@ function getUnitDataFromNode(node, wrapper) {
     trainTime,
     hitPoints,
     speed,
-    handAttack: extractAttack('HandAttack'),
-    rangedAttack: extractAttack('RangedAttack')
+    attacks
+    //handAttack: extractAttack('HandAttack'),
+    //rangedAttack: extractAttack('RangedAttack')
   };
 }

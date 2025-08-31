@@ -43,18 +43,11 @@ body {
 /* ----------------------- TOOLTIP PANEL -----------------------*/
 
 #panel {
-  border: 1px solid #ccc;
+  border: 3px solid #222;
   padding: 10px;
   margin: 20px;
   min-height: flex;
-  background: #f9f9f9;
-}
-
-#panel-description .icon {
-  width: 16px;
-  height: 16px;
-  vertical-align: middle;
-  margin-right: 4px;
+  background: #555;
 }
 
 .panel-line {
@@ -64,6 +57,7 @@ body {
   margin: 2px 0;
   font-family: var(--font-sans);
   font-weight: 600;
+  color: #ddd;
 }
 
 .panel-icon {
@@ -72,7 +66,61 @@ body {
   vertical-align: middle;
 }
 
+.panel-row {
+  display: flex;          /* keep items on one line when possible */
+  flex-wrap: wrap;        /* let them wrap if too many */
+  gap: 6px;               /* space between icons/text */
+  margin-bottom: 4px;     /* spacing between rows */
+}
 
+.frame-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*width: 400px;     /* can be anything */
+    /*height: 250px;    /* can be anything */
+    position: relative;
+    background: black;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+    /* --- corners --- */
+    .corner {
+      position: absolute;
+      width: 64px;      /* size of your corner PNG */
+      height: 64px;
+      background: url('../images/Frames/frame_ornate_corners.png') no-repeat center/contain;
+    }
+    .corner.tl { top: 0; left: 0; transform: rotate(0deg); }
+    .corner.tr { top: 0; right: 0; transform: rotate(90deg); }
+    .corner.br { bottom: 0; right: 0; transform: rotate(180deg); }
+    .corner.bl { bottom: 0; left: 0; transform: rotate(270deg); }
+
+    /* --- edges --- */
+    .edge-h {
+      position: absolute;
+      top: 0;
+      left: 64px;
+      right: 64px;
+      height: 32px; /* thickness of your horizontal strip */
+      background: url('../images/Frames/frame_ornate_edgehorizontal.png') repeat-x center/contain;
+    }
+    .edge-h.bottom {
+      top: auto;
+      bottom: 0;
+    }
+
+    .edge-v {
+      position: absolute;
+      top: 64px;
+      bottom: 64px;
+      width: 32px; /* thickness of your vertical strip */
+      background: url('../images/Frames/frame_ornate_edgevertical.png') repeat-y center/contain;
+    }
+    .edge-v.left { left: 0; }
+    .edge-v.right { right: 0; }
 
 
 /* --------------------------- CONTENT ---------------------------*/

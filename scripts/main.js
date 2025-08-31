@@ -13,8 +13,8 @@ const ICONS = {
   Hp:         {src: "images/Icons/hp.png"},
   
   // Attacks
-  Atk_hack:   {src: "images/Icons/atk_hack.png"},
-  Atk_pierce: {src: "images/Icons/atk_pierce.png"},
+  Attack_Hack:  {src: "images/Icons/atk_hack.png"},
+  Attack_Pierce: {src: "images/Icons/atk_pierce.png"},
   Atk_crush:  {src: "images/Icons/atk_crush.png"},
   Atk_divine: {src: "images/Icons/atk_divine.png"},
   Atk_rof:    {src: "images/Icons/atk_rof.png"},
@@ -170,6 +170,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
 
+      // === HP ===
+      if (data.hitPoints) {
+        const span = document.createElement("span");
+        span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
+        span.style.display = "inline";                              // ensure it's inline
+        if (ICONS.Hp) {
+          const img = document.createElement("img");
+          img.src = ICONS.Hp.src;
+          img.classList.add("panel-icon");
+          span.appendChild(img);
+        }
+        span.appendChild(document.createTextNode(data.hitPoints + " "));
+        panelDescription.appendChild(span);
+      }
+
       // === Population ===
       if (data.population) {
         const span = document.createElement("span");
@@ -202,7 +217,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         panelDescription.appendChild(document.createElement("br"));
       }
 
-
       // === Armor ===
       if (data.armor) {
         for (const [type, val] of Object.entries(data.armor)) {
@@ -221,6 +235,66 @@ document.addEventListener("DOMContentLoaded", async () => {
         panelDescription.appendChild(document.createElement("br"));
       }
       
+      // === Attacks section ===
+      if (data.attacks && data.attacks.length > 0) {
+        data.attacks.forEach(atk => {
+          const row = document.createElement("div");
+          row.classList.add("panel-row");
+
+          // Damage types (Hack, Pierce, Crush, Divine…)
+          for (const [type, val] of Object.entries(atk.damage)) {
+            const dmgSpan = document.createElement("span");
+            dmgSpan.classList.add("panel-line");
+
+            if (ICONS[`Attack_${type}`]) {
+              const img = document.createElement("img");
+              img.src = ICONS[`Attack_${type}`].src;
+              img.classList.add("panel-icon");
+              dmgSpan.appendChild(img);
+            }
+
+            dmgSpan.appendChild(document.createTextNode(val));
+            row.appendChild(dmgSpan);
+          }
+
+          // ROF
+          if (atk.rof) {
+            const rofSpan = document.createElement("span");
+            rofSpan.classList.add("panel-line");
+            rofSpan.textContent = `ROF: ${atk.rof}`;
+            row.appendChild(rofSpan);
+          }
+
+          // Projectiles
+          if (atk.numProjectiles) {
+            const projSpan = document.createElement("span");
+            projSpan.classList.add("panel-line");
+            projSpan.textContent = `×${atk.numProjectiles}`;
+            row.appendChild(projSpan);
+          }
+
+          // Area damage
+          if (atk.area) {
+            const areaSpan = document.createElement("span");
+            areaSpan.classList.add("panel-line");
+            areaSpan.textContent = `Area: ${atk.area}`;
+            row.appendChild(areaSpan);
+          }
+
+          // Bonus vs types
+          if (atk.bonus.length > 0) {
+            atk.bonus.forEach(b => {
+              const bonusSpan = document.createElement("span");
+              bonusSpan.classList.add("panel-line");
+              bonusSpan.textContent = `Bonus vs ${b.vs}: ${b.value}`;
+              row.appendChild(bonusSpan);
+            });
+          }
+
+          panelDescription.appendChild(row);
+        });
+      }
+
       // wrapper.addEventListener("mouseleave", () => {
       // panelTitle.textContent = "";
       // panelDescription.textContent = "";
