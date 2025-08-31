@@ -3,7 +3,7 @@ body {
     height: 100vh;
     margin: 0;
 }
-/* --------------------------- SIDEBAR ---------------------------*/
+/* --------------------------------------------------------- SIDEBAR ---------------------------------------------------------*/
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -40,14 +40,127 @@ body {
   vertical-align: middle;
 }
 
-/* ----------------------- TOOLTIP PANEL -----------------------*/
+/* ----------------------------------------------------- TOOLTIP PANEL -----------------------------------------------------*/
+
+/* ----------------------- Frames -----------------------*/
+.panel-frame-1 {
+  position: relative;
+  min-height: flex;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;        
+  margin: 20px;         
+}
+
+.panel-frame-2 {
+  position: relative;
+  width: 150px;        /* fixed frame size */
+  aspect-ratio: 1 / 1;  /* height = width */       
+  margin: 10px auto 0 auto; /* top/bottom = 10px, left/right auto = horizontal center */
+}
+
+:root {
+  --fr1-size: 30px; /* full corner size */
+  --fr1-thk: 6px;
+  --fr1-offset: calc((var(--fr1-size)/5 - var(--fr1-thk))/2);
+  --fr2-size: 50px; /* full corner size */
+  --fr2-thk: 15px;
+  --fr2-offset: calc((var(--fr2-size)/7 - var(--fr2-thk))/2);
+}
+
+/* Corners */
+.corner-1 {
+  position: absolute;
+  width: var(--fr1-size);
+  height: var(--fr1-size);
+  background-image: url('../images/Frames/frame_ornate_corners_trimmed2.png');
+  background-repeat: no-repeat;
+  background-size: var(--fr1-size) var(--fr1-size);
+  background-position: 0 0;
+  z-index: 2;
+}
+
+.corner-2 {
+  position: absolute;
+  width: var(--fr2-size);
+  height: var(--fr2-size);
+  background-image: url('../images/Frames/frame_Portrait_corners.png');
+  background-repeat: no-repeat;
+  background-size: var(--fr2-size) var(--fr2-size);
+  background-position: 0 0;
+  z-index: 2;
+}
+
+.top-left { top: 0; left: 0; rotate:   0deg; }
+.top-right { top: 0; right: 0;rotate: 90deg;}
+.bottom-left { bottom: 0; left: 0; rotate: 270deg;}
+.bottom-right { bottom: 0; right: 0; rotate: 180deg;}
+
+/* Edges */
+.edge {
+  position: relative;
+}
+
+/* Frame for panel */
+.top-1, .bottom-1 {
+  position: absolute;
+  left: var(--fr1-thk);
+  right: var(--fr1-thk);
+  height: var(--fr1-thk);
+  background-image: url('../images/Frames/frame_ornate_edgehorizontal.png');
+  background-size: auto 100%; /* stretch the PNG to fill height */
+}
+.left-1, .right-1 {
+  position: absolute;
+  top: var(--fr1-thk);
+  bottom: var(--fr1-thk);
+  width: var(--fr1-thk);
+  background-image: url('../images/Frames/frame_ornate_edgevertical.png');
+  background-size: 100% auto; /* stretch the PNG to fill height */
+}
+.top-1 { top: var(--fr1-offset); }
+.bottom-1 { bottom: var(--fr1-offset); }
+.left-1 { left: var(--fr1-offset); }
+.right-1 { right: var(--fr1-offset); }
+
+/* Frame for large icon */
+.top-2, .bottom-2 {
+  position: absolute;
+  left: var(--fr2-thk);
+  right: var(--fr2-thk);
+  height: var(--fr2-thk);
+  background-image: url('../images/Frames/frame_portrait_edgehorizontal.png');
+  background-size: auto 100%; /* stretch the PNG to fill height */
+}
+
+.left-2, .right-2 {
+  position: absolute;
+  top: var(--fr2-thk);
+  bottom: var(--fr2-thk);
+  width: var(--fr2-thk);
+  background-image: url('../images/Frames/frame_portrait_edgevertical.png');
+  background-size: 100% auto; /* stretch the PNG to fill height */
+}
+.top-2 { top: var(--fr2-offset); }
+.bottom-2 { bottom: var(--fr2-offset); }
+.left-2 { left: var(--fr2-offset); }
+.right-2 { right: var(--fr2-offset); }
+
+#large-panel-icon {
+  width: 100%;      /* fixed frame size */
+  height: 100%;
+  display: flex;     /* center the image inside */
+  align-items: center;
+  justify-content: center;
+}
+#large-panel-icon img {
+  max-width: 93%;
+  max-height: 93%;
+  object-fit: contain;  /* keeps full icon visible */
+}
 
 #panel {
-  border: 3px solid #222;
   padding: 10px;
-  margin: 20px;
-  min-height: flex;
-  background: #555;
 }
 
 .panel-line {
@@ -73,76 +186,7 @@ body {
   margin-bottom: 4px;     /* spacing between rows */
 }
 
-.panel-frame {
-  position: relative;
-  /* min-height: 200px; */
-  display: inline-block; /* shrink to content, or use width/height */
-  padding: 12px;         /* space for the 12px frame */
-  margin: 20px;         /* space for the 12px frame */
-}
-
-/* Corner size */
-:root {
-  --fr-size: 50px; /* full corner size */
-  --fr-thk: 8px;
-}
-
-/* Corners */
-.corner {
-  position: absolute;
-  width: var(--fr-size);
-  height: var(--fr-size);
-  background-image: url('../images/Frames/frame_ornate_corners_trimmed2png');
-  background-repeat: no-repeat;
-  background-size: var(--fr-size) var(--fr-size);
-  background-position: 0 0;
-  z-index: 2;
-}
-.top-left { top: 0; left: 0; rotate:   0deg; }
-.top-right { top: 0; right: 0;rotate: 90deg;}
-.bottom-left { bottom: 0; left: 0; rotate: 270deg;}
-.bottom-right { bottom: 0; right: 0; rotate: 180deg;}
-
-/* Edges */
-.edge {
-  position: relative;
-}
-
-.top, .bottom {
-  position: absolute;
-  left: var(--fr-thk);
-  right: var(--fr-thk);
-  height: var(--fr-thk);
-  background-image: url('../images/Frames/frame_ornate_edgehorizontal.png');
-  background-size: auto 100%; /* stretch the PNG to fill height */
-}
-.top { top: calc((12px - var(--fr-thk))/2); }
-.bottom { bottom: calc((12px - var(--fr-thk))/2); }
-
-.left, .right {
-  position: absolute;
-  top: var(--fr-thk);
-  bottom: var(--fr-thk);
-  width: var(--fr-thk);
-  background-image: url('../images/Frames/frame_ornate_edgevertical.png');
-  background-size: 100% auto; /* stretch the PNG to fill height */
-}
-
-.left { left: calc((12px - var(--fr-thk))/2); }
-.right { right: calc((12px - var(--fr-thk))/2); }
-
-/* Content inside frame */
-.frame-content {
-  position: relative;
-  top: var(--corner-size);
-  left: var(--corner-size);
-  right: var(--corner-size);
-  bottom: var(--corner-size);
-  padding: 10px;
-  overflow: auto;
-}
-
-/* --------------------------- CONTENT ---------------------------*/
+/* --------------------------------------------------------- CONTENT ---------------------------------------------------------*/
 .content {
     margin-left: 20vw; /* Same as sidebar width */
     padding: 0;
@@ -175,12 +219,12 @@ main {
   flex: 1;
 }
 
-/* --------------------------- DROPDOWN --------------------------*/
+/* --------------------------------------------------------- DROPDOWN --------------------------------------------------------*/
 
 
 
 
-/* ---------------------------– HEADER ---------------------------*/
+/* ---------------------------------------------------------– HEADER ---------------------------------------------------------*/
 .columns {
   display: flex;
   gap: 20px;   /* space between columns */
@@ -194,7 +238,7 @@ main {
 }
 
 
-/* --------------------------- TECH TREE ITEMS ---------------------------*/
+/* --------------------------------------------------------- TECH TREE ITEMS ---------------------------------------------------------*/
 
 /* Row of flexible columns */
 .age-columns-grid {
@@ -219,7 +263,7 @@ main {
 
 .icon-wrapper {
   position: relative;
-  width: 50px;      /* match frame size */
+  width: 50px;
   height: 50px;
   
 }
@@ -299,7 +343,7 @@ main {
 }   
 
 
-/* --------------------------- FONTS ---------------------------*/
+/* --------------------------------------------------------- FONTS ---------------------------------------------------------*/
 :root {
   --font-sans: 'Segoe', sans-serif;
   --font-serif: 'Constantia', serif;

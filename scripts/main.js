@@ -124,16 +124,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Sidebar panel with tooltip info
   const panelTitle = document.getElementById("panel-title");
   const panelDescription = document.getElementById("panel-description");
+  const panelImg = document.getElementById("large-panel-img");
 
   wrappers.forEach(wrapper => {                               // For each wrapper:
     wrapper.addEventListener("mouseenter", () => {                // When mouse enters that wrapper:
+      
       const id2 = wrapper.getAttribute("name");                      // id = its name attribute    
       const data = unitDataMap[id2];                                 // data = all of that unit's data from top level map    
       if (!data) return;
-
+      
       panelTitle.textContent = data.displayName || "Unknown";       // Panel is made up of title and descripton. This sets title to the unit's displayName
       panelDescription.innerHTML = "";                              // Clear description for now. We will slowly build it up below...
-
+      panelImg.src = `images/${data.icon.replace(/\\/g, "/")}`;
       // === Cost section ===
       if (data.cost) {                                            // If the unit has a cost object:
         for (const [res, val] of Object.entries(data.cost)) {      // For each resource in that cost object:
@@ -168,7 +170,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         panelDescription.appendChild(span);
         panelDescription.appendChild(document.createElement("br"));
       }
-
 
       // === HP ===
       if (data.hitPoints) {
