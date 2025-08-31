@@ -73,55 +73,74 @@ body {
   margin-bottom: 4px;     /* spacing between rows */
 }
 
-.frame-panel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*width: 400px;     /* can be anything */
-    /*height: 250px;    /* can be anything */
-    position: relative;
-    background: black;
-    color: white;
-    padding: 20px;
-    box-sizing: border-box;
-  }
+.panel-frame {
+  position: relative;
+  /* min-height: 200px; */
+  display: inline-block; /* shrink to content, or use width/height */
+  padding: 12px;         /* space for the 12px frame */
+  margin: 20px;         /* space for the 12px frame */
+}
 
-    /* --- corners --- */
-    .corner {
-      position: absolute;
-      width: 64px;      /* size of your corner PNG */
-      height: 64px;
-      background: url('../images/Frames/frame_ornate_corners.png') no-repeat center/contain;
-    }
-    .corner.tl { top: 0; left: 0; transform: rotate(0deg); }
-    .corner.tr { top: 0; right: 0; transform: rotate(90deg); }
-    .corner.br { bottom: 0; right: 0; transform: rotate(180deg); }
-    .corner.bl { bottom: 0; left: 0; transform: rotate(270deg); }
+/* Corner size */
+:root {
+  --fr-size: 50px; /* full corner size */
+  --fr-thk: 8px;
+}
 
-    /* --- edges --- */
-    .edge-h {
-      position: absolute;
-      top: 0;
-      left: 64px;
-      right: 64px;
-      height: 32px; /* thickness of your horizontal strip */
-      background: url('../images/Frames/frame_ornate_edgehorizontal.png') repeat-x center/contain;
-    }
-    .edge-h.bottom {
-      top: auto;
-      bottom: 0;
-    }
+/* Corners */
+.corner {
+  position: absolute;
+  width: var(--fr-size);
+  height: var(--fr-size);
+  background-image: url('../images/Frames/frame_ornate_corners_trimmed2png');
+  background-repeat: no-repeat;
+  background-size: var(--fr-size) var(--fr-size);
+  background-position: 0 0;
+  z-index: 2;
+}
+.top-left { top: 0; left: 0; rotate:   0deg; }
+.top-right { top: 0; right: 0;rotate: 90deg;}
+.bottom-left { bottom: 0; left: 0; rotate: 270deg;}
+.bottom-right { bottom: 0; right: 0; rotate: 180deg;}
 
-    .edge-v {
-      position: absolute;
-      top: 64px;
-      bottom: 64px;
-      width: 32px; /* thickness of your vertical strip */
-      background: url('../images/Frames/frame_ornate_edgevertical.png') repeat-y center/contain;
-    }
-    .edge-v.left { left: 0; }
-    .edge-v.right { right: 0; }
+/* Edges */
+.edge {
+  position: relative;
+}
 
+.top, .bottom {
+  position: absolute;
+  left: var(--fr-thk);
+  right: var(--fr-thk);
+  height: var(--fr-thk);
+  background-image: url('../images/Frames/frame_ornate_edgehorizontal.png');
+  background-size: auto 100%; /* stretch the PNG to fill height */
+}
+.top { top: calc((12px - var(--fr-thk))/2); }
+.bottom { bottom: calc((12px - var(--fr-thk))/2); }
+
+.left, .right {
+  position: absolute;
+  top: var(--fr-thk);
+  bottom: var(--fr-thk);
+  width: var(--fr-thk);
+  background-image: url('../images/Frames/frame_ornate_edgevertical.png');
+  background-size: 100% auto; /* stretch the PNG to fill height */
+}
+
+.left { left: calc((12px - var(--fr-thk))/2); }
+.right { right: calc((12px - var(--fr-thk))/2); }
+
+/* Content inside frame */
+.frame-content {
+  position: relative;
+  top: var(--corner-size);
+  left: var(--corner-size);
+  right: var(--corner-size);
+  bottom: var(--corner-size);
+  padding: 10px;
+  overflow: auto;
+}
 
 /* --------------------------- CONTENT ---------------------------*/
 .content {
@@ -331,8 +350,9 @@ h1 {
 
 h2{
   font-family: var(--font-serif);
-    font-size: var(--font-size-h2);
+  font-size: var(--font-size-h2);
   font-weight: bold;
+  color: var(--text-color);
 }
 
 @font-face {
