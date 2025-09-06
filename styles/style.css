@@ -19,19 +19,17 @@ body {
 }
 
 .sidebar-text {
-    margin: 10px 30px 10px 30px;
+    margin: 0px 30px 0px 30px;
     text-align: left;
-    font-size: 0.9em;
-    color: #bbb;
 }
 
 .sidebar-footer {
     background-color: #111;
     margin-top: auto;
-    padding: 0px 0 10px 0;
+    padding: 10px;
     text-align: center;
-    font-size: 0.9em;
-    color: #222;
+    
+    color: #ccc;
 }
 
 .inline-icon {    /* used for the sidebar legend */
@@ -45,49 +43,53 @@ body {
 /* ----------------------- Frames -----------------------*/
 .panel-frame-1 {
   position: relative;
-  min-height: flex;
   display: flex;
   flex-direction: column;
-  padding: 10px;        
-  margin: 20px;         
+  width: 80%;
+  padding: 3%;
+  margin: 5% auto;
 }
 
 .panel-frame-2 {
   position: relative;
-  width: 150px;        /* fixed frame size */
+  width: 100%;        /* fixed frame size */
   aspect-ratio: 1 / 1;  /* height = width */       
-  margin: 10px auto 0 auto; /* top/bottom = 10px, left/right auto = horizontal center */
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel-frame-2-wrapper {
+    display: inline-block;   /* prevents flex stretching in column parent */
+    width: 70%;              /* scales with parent */
+    text-align: center;      /* center child horizontally if needed */
+    margin: 10px auto 0 auto; /* top/bottom = 10px, left/right auto = horizontal center */
 }
 
 :root {
   --fr1-size: 30px; /* full corner size */
   --fr1-thk: 6px;
   --fr1-offset: calc((var(--fr1-size)/5 - var(--fr1-thk))/2);
-  --fr2-size: 50px; /* full corner size */
-  --fr2-thk: 15px;
+  --fr2-size: 30%;
+  --fr2-thk: 9%;
   --fr2-offset: calc((var(--fr2-size)/7 - var(--fr2-thk))/2);
 }
 
 /* Corners */
 .corner-1 {
   position: absolute;
-  width: var(--fr1-size);
-  height: var(--fr1-size);
+  width: var(--fr1-size); height: var(--fr1-size);
   background-image: url('../images/Frames/frame_ornate_corners_trimmed2.png');
-  background-repeat: no-repeat;
-  background-size: var(--fr1-size) var(--fr1-size);
-  background-position: 0 0;
+  background-repeat: no-repeat; background-size: 100% 100%;
   z-index: 2;
 }
 
 .corner-2 {
   position: absolute;
-  width: var(--fr2-size);
-  height: var(--fr2-size);
+  width: var(--fr2-size); height: var(--fr2-size);
   background-image: url('../images/Frames/frame_Portrait_corners.png');
-  background-repeat: no-repeat;
-  background-size: var(--fr2-size) var(--fr2-size);
-  background-position: 0 0;
+  background-repeat: no-repeat; background-size: 100% 100%;
   z-index: 2;
 }
 
@@ -103,20 +105,16 @@ body {
 
 /* Frame for panel */
 .top-1, .bottom-1 {
-  position: absolute;
-  left: var(--fr1-thk);
-  right: var(--fr1-thk);
-  height: var(--fr1-thk);
+  position: absolute; height: var(--fr1-thk);
+  left: var(--fr1-thk); right: var(--fr1-thk);
   background-image: url('../images/Frames/frame_ornate_edgehorizontal.png');
-  background-size: auto 100%; /* stretch the PNG to fill height */
+  background-size: auto 100%;
 }
 .left-1, .right-1 {
-  position: absolute;
-  top: var(--fr1-thk);
-  bottom: var(--fr1-thk);
-  width: var(--fr1-thk);
+  position: absolute; width: var(--fr1-thk);
+  top: var(--fr1-thk); bottom: var(--fr1-thk);
   background-image: url('../images/Frames/frame_ornate_edgevertical.png');
-  background-size: 100% auto; /* stretch the PNG to fill height */
+  background-size: 100% auto;
 }
 .top-1 { top: var(--fr1-offset); }
 .bottom-1 { bottom: var(--fr1-offset); }
@@ -125,19 +123,15 @@ body {
 
 /* Frame for large icon */
 .top-2, .bottom-2 {
-  position: absolute;
-  left: var(--fr2-thk);
-  right: var(--fr2-thk);
-  height: var(--fr2-thk);
+  position: absolute; height: var(--fr2-thk);
+  left: var(--fr2-thk); right: var(--fr2-thk);
   background-image: url('../images/Frames/frame_portrait_edgehorizontal.png');
   background-size: auto 100%; /* stretch the PNG to fill height */
 }
 
 .left-2, .right-2 {
-  position: absolute;
-  top: var(--fr2-thk);
-  bottom: var(--fr2-thk);
-  width: var(--fr2-thk);
+  position: absolute; width: var(--fr2-thk);
+  top: var(--fr2-thk); bottom: var(--fr2-thk);
   background-image: url('../images/Frames/frame_portrait_edgevertical.png');
   background-size: 100% auto; /* stretch the PNG to fill height */
 }
@@ -147,16 +141,15 @@ body {
 .right-2 { right: var(--fr2-offset); }
 
 #large-panel-icon {
-  width: 100%;      /* fixed frame size */
-  height: 100%;
-  display: flex;     /* center the image inside */
-  align-items: center;
-  justify-content: center;
+  max-width: 95%; max-height: 95%;
+  object-fit: contain;
+  display: flex;
+  align-items: center; justify-content: center;
 }
 #large-panel-icon img {
-  max-width: 93%;
-  max-height: 93%;
+  max-width: 100%; max-height: 100%;
   object-fit: contain;  /* keeps full icon visible */
+  display: block;
 }
 
 #panel {
@@ -168,8 +161,7 @@ body {
   align-items: center;
   gap: 4px;
   margin: 2px 0;
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font: var(--p);
   color: #ddd;
 }
 
@@ -204,11 +196,9 @@ header {
     position: fixed;
     background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
     color: white;
-
     display: flex;              /* enable flexbox */
     justify-content: center;    /* center horizontally */
     align-items: center;        /* center vertically */
-  
     z-index: 1000;
 }
 
@@ -345,58 +335,50 @@ main {
 
 /* --------------------------------------------------------- FONTS ---------------------------------------------------------*/
 :root {
-  --font-sans: 'Segoe', sans-serif;
-  --font-serif: 'Constantia', serif;
-  
   --text-color: #ccc;
-  --font-size-base: 16px;
-  --line-height-base: 1.6;
+  --line-height: 1.6;
   
-  --font-size-h1: 2rem;
-  --font-size-h2: 1.5rem;
-  --font-size-small: 0.9rem;
+  --font-size-h1: clamp(16px, 4vw, 32px);
+  --font-size-h2: clamp(16px, 1.5vw, 32px);
+  --font-size-p: clamp(10px, 1vw, 32px);
+  --font-size-p2: clamp(10px, 0.9vw, 32px);
+  --font-size-p3: clamp(10px, 0.7vw, 32px);
+
+  --h1: 700 var(--font-size-h1)/var(--line-height) 'Constantia', serif;
+  --h2: 700 var(--font-size-h2)/var(--line-height) 'Constantia', serif;
+  --p: 500 var(--font-size-p)/var(--line-height) 'Segoe', sans-serif;
+  --p2: 500 var(--font-size-p2)/var(--line-height) 'Segoe', sans-serif;
+  --p3: 500 var(--font-size-p3)/var(--line-height) 'Segoe', sans-serif;
 }
 
 p {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
+  font: var(--p);
   color: var(--text-color);
 }
 
-p2 {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: var(--line-height-base);
+p2 { /* used for Key in sidebar */
+  font: var(--p2);
   color: var(--text-color);
 }
 
-p3 {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  line-height: var(--line-height-base);
+p3 { /* used for footnote in sidebar */
+  font: var(--p3);
   color: #888;
+}
+
+h1 {
+  font: var(--h1);
+  color: #fff;
+}
+
+h2{
+  font: var(--h2);
+  color: #ddd;
 }
 
 a {
   color: #666;              
   text-decoration: underline;
-}
-
-
-
-h1 {
-    margin: 0;
-    font-family: var(--font-serif);
-    font-size: var(--font-size-h1);
-    font-weight: bold;
-}
-
-h2{
-  font-family: var(--font-serif);
-  font-size: var(--font-size-h2);
-  font-weight: bold;
-  color: var(--text-color);
 }
 
 @font-face {
@@ -407,4 +389,4 @@ h2{
 @font-face {
     font-family: 'Segoe';
     src: url("../fonts/SegoeUI.woff2") format('woff2');
-}
+} 
