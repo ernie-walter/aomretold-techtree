@@ -1,35 +1,36 @@
 body {
     display: flex;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     margin: 0;
 }
 /* --------------------------------------------------------- SIDEBAR ---------------------------------------------------------*/
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;          /* Ensures sidebar fills the viewport */
-    width: 20vw;            /* Fixed width for sidebar */
-    overflow-y: auto;       /* scrolls vertically if content overflows */
-    background: #3d3d3d;
-    background-image: url('../images/ornatetexture.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: fixed;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;            /* Fixed width for sidebar */
+  overflow-y: auto;       /* scrolls vertically if content overflows */
+  top: env(safe-area-inset-top);       /* push top down safely */
+  bottom: env(safe-area-inset-bottom); /* push top to bottom safely */
+  min-height: calc(var(--vh, 1vh) * 100 - 15vh); /* full height minus header */
+  background: #3d3d3d;
+  background-image: url('../images/ornatetexture.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .sidebar-text {
-    margin: 0px 30px 0px 30px;
-    text-align: left;
+  margin: 0 8% 0 8%;
+  text-align: left;
 }
 
 .sidebar-footer {
-    background-color: #111;
-    margin-top: auto;
-    padding: 10px;
-    text-align: center;
-    
-    color: #ccc;
+  background-color: #111;
+  margin-top: auto;
+  padding: 10px;
+  text-align: center;
+  color: #ccc;
 }
 
 .inline-icon {    /* used for the sidebar legend */
@@ -180,31 +181,31 @@ body {
 
 /* --------------------------------------------------------- CONTENT ---------------------------------------------------------*/
 .content {
-    margin-left: 20vw; /* Same as sidebar width */
-    padding: 0;
-    display: flex;
-    overflow: auto;
-    background-image: url('../images/Background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  margin-left: 20vw; /* Same as sidebar width */
+  padding: 0;
+  display: flex;
+  min-height: calc(var(--vh, 1vh) * 100 - 15vh); /* full height minus header */
+  overflow: auto;
+  background-image: url('../images/Background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 header {
-    left: 20vw;
-    width: 80vw;
-    height: 100px;
-    position: fixed;
-    background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
-    color: white;
-    display: flex;              /* enable flexbox */
-    justify-content: center;    /* center horizontally */
-    align-items: center;        /* center vertically */
-    z-index: 1000;
+  left: 20vw;
+  height: 15vh;
+  position: fixed;
+  background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
+  color: white;
+  display: flex;              /* enable flexbox */
+  justify-content: center;    /* center horizontally */
+  align-items: center;        /* center vertically */
+  z-index: 1000;
 }
 
 main {
   display: flex;
-  margin-top: 100px; /* push body content below header */
+  margin-top: 15vh; /* push body content below header */
   padding: 20px;
   flex: 1;
 }
@@ -214,18 +215,28 @@ main {
 
 
 
-/* ---------------------------------------------------------– HEADER ---------------------------------------------------------*/
+/* ---------------------------------------------------------– COLUMNS ---------------------------------------------------------*/
 .columns {
   display: flex;
-  gap: 20px;   /* space between columns */
-      display: flex;              /* enable flexbox */
-    justify-content: center;    /* center horizontally */
-    align-items: center;        /* center vertically */
+  overflow: hidden;         /* prevent overflow */
+  gap: 20px;                /* space between columns */
+  display: flex;              /* enable flexbox */
+  justify-content: center;    /* center horizontally */
+  align-items: center;        /* center vertically */
 }
 
 .columns > div {
   flex: 1;     /* make them equal width */
 }
+
+.key-list {
+  column-count: 2;        /* number of columns */
+  column-gap: 12px;       /* space between columns */
+  padding: 0;
+  margin: 0;
+}
+
+
 
 
 /* --------------------------------------------------------- TECH TREE ITEMS ---------------------------------------------------------*/
@@ -331,6 +342,30 @@ main {
   visibility: visible;
   opacity: 1;
 }   
+/* --------------------------------------------------------- MOBILE ---------------------------------------------------------*/
+
+@media (max-width: 768px) {
+  header {
+    height: 10vh;
+    left: 30vw;
+  }
+
+  main{
+    margin-top: 10vh;
+  }
+
+  .key-list {
+    column-count: 1;
+  }
+
+  .sidebar {
+    width: 30vw;            /* Fixed width for sidebar */
+  }
+
+  .content{
+    margin-left: 30vw;
+  }
+}
 
 
 /* --------------------------------------------------------- FONTS ---------------------------------------------------------*/
@@ -342,26 +377,31 @@ main {
   --font-size-h2: clamp(16px, 1.5vw, 32px);
   --font-size-p: clamp(10px, 1vw, 32px);
   --font-size-p2: clamp(10px, 0.9vw, 32px);
-  --font-size-p3: clamp(10px, 0.7vw, 32px);
+  --font-size-p3: clamp(8px, 0.7vw, 32px);
 
   --h1: 700 var(--font-size-h1)/var(--line-height) 'Constantia', serif;
   --h2: 700 var(--font-size-h2)/var(--line-height) 'Constantia', serif;
   --p: 500 var(--font-size-p)/var(--line-height) 'Segoe', sans-serif;
-  --p2: 500 var(--font-size-p2)/var(--line-height) 'Segoe', sans-serif;
-  --p3: 500 var(--font-size-p3)/var(--line-height) 'Segoe', sans-serif;
+  --p2: 500 var(--font-size-p2)/1.2 'Segoe', sans-serif;
+  --p3: 500 var(--font-size-p3)/1.2 'Segoe', sans-serif;
 }
 
 p {
   font: var(--p);
   color: var(--text-color);
+  hyphens: auto; 
 }
 
-p2 { /* used for Key in sidebar */
+p.key { /* used for Key in sidebar */
   font: var(--p2);
   color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px 0;      /* spacing between items vertically */
 }
 
-p3 { /* used for footnote in sidebar */
+p.footnote { /* used for footnote in sidebar */
   font: var(--p3);
   color: #888;
 }
@@ -374,6 +414,7 @@ h1 {
 h2{
   font: var(--h2);
   color: #ddd;
+  hyphens: auto;  
 }
 
 a {

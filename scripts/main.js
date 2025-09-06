@@ -48,6 +48,16 @@ const ICONS = {
   Type_ship_melee:  {src: "images/Icons/type_ship_melee.png"},
 };
 
+// Viewport adjustment for iOS Safari
+function setVh() {    // Set CSS variable --vh to 1% of the viewport height
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+setVh();    // Run on load
+window.addEventListener('resize', setVh); // Update on resize or orientation change
+window.addEventListener('orientationchange', setVh);
+
+
 // Player Colour Dropdown Selection
 const dropdownColour = document.getElementById("PlayerColourToggle");
 
