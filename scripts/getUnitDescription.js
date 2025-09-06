@@ -1,5 +1,5 @@
 // ======= LR Loader =======
-const stringTableUrl = '../gamefiles/string_table.txt';
+const stringTableUrl = 'gamefiles/string_table.txt';
 let LRMapCache = null;
 
 /**
