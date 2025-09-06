@@ -112,6 +112,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  // Merge _LR strings into unitDataMap
+  try {
+    await mergeLRIntoUnitData(unitDataMap);
+    console.log("Merged _LR strings into unitDataMap");
+    } catch (err) {
+    console.error("Failed to merge _LR strings:", err);
+    }
+
   // Add god overlays
   wrappers.forEach(wrapper => {
     if (!wrapper.dataset.civ) return;
@@ -146,6 +154,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       panelTitle.textContent = data.displayName || "Unknown";       // Panel is made up of title and descripton. This sets title to the unit's displayName
       panelDescription.innerHTML = "";                              // Clear description for now. We will slowly build it up below...
       panelImg.src = `images/${data.icon.replace(/\\/g, "/")}`;
+
+       if (data._LR) {
+            const span = document.createElement("div");
+            span.textContent = data._LR;
+            span.classList.add("panel-line");
+            panelDescription.appendChild(span);
+        }
+
       // === Cost section ===
       if (data.cost) {                                            // If the unit has a cost object:
         for (const [res, val] of Object.entries(data.cost)) {      // For each resource in that cost object:
