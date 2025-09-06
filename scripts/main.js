@@ -1,52 +1,22 @@
-// Unit Icons Source Mapping
-const ICONS = {
-  // Costs
-  Food:       {src: "images/Icons/food.png"},
-  Wood:       {src: "images/Icons/wood.png"},
-  Gold:       {src: "images/Icons/gold.png"},
-  Favor:      {src: "images/Icons/favor.png"},
-  Train_time: {src: "images/Icons/time.png"},
-  
-  // Unit Stats
-  Population: {src: "images/Icons/pop.png"},
-  Speed:      {src: "images/Icons/speed.png"},
-  Hp:         {src: "images/Icons/hp.png"},
-  
-  // Attacks
-  Attack_Hack:  {src: "images/Icons/atk_hack.png"},
-  Attack_Pierce: {src: "images/Icons/atk_pierce.png"},
-  Atk_crush:  {src: "images/Icons/atk_crush.png"},
-  Atk_divine: {src: "images/Icons/atk_divine.png"},
-  Atk_rof:    {src: "images/Icons/atk_rof.png"},
-  Atk_projectiles: {src: "images/Icons/atk_projectiles.png"},
-  Atk_area:   {src: "images/Icons/atk_area.png"},
+// List of panel icon names (same as filenames without extension)
+const iconNames = [
+  "food", "wood", "gold", "favor", "time",
+  "pop", "speed", "hp",
+  "atk_hack", "atk_pierce", "atk_crush", "atk_divine","atk_rof", "atk_projectiles", "atk_area",
+  "armor_hack", "armor_pierce", "armor_crush",
+  "type_soldier", "type_infantry", "type_cavalry", "type_ranged",
+  "type_villager", "type_hero", "type_myth", "type_titan",
+  "type_building", "type_wall", "type_tower", "type_siege",
+  "type_ship", "type_ship_archer", "type_ship_siege", "type_ship_melee"
+];
+// Create a mapping of icon names to their file paths
+const ICONS = Object.fromEntries(
+  iconNames.map(name => [PascalCaseName(name), { src: `images/Icons/${name}.png` }])
+);
 
-  // Armor
-  Armor_Hack:   {src: "images/Icons/armor_hack.png"},
-  Armor_Pierce: {src: "images/Icons/armor_pierce.png"},
-  Armor_Crush:  {src: "images/Icons/armor_crush.png"},
-
-  // Unit types
-  Type_soldier:  {src: "images/Icons/type_soldier.png"},
-  Type_infantry: {src: "images/Icons/type_infantry.png"},
-  Type_cavalry:  {src: "images/Icons/type_cavalry.png"},
-  Type_ranged:   {src: "images/Icons/type_ranged.png"},  
-  
-  Type_villager: {src: "images/Icons/type_villager.png"},
-  Type_hero:     {src: "images/Icons/type_hero.png"},
-  Type_myth:     {src: "images/Icons/type_myth.png"},
-  Type_titan:    {src: "images/Icons/type_titan.png"},
-  
-  Type_building: {src: "images/Icons/type_building.png"},
-  Type_wall:     {src: "images/Icons/type_wall.png"},
-  Type_tower:    {src: "images/Icons/type_tower.png"},
-  Type_siege:    {src: "images/Icons/type_siege.png"},
-  
-  Type_ship:     {src: "images/Icons/type_ship.png"},
-  Type_ship_archer: {src: "images/Icons/type_ship_archer.png"},
-  Type_ship_siege:  {src: "images/Icons/type_ship_siege.png"},
-  Type_ship_melee:  {src: "images/Icons/type_ship_melee.png"},
-};
+function PascalCaseName(name) {
+  return name.replace(/(^|_)([a-z])/g, (_, __, c) => c.toUpperCase());
+}
 
 // Viewport adjustment for iOS Safari
 function setVh() {    // Set CSS variable --vh to 1% of the viewport height
@@ -56,7 +26,6 @@ function setVh() {    // Set CSS variable --vh to 1% of the viewport height
 setVh();    // Run on load
 window.addEventListener('resize', setVh); // Update on resize or orientation change
 window.addEventListener('orientationchange', setVh);
-
 
 // Player Colour Dropdown Selection
 const dropdownColour = document.getElementById("PlayerColourToggle");
@@ -112,13 +81,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Merge _LR strings into unitDataMap
-  try {
-    await mergeLRIntoUnitData(unitDataMap);
-    console.log("Merged _LR strings into unitDataMap");
-    } catch (err) {
-    console.error("Failed to merge _LR strings:", err);
-    }
+  // Merge LR for both units and techs
+   await mergeLRIntoUnitData(unitDataMap);
 
   // Add god overlays
   wrappers.forEach(wrapper => {
@@ -155,12 +119,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       panelDescription.innerHTML = "";                              // Clear description for now. We will slowly build it up below...
       panelImg.src = `images/${data.icon.replace(/\\/g, "/")}`;
 
-       if (data._LR) {
-            const span = document.createElement("div");
-            span.textContent = data._LR;
-            span.classList.add("panel-line");
-            panelDescription.appendChild(span);
-        }
+    // Add _LR description if it exists
+    if (data._LR) {
+      const span = document.createElement("div");
+      span.textContent = data._LR;
+      span.classList.add("panel-line");
+      panelDescription.appendChild(span);
+    }
 
       // === Cost section ===
       if (data.cost) {                                            // If the unit has a cost object:
@@ -186,9 +151,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const span = document.createElement("span");
         span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
         span.style.display = "inline";                              // ensure it's inline
-        if (ICONS.Train_time) {
+        if (ICONS.Time) {
           const img = document.createElement("img");
-          img.src = ICONS.Train_time.src;
+          img.src = ICONS.Time.src;
           img.classList.add("panel-icon");
           span.appendChild(img);
         }
@@ -217,9 +182,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const span = document.createElement("span");
         span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
         span.style.display = "inline";                              // ensure it's inline
-        if (ICONS.Population) {
+        if (ICONS.Pop) {
           const img = document.createElement("img");
-          img.src = ICONS.Population.src;
+          img.src = ICONS.Pop.src;
           img.classList.add("panel-icon");
           span.appendChild(img);
         }
@@ -250,9 +215,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           const span = document.createElement("span");
           span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
           span.style.display = "inline";                              // ensure it's inline
-          if (ICONS[`Armor_${type}`]){
+          if (ICONS[`Armor${type}`]){
             const img = document.createElement("img");
-            img.src = ICONS[`Armor_${type.replace(/["'\s]/g,'')}`]?.src;
+            img.src = ICONS[`Armor${type.replace(/["'\s]/g,'')}`]?.src;
             img.classList.add("panel-icon");                        // Add a "panel-icon" class to that img to carry over styling 
             span.appendChild(img);
           }
@@ -326,6 +291,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       // panelTitle.textContent = "";
       // panelDescription.textContent = "";
       // });
+
+      // console.log(data);  // Debug log to confirm hover action
+
     });
   });
 });

@@ -126,8 +126,8 @@
 }
 
 .panel-icon {
-  width: 25px;
-  height: 25px;
+  width: clamp(10px, 1.8vw, 32px);
+  height: clamp(10px, 1.8vw, 32px);
   vertical-align: middle;
 }
 

@@ -89,7 +89,6 @@ function getUnitDataFromNode(node, wrapper) {
   const rawArm = a.getAttribute('value');
   const numArm = Number(rawArm);  // Parse as number if possible
   armor[arm] = (numArm * 100).toString().replace(/\.0+$/, "") + "%";
-  //armor[arm]  = isNaN(numArm) ? rawArm : numArm.toString();   // If numeric, format to remove trailing zeros, else keep as string
   });
   const armorString = Object.entries(armor)     // Convert cost object to readable string
   .map(([arm, val]) => `${arm}: ${val}`)

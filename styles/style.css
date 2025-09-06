@@ -34,8 +34,8 @@ body {
 }
 
 .inline-icon {    /* used for the sidebar legend */
-  width: 16px;
-  height: 16px;
+  width: var(--font-size-p);
+  height: var(--font-size-p);
   vertical-align: middle;
 }
 
@@ -199,30 +199,6 @@ main {
   visibility: visible;
   opacity: 1;
 }   
-/* --------------------------------------------------------- MOBILE ---------------------------------------------------------*/
-
-@media (max-width: 768px) {
-  header {
-    height: 10vh;
-    left: 30vw;
-  }
-
-  main{
-    margin-top: 10vh;
-  }
-
-  .key-list {
-    column-count: 1;
-  }
-
-  .sidebar {
-    width: 30vw;            /* Fixed width for sidebar */
-  }
-
-  .content{
-    margin-left: 30vw;
-  }
-}
 
 
 /* --------------------------------------------------------- FONTS ---------------------------------------------------------*/
@@ -232,7 +208,7 @@ main {
   
   --font-size-h1: clamp(16px, 4vw, 32px);
   --font-size-h2: clamp(16px, 1.5vw, 32px);
-  --font-size-p: clamp(10px, 1vw, 32px);
+  --font-size-p: clamp(10px, 1.1vw, 32px);
   --font-size-p2: clamp(10px, 0.9vw, 32px);
   --font-size-p3: clamp(8px, 0.7vw, 32px);
 
@@ -288,3 +264,21 @@ a {
     font-family: 'Segoe';
     src: url("../fonts/SegoeUI.woff2") format('woff2');
 } 
+
+/* --------------------------------------------------------- MOBILE ---------------------------------------------------------*/
+
+@media (max-width: 768px) {
+  header {
+    height: 10vh;
+    left: 30vw;}
+  main{
+    margin-top: 10vh;}
+  .key-list {
+    column-count: 1;}
+  .sidebar {
+    width: 30vw;}
+  .content{
+    margin-left: 30vw;}
+  :root{
+    --font-size-p: clamp(10px, 1.3vw, 32px);}
+}
