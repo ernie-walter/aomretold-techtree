@@ -42,7 +42,7 @@ async function populateUnitWrapper(wrapper, unitIndex) {
     wrapper.appendChild(frame);
   }
    // --- Tooltip ---
-  wrapper.title = `${data.displayName}\nCategory: ${data.category}\n${data.costString}\n${data.armorString}\nPopulation: ${data.population}`;
+  //wrapper.title = `${data.displayName}\nCategory: ${data.category}\n${data.costString}\n${data.armorString}\nPopulation: ${data.population}`;
   
   return data;
 }
