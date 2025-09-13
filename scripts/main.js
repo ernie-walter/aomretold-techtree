@@ -69,7 +69,7 @@ dropdownMajor.addEventListener('change', () => {
 });
 
 // Helper function to print icons
-function appendIconValue(parent, key, value, iconPrefix) {
+function appendIconValue(parent, key, value, iconPrefix, iconSuffix = "") {
   const fullKey = PascalCaseName(iconPrefix ? `${iconPrefix}${key}` : key);
   const iconData = ICONS[fullKey];
   if (iconData) {
@@ -78,24 +78,24 @@ function appendIconValue(parent, key, value, iconPrefix) {
     img.classList.add("panel-icon");
     parent.appendChild(img);
   }
-  parent.appendChild(document.createTextNode(value + " "));
+  parent.appendChild(document.createTextNode(value + iconSuffix + " " ));
 }
 
 // For single-value or simple array properties
 function addPanelInfo(panel, data, tag, options = {}){
-  let prefix, newline = false;
+  let prefix, newline, suffix;
   let entries;
   if (typeof tag === "string") { 
     entries = [[tag, data]]; // tag is a single value
-    ({ prefix = undefined, newline = false } = options);
+    ({ prefix = undefined, newline = false, suffix = "" } = options);
   } else {
     entries = Object.entries(data);   // tag is object/array
-    ({ prefix = undefined, newline = false } = tag || {});
+    ({ prefix = undefined, newline = false, suffix = "" } = tag || {});
   }
   for (const [key, val] of entries) {
     const span = document.createElement("span");
     span.classList.add("panel-line");
-    appendIconValue(span, key, val, prefix);
+    appendIconValue(span, key, val, prefix, suffix);
     panel.appendChild(span);
   }
   if (newline) panel.appendChild(document.createElement("br"));
@@ -113,26 +113,26 @@ function addPanelAttacks(panel, attacks) {
   h3.classList.add("attack-name");
   panel.appendChild(h3);
 
-  appendIconValue(span, "rof", attack.rof, "atk");
-  if (attack.maxrange != null) appendIconValue(span, "range", attack.maxrange, "atk");
-  if (attack.numberProjectiles != null) appendIconValue(span, "projectiles", attack.numberProjectiles, "atk");
-  if (attack.area != null) appendIconValue(span, "area", attack.area, "atk");
-
   // Damages
   if (attack.damages) {
     for (const [type, val] of Object.entries(attack.damages)) {
       appendIconValue(span, type, val, "atk");
     }
   }
-
   // Bonus damages
   if (attack.bonus) {
     for (const [type, val] of Object.entries(attack.bonus)) {
       const iconKey = `type_${type.toLowerCase()}`; 
-      appendIconValue(span, iconKey, val);
+      appendIconValue(span, iconKey, val, "", "x");
     }
+    span.appendChild(document.createElement("br"));
   }
-
+  // Attack details
+  appendIconValue(span, "Rof", attack.rof, "atk");
+  if (attack.maxrange != null) appendIconValue(span, "Range", attack.maxrange, "atk");
+  if (attack.numberProjectiles != null) appendIconValue(span, "Projectiles", attack.numberProjectiles, "atk");
+  if (attack.area != null) appendIconValue(span, "Area", attack.area, "atk");
+  
   panel.appendChild(span);
   panel.appendChild(document.createElement("br")); // new line per attack
   });
@@ -202,180 +202,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (data.cost) addPanelInfo(panelDescription, data.cost, {newline: true});
     if (data.population) addPanelInfo(panelDescription, data.population, "Pop");
-    if (data.trainTime) addPanelInfo(panelDescription, data.trainTime, "Time", {newline: true});
+    if (data.trainTime) addPanelInfo(panelDescription, data.trainTime, "Time", {newline: true, suffix: "s"});
     if (data.hitPoints) addPanelInfo(panelDescription, data.hitPoints, "Hp");
     if (data.armor) addPanelInfo(panelDescription, data.armor, {prefix: "Armor"});
     if (data.speed) addPanelInfo(panelDescription, data.speed, "Speed", {newline: true});
     if (data.attacks) addPanelAttacks(panelDescription, data.attacks);
 
-
-      // === Cost section ===
-      if (data.cost) {                                            // If the unit has a cost object:
-        for (const [res, val] of Object.entries(data.cost)) {      // For each resource in that cost object:
-          const span = document.createElement("span");                // Create a new span for each resource
-          span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
-          span.style.display = "inline";                              // ensure it's inline
-
-          if (ICONS[res]) {                                       // If there's an icon for that resource:    
-            const img = document.createElement("img");              // Create an <img> element  
-            img.src = ICONS[res].src;                               // Set its src to the icon's src 
-            img.classList.add("panel-icon");                        // Add a "panel-icon" class to that img to carry over styling 
-            span.appendChild(img);
-          }
-          span.appendChild(document.createTextNode(val + " "));         // Add the cost value text to the span
-          panelDescription.appendChild(span);                     // Add that span to the panel description.
-        }
-        
-      }
-
-      // === Train Time ===
-      if (data.trainTime) {
-        const span = document.createElement("span");
-        span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
-        span.style.display = "inline";                              // ensure it's inline
-        if (ICONS.Time) {
-          const img = document.createElement("img");
-          img.src = ICONS.Time.src;
-          img.classList.add("panel-icon");
-          span.appendChild(img);
-        }
-        span.appendChild(document.createTextNode(data.trainTime + "s "));
-        panelDescription.appendChild(span);
-        panelDescription.appendChild(document.createElement("br"));
-      }
-
-      // === HP ===
-      if (data.hitPoints) {
-        const span = document.createElement("span");
-        span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
-        span.style.display = "inline";                              // ensure it's inline
-        if (ICONS.Hp) {
-          const img = document.createElement("img");
-          img.src = ICONS.Hp.src;
-          img.classList.add("panel-icon");
-          span.appendChild(img);
-        }
-        span.appendChild(document.createTextNode(data.hitPoints + " "));
-        panelDescription.appendChild(span);
-      }
-
-      // === Population ===
-      if (data.population) {
-        const span = document.createElement("span");
-        span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
-        span.style.display = "inline";                              // ensure it's inline
-        if (ICONS.Pop) {
-          const img = document.createElement("img");
-          img.src = ICONS.Pop.src;
-          img.classList.add("panel-icon");
-          span.appendChild(img);
-        }
-        span.appendChild(document.createTextNode(data.population + " "));
-        panelDescription.appendChild(span);
-      }
-
-      // === Speed ===
-      if (data.speed) {
-        const span = document.createElement("span");
-        span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
-        span.style.display = "inline";                              // ensure it's inline
-        if (ICONS.Speed) {
-          const img = document.createElement("img");
-          img.src = ICONS.Speed.src;
-          img.alt = "Speed";
-          img.classList.add("panel-icon");
-          span.appendChild(img);
-        }
-        span.appendChild(document.createTextNode(data.speed + " "));
-        panelDescription.appendChild(span);
-        panelDescription.appendChild(document.createElement("br"));
-      }
-
-      // === Armor ===
-      if (data.armor) {
-        for (const [type, val] of Object.entries(data.armor)) {
-          const span = document.createElement("span");
-          span.classList.add("panel-line");                           // Add a "panel-line" class to that span to carry over styling 
-          span.style.display = "inline";                              // ensure it's inline
-          if (ICONS[`Armor${type}`]){
-            const img = document.createElement("img");
-            img.src = ICONS[`Armor${type.replace(/["'\s]/g,'')}`]?.src;
-            img.classList.add("panel-icon");                        // Add a "panel-icon" class to that img to carry over styling 
-            span.appendChild(img);
-          }
-          span.appendChild(document.createTextNode(data.armor[type] + " "));
-          panelDescription.appendChild(span);
-        }
-        panelDescription.appendChild(document.createElement("br"));
-      }
-      
-      // // === Attacks section ===
-      // if (data.attacks && data.attacks.length > 0) {
-      //   data.attacks.forEach(atk => {
-      //     const row = document.createElement("div");
-      //     row.classList.add("panel-row");
-
-      //     // Damage types (Hack, Pierce, Crush, Divine…)
-      //     for (const [type, val] of Object.entries(atk.damage)) {
-      //       const dmgSpan = document.createElement("span");
-      //       dmgSpan.classList.add("panel-line");
-
-      //       if (ICONS[`Attack_${type}`]) {
-      //         const img = document.createElement("img");
-      //         img.src = ICONS[`Attack_${type}`].src;
-      //         img.classList.add("panel-icon");
-      //         dmgSpan.appendChild(img);
-      //       }
-
-      //       dmgSpan.appendChild(document.createTextNode(val));
-      //       row.appendChild(dmgSpan);
-      //     }
-
-      //     // ROF
-      //     if (atk.rof) {
-      //       const rofSpan = document.createElement("span");
-      //       rofSpan.classList.add("panel-line");
-      //       rofSpan.textContent = `ROF: ${atk.rof}`;
-      //       row.appendChild(rofSpan);
-      //     }
-
-      //     // Projectiles
-      //     if (atk.numProjectiles) {
-      //       const projSpan = document.createElement("span");
-      //       projSpan.classList.add("panel-line");
-      //       projSpan.textContent = `×${atk.numProjectiles}`;
-      //       row.appendChild(projSpan);
-      //     }
-
-      //     // Area damage
-      //     if (atk.area) {
-      //       const areaSpan = document.createElement("span");
-      //       areaSpan.classList.add("panel-line");
-      //       areaSpan.textContent = `Area: ${atk.area}`;
-      //       row.appendChild(areaSpan);
-      //     }
-
-      //     // Bonus vs types
-      //     if (atk.bonus.length > 0) {
-      //       atk.bonus.forEach(b => {
-      //         const bonusSpan = document.createElement("span");
-      //         bonusSpan.classList.add("panel-line");
-      //         bonusSpan.textContent = `Bonus vs ${b.vs}: ${b.value}`;
-      //         row.appendChild(bonusSpan);
-      //       });
-      //     }
-
-      //     panelDescription.appendChild(row);
-      //   });
-      // }
-
-      // wrapper.addEventListener("mouseleave", () => {
-      // panelTitle.textContent = "";
-      // panelDescription.textContent = "";
-      // });
-
       console.log(data);  // Debug log to confirm hover action
-
     });
   });
 });
