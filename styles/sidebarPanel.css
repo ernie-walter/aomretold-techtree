@@ -117,7 +117,7 @@
 }
 
 .panel-line {
-  display: flex;
+  display: inline;
   align-items: center;
   gap: 4px;
   margin: 2px 0;

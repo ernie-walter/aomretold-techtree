@@ -173,12 +173,14 @@ main {
   
   --font-size-h1: clamp(16px, 4vw, 32px);
   --font-size-h2: clamp(16px, 1.5vw, 32px);
+  --font-size-h3: clamp(12px, 1.2vw, 32px);
   --font-size-p: clamp(10px, 1.1vw, 32px);
   --font-size-p2: clamp(10px, 0.9vw, 32px);
   --font-size-p3: clamp(8px, 0.7vw, 32px);
 
   --h1: 700 var(--font-size-h1)/var(--line-height) 'Constantia', serif;
   --h2: 700 var(--font-size-h2)/var(--line-height) 'Constantia', serif;
+  --h3: 500 var(--font-size-h3)/1 'Constantia', serif;
   --p: 500 var(--font-size-p)/var(--line-height) 'Segoe', sans-serif;
   --p2: 500 var(--font-size-p2)/1.2 'Segoe', sans-serif;
   --p3: 500 var(--font-size-p3)/1.2 'Segoe', sans-serif;
@@ -213,6 +215,13 @@ h2{
   font: var(--h2);
   color: #ddd;
   hyphens: auto;  
+}
+
+h3{
+  font: var(--h3);
+  color: #aaa;
+  hyphens: auto; 
+  text-transform: uppercase;
 }
 
 a {

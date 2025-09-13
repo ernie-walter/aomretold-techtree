@@ -2,18 +2,18 @@
 const iconNames = [
   "food", "wood", "gold", "favor", "time",
   "pop", "speed", "hp",
-  "atk_hack", "atk_pierce", "atk_crush", "atk_divine","atk_rof", "atk_projectiles", "atk_area",
+  "atk_hack", "atk_pierce", "atk_crush", "atk_divine","atk_rof", "atk_projectiles", "atk_area", "atk_range",
   "armor_hack", "armor_pierce", "armor_crush",
   "type_soldier", "type_infantry", "type_cavalry", "type_ranged",
-  "type_villager", "type_hero", "type_myth", "type_titan",
+  "type_villager", "type_hero", "type_mythunit", "type_titan",
   "type_building", "type_wall", "type_tower", "type_siege",
   "type_ship", "type_ship_archer", "type_ship_siege", "type_ship_melee"
 ];
 // Create a mapping of icon names to their file paths
 const ICONS = Object.fromEntries(
-  iconNames.map(name => [PascalCaseName(name), { src: `images/Icons/${name}.png` }])
+  iconNames.map(name => [PascalCaseName(name), { src: `images/Icons/${name}.png` }])  
 );
-
+console.log(ICONS)
 function PascalCaseName(name) {
   return name.replace(/(^|_)([a-z])/g, (_, __, c) => c.toUpperCase());
 }
@@ -68,23 +68,76 @@ dropdownMajor.addEventListener('change', () => {
   });
 });
 
-function addPanelLine(panel, iconKey, text, newline = false) {
-  const span = document.createElement("span");
-  span.classList.add("panel-line");
-  span.style.display = "inline";
-
-  if (ICONS[iconKey]) {
+// Helper function to print icons
+function appendIconValue(parent, key, value, iconPrefix) {
+  const fullKey = PascalCaseName(iconPrefix ? `${iconPrefix}${key}` : key);
+  const iconData = ICONS[fullKey];
+  if (iconData) {
     const img = document.createElement("img");
-    img.src = ICONS[iconKey].src;
+    img.src = iconData.src;
     img.classList.add("panel-icon");
-    span.appendChild(img);
+    parent.appendChild(img);
   }
+  parent.appendChild(document.createTextNode(value + " "));
+}
 
-  span.appendChild(document.createTextNode(text + " "));
-  panel.appendChild(span);
-
+// For single-value or simple array properties
+function addPanelInfo(panel, data, tag, options = {}){
+  let prefix, newline = false;
+  let entries;
+  if (typeof tag === "string") { 
+    entries = [[tag, data]]; // tag is a single value
+    ({ prefix = undefined, newline = false } = options);
+  } else {
+    entries = Object.entries(data);   // tag is object/array
+    ({ prefix = undefined, newline = false } = tag || {});
+  }
+  for (const [key, val] of entries) {
+    const span = document.createElement("span");
+    span.classList.add("panel-line");
+    appendIconValue(span, key, val, prefix);
+    panel.appendChild(span);
+  }
   if (newline) panel.appendChild(document.createElement("br"));
 }
+
+// For the more complex attack array
+function addPanelAttacks(panel, attacks) {
+  attacks.forEach(attack => {
+  const span = document.createElement("span");
+  span.classList.add("panel-line");
+
+  const formattedName = attack.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+  const h3 = document.createElement("h3");
+  h3.textContent = formattedName;
+  h3.classList.add("attack-name");
+  panel.appendChild(h3);
+
+  appendIconValue(span, "rof", attack.rof, "atk");
+  if (attack.maxrange != null) appendIconValue(span, "range", attack.maxrange, "atk");
+  if (attack.numberProjectiles != null) appendIconValue(span, "projectiles", attack.numberProjectiles, "atk");
+  if (attack.area != null) appendIconValue(span, "area", attack.area, "atk");
+
+  // Damages
+  if (attack.damages) {
+    for (const [type, val] of Object.entries(attack.damages)) {
+      appendIconValue(span, type, val, "atk");
+    }
+  }
+
+  // Bonus damages
+  if (attack.bonus) {
+    for (const [type, val] of Object.entries(attack.bonus)) {
+      const iconKey = `type_${type.toLowerCase()}`; 
+      appendIconValue(span, iconKey, val);
+    }
+  }
+
+  panel.appendChild(span);
+  panel.appendChild(document.createElement("br")); // new line per attack
+  });
+}
+
 
 // Build icons using populateUnitWrapper() and getUnitData()
 document.addEventListener("DOMContentLoaded", async () => {
@@ -147,19 +200,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       panelDescription.appendChild(span);
     }
 
-    if (data.hitPoints) {
-      addPanelLine(panelDescription, "Hp", data.hitPoints);
-    }
-
-    if (data.population) {
-      addPanelLine(panelDescription, "Population", data.population);
-    }
-
-    if (data.speed) {
-      addPanelLine(panelDescription, "Speed", data.speed, true);
-    }
-
-
+    if (data.cost) addPanelInfo(panelDescription, data.cost, {newline: true});
+    if (data.population) addPanelInfo(panelDescription, data.population, "Pop");
+    if (data.trainTime) addPanelInfo(panelDescription, data.trainTime, "Time", {newline: true});
+    if (data.hitPoints) addPanelInfo(panelDescription, data.hitPoints, "Hp");
+    if (data.armor) addPanelInfo(panelDescription, data.armor, {prefix: "Armor"});
+    if (data.speed) addPanelInfo(panelDescription, data.speed, "Speed", {newline: true});
+    if (data.attacks) addPanelAttacks(panelDescription, data.attacks);
 
 
       // === Cost section ===
