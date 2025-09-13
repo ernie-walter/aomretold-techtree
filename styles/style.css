@@ -53,6 +53,7 @@ body {
 header {
   left: 20vw;
   height: 15vh;
+  right: 0;
   position: fixed;
   background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
   color: white;

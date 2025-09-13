@@ -31,12 +31,14 @@ window.addEventListener('orientationchange', setVh);
 const dropdownColour = document.getElementById("PlayerColourToggle");
 
 dropdownColour.addEventListener("change", function () {
-
   const color = this.value || "#ffffff"; 
   const wrappers = document.querySelectorAll(".icon:not(.no-background)");
   wrappers.forEach(wrapper => {
-    //wrapper.querySelector('.background-layer').style.backgroundColor = color;
     wrapper.style.backgroundColor = color; 
+  });
+  const panelIcons = document.querySelectorAll("#large-panel-icon");
+  panelIcons.forEach(img => {
+    img.style.backgroundColor = color; 
   });
 });
 
@@ -65,6 +67,24 @@ dropdownMajor.addEventListener('change', () => {
     }
   });
 });
+
+function addPanelLine(panel, iconKey, text, newline = false) {
+  const span = document.createElement("span");
+  span.classList.add("panel-line");
+  span.style.display = "inline";
+
+  if (ICONS[iconKey]) {
+    const img = document.createElement("img");
+    img.src = ICONS[iconKey].src;
+    img.classList.add("panel-icon");
+    span.appendChild(img);
+  }
+
+  span.appendChild(document.createTextNode(text + " "));
+  panel.appendChild(span);
+
+  if (newline) panel.appendChild(document.createElement("br"));
+}
 
 // Build icons using populateUnitWrapper() and getUnitData()
 document.addEventListener("DOMContentLoaded", async () => {
@@ -105,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Sidebar panel with tooltip info
   const panelTitle = document.getElementById("panel-title");
-  const panelDescription = document.getElementById("panel-description");
+  const panelDescription = document.getElementById("panel-content");
   const panelImg = document.getElementById("large-panel-img");
 
   wrappers.forEach(wrapper => {                               // For each wrapper:
@@ -126,6 +146,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       span.classList.add("panel-line");
       panelDescription.appendChild(span);
     }
+
+    if (data.hitPoints) {
+      addPanelLine(panelDescription, "Hp", data.hitPoints);
+    }
+
+    if (data.population) {
+      addPanelLine(panelDescription, "Population", data.population);
+    }
+
+    if (data.speed) {
+      addPanelLine(panelDescription, "Speed", data.speed, true);
+    }
+
+
+
 
       // === Cost section ===
       if (data.cost) {                                            // If the unit has a cost object:
@@ -227,72 +262,72 @@ document.addEventListener("DOMContentLoaded", async () => {
         panelDescription.appendChild(document.createElement("br"));
       }
       
-      // === Attacks section ===
-      if (data.attacks && data.attacks.length > 0) {
-        data.attacks.forEach(atk => {
-          const row = document.createElement("div");
-          row.classList.add("panel-row");
+      // // === Attacks section ===
+      // if (data.attacks && data.attacks.length > 0) {
+      //   data.attacks.forEach(atk => {
+      //     const row = document.createElement("div");
+      //     row.classList.add("panel-row");
 
-          // Damage types (Hack, Pierce, Crush, Divine…)
-          for (const [type, val] of Object.entries(atk.damage)) {
-            const dmgSpan = document.createElement("span");
-            dmgSpan.classList.add("panel-line");
+      //     // Damage types (Hack, Pierce, Crush, Divine…)
+      //     for (const [type, val] of Object.entries(atk.damage)) {
+      //       const dmgSpan = document.createElement("span");
+      //       dmgSpan.classList.add("panel-line");
 
-            if (ICONS[`Attack_${type}`]) {
-              const img = document.createElement("img");
-              img.src = ICONS[`Attack_${type}`].src;
-              img.classList.add("panel-icon");
-              dmgSpan.appendChild(img);
-            }
+      //       if (ICONS[`Attack_${type}`]) {
+      //         const img = document.createElement("img");
+      //         img.src = ICONS[`Attack_${type}`].src;
+      //         img.classList.add("panel-icon");
+      //         dmgSpan.appendChild(img);
+      //       }
 
-            dmgSpan.appendChild(document.createTextNode(val));
-            row.appendChild(dmgSpan);
-          }
+      //       dmgSpan.appendChild(document.createTextNode(val));
+      //       row.appendChild(dmgSpan);
+      //     }
 
-          // ROF
-          if (atk.rof) {
-            const rofSpan = document.createElement("span");
-            rofSpan.classList.add("panel-line");
-            rofSpan.textContent = `ROF: ${atk.rof}`;
-            row.appendChild(rofSpan);
-          }
+      //     // ROF
+      //     if (atk.rof) {
+      //       const rofSpan = document.createElement("span");
+      //       rofSpan.classList.add("panel-line");
+      //       rofSpan.textContent = `ROF: ${atk.rof}`;
+      //       row.appendChild(rofSpan);
+      //     }
 
-          // Projectiles
-          if (atk.numProjectiles) {
-            const projSpan = document.createElement("span");
-            projSpan.classList.add("panel-line");
-            projSpan.textContent = `×${atk.numProjectiles}`;
-            row.appendChild(projSpan);
-          }
+      //     // Projectiles
+      //     if (atk.numProjectiles) {
+      //       const projSpan = document.createElement("span");
+      //       projSpan.classList.add("panel-line");
+      //       projSpan.textContent = `×${atk.numProjectiles}`;
+      //       row.appendChild(projSpan);
+      //     }
 
-          // Area damage
-          if (atk.area) {
-            const areaSpan = document.createElement("span");
-            areaSpan.classList.add("panel-line");
-            areaSpan.textContent = `Area: ${atk.area}`;
-            row.appendChild(areaSpan);
-          }
+      //     // Area damage
+      //     if (atk.area) {
+      //       const areaSpan = document.createElement("span");
+      //       areaSpan.classList.add("panel-line");
+      //       areaSpan.textContent = `Area: ${atk.area}`;
+      //       row.appendChild(areaSpan);
+      //     }
 
-          // Bonus vs types
-          if (atk.bonus.length > 0) {
-            atk.bonus.forEach(b => {
-              const bonusSpan = document.createElement("span");
-              bonusSpan.classList.add("panel-line");
-              bonusSpan.textContent = `Bonus vs ${b.vs}: ${b.value}`;
-              row.appendChild(bonusSpan);
-            });
-          }
+      //     // Bonus vs types
+      //     if (atk.bonus.length > 0) {
+      //       atk.bonus.forEach(b => {
+      //         const bonusSpan = document.createElement("span");
+      //         bonusSpan.classList.add("panel-line");
+      //         bonusSpan.textContent = `Bonus vs ${b.vs}: ${b.value}`;
+      //         row.appendChild(bonusSpan);
+      //       });
+      //     }
 
-          panelDescription.appendChild(row);
-        });
-      }
+      //     panelDescription.appendChild(row);
+      //   });
+      // }
 
       // wrapper.addEventListener("mouseleave", () => {
       // panelTitle.textContent = "";
       // panelDescription.textContent = "";
       // });
 
-      // console.log(data);  // Debug log to confirm hover action
+      console.log(data);  // Debug log to confirm hover action
 
     });
   });

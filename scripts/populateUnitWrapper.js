@@ -2,7 +2,6 @@
 async function populateUnitWrapper(wrapper, unitIndex) {
   const unitName = wrapper.getAttribute('name');
   
-
   const unitNodeObj = unitIndex[unitName];
   if (!unitNodeObj) {
    // console.warn(`Unit ${unitName} not found`);
