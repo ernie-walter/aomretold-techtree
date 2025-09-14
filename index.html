@@ -10,6 +10,7 @@
     <script src="scripts/getUnitData.js" defer></script>
     <script src="scripts/populateUnitWrapper.js" defer></script>
     <script src="scripts/getUnitDescription.js" defer></script>
+    <script src="scripts/panelBuildingScripts.js" defer></script>
     <script src="scripts/main.js" defer></script>
 </head>    
 <body>
@@ -17,6 +18,7 @@
         <div class="sidebar-text">
             <h2> Civilisation</h2>
             <select id="MajorGodToggle">
+                <option value="" selected disabled>--Choose Civ--</option>
                 <option value="all">All</option>
                 <option value="zeus">Zeus</option>
                 <option value="poseidon">Poseidon</option>
@@ -69,7 +71,7 @@
             </div>
             <div id="panel">
                 <h2 id="panel-title">Hover over an icon</h2>
-                <div id="panel-content"></div>
+                <p id="panel-content">Click to freeze it</p>
             </div>
         </div>
 

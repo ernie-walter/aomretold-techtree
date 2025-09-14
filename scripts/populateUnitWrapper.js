@@ -1,15 +1,9 @@
 // populateUnitWrapper populates an icon wrapper with unit data
-async function populateUnitWrapper(wrapper, unitIndex) {
+function populateUnitWrapper(wrapper, unitIndex) {
   const unitName = wrapper.getAttribute('name');
-  
   const unitNodeObj = unitIndex[unitName];
-  if (!unitNodeObj) {
-   // console.warn(`Unit ${unitName} not found`);
-    return;
-  }
-
+  if (!unitNodeObj) return
   const data = getUnitDataFromNode(unitNodeObj.node, wrapper);
-
 
   // --- Icon ---
   let iconDiv = wrapper.querySelector('.icon');
@@ -28,20 +22,16 @@ async function populateUnitWrapper(wrapper, unitIndex) {
     img.style.objectFit = "contain";
     iconDiv.appendChild(img);
   }
-
   img.src = `images/${data.icon.replace(/\\/g, "/")}`;
 
   // --- Frame overlay ---
   const existingFrame = wrapper.querySelector('.frame');
   if (!existingFrame) {
     const frame = document.createElement('img');
-    //frame.src = `../aomretold-techtree/images/Frames/Frame_${data.category}.png`;
     frame.src = `images/Frames/Frame_${data.category}.png`;
     frame.classList.add('frame');
     wrapper.appendChild(frame);
   }
-   // --- Tooltip ---
-  //wrapper.title = `${data.displayName}\nCategory: ${data.category}\n${data.costString}\n${data.armorString}\nPopulation: ${data.population}`;
-  
+
   return data;
 }

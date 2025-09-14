@@ -1,17 +1,10 @@
-// getUnitData function to fetch unit data from XML file
-// uncomment this to use the getUnitData function in a Node.js environment
-// import fetch from "node-fetch"; 
-// import { XMLParser } from "fast-xml-parser";
-
-// Load XML and parse into a Document
-
+// XML loading helper functions
 async function loadXML(url) {
   const response = await fetch(url);
   const text = await response.text();
   return new DOMParser().parseFromString(text, "application/xml");
 }
 
-// Build a merged unit/tech index
 async function buildUnitIndex() {
   const protoDoc = await loadXML('https://raw.githubusercontent.com/ernie-walter/aomretold-techtree/main/gamefiles/proto.xml');
   const techtreeDoc = await loadXML('https://raw.githubusercontent.com/ernie-walter/aomretold-techtree/main/gamefiles/techtree.xml');
@@ -29,12 +22,12 @@ async function buildUnitIndex() {
   [...protoNodes, ...techtreeNodes].forEach(node => {
     const name = node.getAttribute('name');
     if (!name) return;
-
     unitIndex[name] = { node };
   });
 
   return unitIndex;
 }
+
 
 function getUnitDataFromNode(node, wrapper) {
   if (!node) return null;
@@ -42,24 +35,18 @@ function getUnitDataFromNode(node, wrapper) {
   const name = node.getAttribute("name");
 
   // --- displayName ---
-  let displayName;
-  if (wrapper && wrapper.hasAttribute("displayName")) {
-    displayName = wrapper.getAttribute("displayName");
-  } else {
-    displayName = name;
-    const suffixes = ["Greek", "Egyptian", "Norse", "Atlantean", "Chinese"];
-    for (const suffix of suffixes) {
-      if (displayName.endsWith(suffix)) {
-        displayName = displayName.slice(0, -suffix.length);
-        break;
-      }
+  let displayName = wrapper?.getAttribute("displayName") || name;
+  const suffixes = ["Greek", "Egyptian", "Norse", "Atlantean", "Chinese"];
+  for (const suffix of suffixes) {
+    if (displayName.endsWith(suffix)) {
+      displayName = displayName.slice(0, -suffix.length);
+      break;
     }
   }
-
   // Insert spaces before capital letters (except first letter)
   displayName = displayName.replace(/([a-z])([A-Z])/g, "$1 $2");
 
-  // Category is already computed in index if desired
+  // Category
   const rawTypes = Array.from(node.querySelectorAll('unittype')).map(u => u.textContent.trim());
   let category = 'Unknown';
   if (rawTypes.includes('Hero')) category = 'Hero';
@@ -72,27 +59,18 @@ function getUnitDataFromNode(node, wrapper) {
   // Costs
   const cost = {};
   node.querySelectorAll('cost').forEach(c => {
-  const res = c.getAttribute('resourcetype');
-  const rawCost = c.textContent.trim();
-  const numCost = Number(rawCost);  // Parse as number if possible
-  cost[res] = isNaN(numCost) ? rawCost : numCost.toString();   // If numeric, format to remove trailing zeros, else keep as string
+    const res = c.getAttribute('resourcetype');
+    const val = Number(c.textContent.trim());
+    cost[res] = isNaN(val) ? c.textContent.trim() : val.toString();
   });
-  const costString = Object.entries(cost)     // Convert cost object to readable string
-  .map(([res, val]) => `${res}: ${val}`)
-  .join(", ");
   
   // Armor
   const armor = {};
   node.querySelectorAll('armor').forEach(a => {
-  armor[a.getAttribute('type')] = a.getAttribute('value');
-  const arm = a.getAttribute('type');
-  const rawArm = a.getAttribute('value');
-  const numArm = Number(rawArm);  // Parse as number if possible
-  armor[arm] = (numArm * 100).toString().replace(/\.0+$/, "") + "%";
+    const type = a.getAttribute('type');
+    const val = Number(a.getAttribute('value'));
+    armor[type] = `${(val * 100).toString().replace(/\.0+$/,"")}%`;
   });
-  // const armorString = Object.entries(armor)     // Convert cost object to readable string
-  // .map(([arm, val]) => `${arm}: ${val}`)
-  // .join(", ");
 
   // Population, Speed, Train Time, HP
   const population = node.querySelector('populationcount')?.textContent || null;
@@ -104,7 +82,6 @@ function getUnitDataFromNode(node, wrapper) {
   const attacks = [];
 
   node.querySelectorAll('protoaction').forEach(pa => {
-    if (!pa) return;
     const attack = {
       name: pa.querySelector('name')?.textContent || "",
       rof: Number(pa.querySelector('rof')?.textContent) || null,
