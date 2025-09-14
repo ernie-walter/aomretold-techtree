@@ -4,8 +4,8 @@ const iconNames = [
   "pop", "speed", "hp",
   "atk_hack", "atk_pierce", "atk_crush", "atk_divine","atk_rof", "atk_projectiles", "atk_area", "atk_range",
   "armor_hack", "armor_pierce", "armor_crush",
-  "type_soldier", "type_infantry", "type_cavalry", "type_ranged",
-  "type_villager", "type_hero", "type_mythunit", "type_titan",
+  "type_humansoldier", "type_abstractinfantry", "type_abstractcavalry", "type_abstractarcher",
+  "type_villager", "type_hero", "type_mythunit", "type_abstracttitan",
   "type_building", "type_wall", "type_abstracttower", "type_siege",
   "type_ship", "type_ship_archer", "type_ship_siege", "type_ship_melee"
 ];

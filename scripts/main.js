@@ -16,12 +16,12 @@ function initDropdown(containerId, onSelect) {
   const list = container.querySelector(".dropdown-list");
   const options = list.querySelectorAll("li");
 
-  // Toggle dropdown visibility
+  // Make dropdown list appear when you click on button aka 'selected'
   selected.addEventListener("click", () => {
     list.style.display = list.style.display === "block" ? "none" : "block";
   });
 
-  // Handle option selection
+  // If you click on a list item, make that list item -> 'selected'
   options.forEach(option => {
     option.addEventListener("click", () => {
       selected.innerHTML = option.innerHTML; // show icon + text

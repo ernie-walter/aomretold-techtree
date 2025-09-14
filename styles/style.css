@@ -71,43 +71,32 @@ main {
 }
 
 /* --------------------------------------------------------- DROPDOWN --------------------------------------------------------*/
-
-.dropdown {
+/* Container for .selected and .dropdown-list */
+.dropdown { 
   position: relative;
   width: 90%;
   margin: auto;
   font: var(--p);
   color: #ccc;
 }
-
+/* Main visible button before list is opened */
 .dropdown .selected {
-  padding: 10px 12px;
-  border-radius: 100px;
-  background-image: url('../images/Buttons/BtnOrnate_Sml_Focus.png');
-  background-size: contain;      /* fits inside, preserves aspect ratio */
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
+  position: relative;      /* so text can be positioned over the image */
+  display: inline-flex;     /* shrink-wrap around content */
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   cursor: pointer;
+  padding: 10px 20px;       /* optional spacing for the label */
 }
 
+/* Appends ▼ to the end of the button text */
 .dropdown .selected::after {
   content: "▼";
   font-size: 12px;
   margin-left: 10px;
 }
 
-.selected .dropdown-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* scales the image nicely */
-}
-
+/* The actual dropdown menu upon clicking */
 .dropdown .dropdown-list {
   position: absolute;
   top: 100%;
@@ -125,6 +114,7 @@ main {
   color: #333;
 }
 
+/* Each item in the list */
 .dropdown .dropdown-list li {
   padding: 8px 12px;
   display: flex;
@@ -132,15 +122,30 @@ main {
   gap: 8px;
 }
 
+/* Hovering over individual list items */
 .dropdown .dropdown-list li:hover {
   background-color: #e0e0e0;
 }
 
+/* Icons within dropdown bars */
 .dropdown-icon {
   width: 30px;
   height: 30px;
 }
 
+/* Button image */
+.dropdown .selected .dropdown-bg {
+  display: block;
+  width: 100%;
+  height: auto;              /* preserves the image’s aspect ratio */
+}
+
+.dropdown .selected .label {
+  position: absolute;        /* sits on top of the image */
+  color: #fff;
+  font: var(--p);
+  pointer-events: none;      /* so clicks still hit the button */
+}
 
 /* ---------------------------------------------------------– COLUMNS ---------------------------------------------------------*/
 .columns {
