@@ -16,15 +16,17 @@
 <body>
     <aside class="sidebar">
         <div class="sidebar-text">
-            <h2> Civilisation</h2>
-            <select id="MajorGodToggle">
-                <option value="" selected disabled>--Choose Civ--</option>
-                <option value="all">All</option>
-                <option value="zeus">Zeus</option>
-                <option value="poseidon">Poseidon</option>
-                <option value="hades">Hades</option>
-                <!-- <option value="Ra">Ra</option> -->
-            </select>
+
+            <h2>Civilisation</h2>
+            <div class="dropdown" id="MajorGodToggle">
+                <div class="selected">Choose a Major God</div>  
+                <ul class="dropdown-list">
+                    <li data-value="all">All</li>
+                    <li data-value="zeus"><img src="images/God Pictures/zeus_icon.png" class="dropdown-icon">Zeus</li>
+                    <li data-value="poseidon"><img src="images/God Pictures/poseidon_icon.png" class="dropdown-icon">Poseidon</li>
+                    <li data-value="hades"><img src="images/God Pictures/hades_icon.png" class="dropdown-icon">Hades</li>
+                </ul>
+            </div>
 
             <h2> Player Colour</h2>
             <select id="PlayerColourToggle">

@@ -7,6 +7,35 @@ setVh();    // Run on load
 window.addEventListener('resize', setVh); // Update on resize or orientation change
 window.addEventListener('orientationchange', setVh);
 
+// Build fancy dropdown menus
+function initDropdown(containerId, onSelect) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const selected = container.querySelector(".selected");
+  const list = container.querySelector(".dropdown-list");
+  const options = list.querySelectorAll("li");
+
+  // Toggle dropdown visibility
+  selected.addEventListener("click", () => {
+    list.style.display = list.style.display === "block" ? "none" : "block";
+  });
+
+  // Handle option selection
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      selected.innerHTML = option.innerHTML; // show icon + text
+      list.style.display = "none";
+      if (onSelect) onSelect(option.dataset.value);
+    });
+  });
+
+  // Close when clicking outside
+  document.addEventListener("click", e => {
+    if (!container.contains(e.target)) list.style.display = "none";
+  });
+}
+
 // Player Colour Dropdown Selection
 const dropdownColour = document.getElementById("PlayerColourToggle");
 
@@ -36,16 +65,15 @@ const iconsCiv = document.querySelectorAll('.icon-wrapper[data-civ]');
 const dropdownMajor = document.getElementById('MajorGodToggle');
 dropdownMajor.addEventListener('change', filterIcons);
 
-function filterIcons() {
-  const selectedMajor = dropdownMajor.value;
+function filterIcons(selectedMajor) {
   iconsCiv.forEach(icon => {
     const minorGod = icon.dataset.civ;
     if (selectedMajor === "all") {
-      icon.style.display = "block";  // show everything
-    } else if (selectedMajor && (majorToMinorMap[selectedMajor] || []).includes(minorGod)) {
-      icon.style.display = "block";  // show matches
+      icon.style.display = "block"; // show everything
+    } else if ((majorToMinorMap[selectedMajor] || []).includes(minorGod)) {
+      icon.style.display = "block"; // show matching icons
     } else {
-      icon.style.display = "none";   // hide the rest
+      icon.style.display = "none";  // hide the rest
     }
   });
 }
@@ -137,12 +165,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   
   // Click off icon to unfreeze
-  document.addEventListener("click", () => {
-    lock = null;
-    panelTitle.textContent = "Hover over an icon";
-    panelDescription.innerHTML = "Click to freeze it";
-    panelImg.src = "";
+  const main = document.querySelector('main'); // your main content
+  document.addEventListener("click", (e) => {
+    if (main.contains(e.target)) {
+      lock = null;
+      panelTitle.textContent = "Hover over an icon";
+      panelDescription.innerHTML = "Click to freeze it";
+      panelImg.src = "";
+    }
   });
-  filterIcons();
+  
+
+  initDropdown("MajorGodToggle", value => {
+    filterIcons(value);
+    // separate filtering logic can go here
+  });
+
+  // initDropdown("UnitDropdown", value => {
+  //   console.log("Selected Unit:", value);
+  //   // separate logic can go here
+  // });
 });
 
