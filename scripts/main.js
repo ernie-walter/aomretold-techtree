@@ -71,30 +71,22 @@ addHoverFadeSwap(
 );
 
 
-// Player Colour Dropdown Selection
+// Set player colour onto icon backgrounds
 const dropdownColour = document.getElementById("PlayerColourToggle");
-
-dropdownColour.addEventListener("change", function () {
-  const color = this.value || "#ffffff"; 
+function changePlayerColour(color) {
   const wrappers = document.querySelectorAll(".icon:not(.no-background)");
-  wrappers.forEach(wrapper => {
-    wrapper.style.backgroundColor = color; 
-  });
+  wrappers.forEach(wrapper => {wrapper.style.backgroundColor = color;});
   const panelIcons = document.querySelectorAll("#large-panel-icon");
   panelIcons.forEach(img => {
     img.style.backgroundColor = color; 
   });
-});
+};
 
 // Helper to build Player Colour Square Icons
 document.querySelectorAll('.player-square').forEach(el => {
   const color = el.getAttribute('color');
   if (!color) return;
-  el.style.backgroundImage = `
-    url('image2.png'),
-    linear-gradient(${color}, ${color}),
-    url('image1.png')
-  `;
+  el.style.setProperty('--playerColour', color);
 });
 
 // Minor God Mapping
@@ -218,14 +210,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       panelTitle.textContent = "Hover over an icon";
       panelDescription.innerHTML = "Click to freeze it";
       panelImg.src = "";
+      panelImg.style.backgroundColor = ""; // clear background color
+      panelImg.parentElement.style.backgroundColor = "";
     }
   });
   
-
   initDropdown("MajorGodToggle", value => {
     filterIcons(value);
   });
 
-  initDropdown("PlayerColourToggle")
+  initDropdown("PlayerColourToggle", changePlayerColour);
 });
 
