@@ -40,7 +40,7 @@ function initDropdown(containerId, onSelect) {
   });
 }
 
-// Dropdown button changes
+// Dropdown button mouse hover background changes
 document.querySelectorAll('.dropdown .selected .dropdown-bg').forEach(img => {
   const off = 'images/Buttons/BtnOrnate_Sml_Light.png';
   const on  = 'images/Buttons/BtnOrnate_Sml_Gold.png';
@@ -62,7 +62,6 @@ function addHoverFadeSwap(img, offSrc, onSrc, duration = 300) {
   img.addEventListener('mouseenter', () => swap(onSrc));
   img.addEventListener('mouseleave', () => swap(offSrc));
 }
-
 const btnImg = document.querySelector('.dropdown .selected .dropdown-bg');
 addHoverFadeSwap(
   btnImg,
@@ -85,6 +84,17 @@ dropdownColour.addEventListener("change", function () {
   panelIcons.forEach(img => {
     img.style.backgroundColor = color; 
   });
+});
+
+// Helper to build Player Colour Square Icons
+document.querySelectorAll('.player-square').forEach(el => {
+  const color = el.getAttribute('color');
+  if (!color) return;
+  el.style.backgroundImage = `
+    url('image2.png'),
+    linear-gradient(${color}, ${color}),
+    url('image1.png')
+  `;
 });
 
 // Minor God Mapping
@@ -214,12 +224,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initDropdown("MajorGodToggle", value => {
     filterIcons(value);
-    // separate filtering logic can go here
   });
 
-  // initDropdown("UnitDropdown", value => {
-  //   console.log("Selected Unit:", value);
-  //   // separate logic can go here
-  // });
+  initDropdown("PlayerColourToggle")
 });
 

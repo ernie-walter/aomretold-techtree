@@ -98,11 +98,21 @@
 /* Icons within dropdown bars */
 .dropdown-icon {
   display: block;
-  margin: 0;
-  padding: 0;
   width: 35px;
   height: 35px;
   border: 1px solid #b38236;
   object-fit: contain;
+}
 
+.player-square{
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-image: 
+    url('../images/Buttons/PlayerColorEmboss.png'),  
+    linear-gradient(var(--playerColour), var(--playerColour)),
+    url('../images/Buttons/PlayerColorBase.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
