@@ -1,3 +1,75 @@
+/* --------------------------------------------------------- FONTS ---------------------------------------------------------*/
+:root {
+  --text-color: #ccc;
+  --line-height: 1.6;
+  
+  --font-size-h1: clamp(16px, 4vw, 32px);
+  --font-size-h2: clamp(16px, 1.5vw, 32px);
+  --font-size-h3: clamp(12px, 1.2vw, 32px);
+  --font-size-p: clamp(10px, 1.1vw, 32px);
+  --font-size-p2: clamp(10px, 0.9vw, 32px);
+  --font-size-p3: clamp(8px, 0.7vw, 32px);
+
+  --h1: 700 var(--font-size-h1)/var(--line-height) 'Constantia', serif;
+  --h2: 700 var(--font-size-h2)/var(--line-height) 'Constantia', serif;
+  --h3: 500 var(--font-size-h3)/1 'Constantia', serif;
+  --p: 500 var(--font-size-p)/var(--line-height) 'Segoe', sans-serif;
+  --p2: 500 var(--font-size-p2)/1.2 'Segoe', sans-serif;
+  --p3: 500 var(--font-size-p3)/1.2 'Segoe', sans-serif;
+}
+
+p {
+  font: var(--p);
+  color: var(--text-color);
+  hyphens: auto; 
+}
+
+p.key { /* used for Key in sidebar */
+  font: var(--p2);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px 0;      /* spacing between items vertically */
+}
+
+p.footnote { /* used for footnote in sidebar */
+  font: var(--p3);
+  color: #888;
+}
+
+h1 {
+  font: var(--h1);
+  color: #fff;
+}
+
+h2{
+  font: var(--h2);
+  color: #ddd;
+  hyphens: auto;  
+}
+
+h3{
+  font: var(--h3);
+  color: #aaa;
+  hyphens: auto; 
+  text-transform: uppercase;
+}
+
+a {
+  color: #666;              
+  text-decoration: underline;
+}
+
+@font-face {
+  font-family: 'Constantia';
+  src: url("../fonts/Constantia.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: 'Segoe';
+    src: url("../fonts/SegoeUI.woff2") format('woff2');
+} 
 body {
     display: flex;
     height: calc(var(--vh, 1vh) * 100);
@@ -74,26 +146,67 @@ main {
 /* Container for .selected and .dropdown-list */
 .dropdown { 
   position: relative;
-  width: 90%;
+  width: 100%;
   margin: auto;
-  font: var(--p);
-  color: #ccc;
 }
+
 /* Main visible button before list is opened */
 .dropdown .selected {
   position: relative;      /* so text can be positioned over the image */
-  display: inline-flex;     /* shrink-wrap around content */
+  display: inline-block;   /* shrink-wrap to the image width */
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 10px 20px;       /* optional spacing for the label */
+  font: var(--h2);
+  transition: transform 0.3s ease;
 }
 
+.dropdown .selected:hover{
+  transform: scale(1.05);
+}
+
+/* Button image */
+.dropdown .selected .dropdown-bg {
+  display: flex;
+  width: 100%;
+  height: auto;              /* preserves the image’s aspect ratio */
+  transition: opacity 0.2s ease;
+}
+
+.dropdown .selected .label {
+  position: absolute;        /* sits on top of the image */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;     /* flex to allow gap */
+  align-items: center;      /* vertical alignment of icon + text */
+  justify-content: center;  /* horizontal centering */
+  gap: 8px;                 /* separates icon and text */
+  color: #ccc;
+  width: 90%;               /* prevents text from spilling */
+  text-align: center;
+  white-space: nowrap;      /* keep on one line */
+  overflow: hidden;         /* hide overflow */
+  text-overflow: ellipsis;  /* show “…” if text too long */
+  pointer-events: none;      /* so clicks still hit the button */
+  font-size: 90%;
+}
+
+/* .dropdown .selected .arrow {
+  display: inline;
+  width: 1em;
+  height: auto;
+  margin-left: 0.5em;
+} */
+
 /* Appends ▼ to the end of the button text */
-.dropdown .selected::after {
-  content: "▼";
-  font-size: 12px;
-  margin-left: 10px;
+.dropdown .selected .label::after {
+  content: "";
+  display: inline-block;
+  background-image: url('../images/Buttons/Dropdown_Arrow_Down_Double.png');
+  width: 1em;
+  height: auto;
+  margin-left: 0.5em;
 }
 
 /* The actual dropdown menu upon clicking */
@@ -110,8 +223,8 @@ main {
   overflow-y: auto;
   display: none;
   z-index: 10;
-  font: var(--p);
   color: #333;
+  font: var(--p);
 }
 
 /* Each item in the list */
@@ -120,6 +233,7 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
+  font: var(--p);
 }
 
 /* Hovering over individual list items */
@@ -129,22 +243,8 @@ main {
 
 /* Icons within dropdown bars */
 .dropdown-icon {
-  width: 30px;
-  height: 30px;
-}
-
-/* Button image */
-.dropdown .selected .dropdown-bg {
-  display: block;
-  width: 100%;
-  height: auto;              /* preserves the image’s aspect ratio */
-}
-
-.dropdown .selected .label {
-  position: absolute;        /* sits on top of the image */
-  color: #fff;
-  font: var(--p);
-  pointer-events: none;      /* so clicks still hit the button */
+  width: 35px;
+  height: 35px;
 }
 
 /* ---------------------------------------------------------– COLUMNS ---------------------------------------------------------*/
@@ -238,78 +338,7 @@ main {
 
 
 
-/* --------------------------------------------------------- FONTS ---------------------------------------------------------*/
-:root {
-  --text-color: #ccc;
-  --line-height: 1.6;
-  
-  --font-size-h1: clamp(16px, 4vw, 32px);
-  --font-size-h2: clamp(16px, 1.5vw, 32px);
-  --font-size-h3: clamp(12px, 1.2vw, 32px);
-  --font-size-p: clamp(10px, 1.1vw, 32px);
-  --font-size-p2: clamp(10px, 0.9vw, 32px);
-  --font-size-p3: clamp(8px, 0.7vw, 32px);
 
-  --h1: 700 var(--font-size-h1)/var(--line-height) 'Constantia', serif;
-  --h2: 700 var(--font-size-h2)/var(--line-height) 'Constantia', serif;
-  --h3: 500 var(--font-size-h3)/1 'Constantia', serif;
-  --p: 500 var(--font-size-p)/var(--line-height) 'Segoe', sans-serif;
-  --p2: 500 var(--font-size-p2)/1.2 'Segoe', sans-serif;
-  --p3: 500 var(--font-size-p3)/1.2 'Segoe', sans-serif;
-}
-
-p {
-  font: var(--p);
-  color: var(--text-color);
-  hyphens: auto; 
-}
-
-p.key { /* used for Key in sidebar */
-  font: var(--p2);
-  color: var(--text-color);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 6px 0;      /* spacing between items vertically */
-}
-
-p.footnote { /* used for footnote in sidebar */
-  font: var(--p3);
-  color: #888;
-}
-
-h1 {
-  font: var(--h1);
-  color: #fff;
-}
-
-h2{
-  font: var(--h2);
-  color: #ddd;
-  hyphens: auto;  
-}
-
-h3{
-  font: var(--h3);
-  color: #aaa;
-  hyphens: auto; 
-  text-transform: uppercase;
-}
-
-a {
-  color: #666;              
-  text-decoration: underline;
-}
-
-@font-face {
-  font-family: 'Constantia';
-  src: url("../fonts/Constantia.woff2") format('woff2');
-}
-
-@font-face {
-    font-family: 'Segoe';
-    src: url("../fonts/SegoeUI.woff2") format('woff2');
-} 
 
 /* --------------------------------------------------------- MOBILE ---------------------------------------------------------*/
 

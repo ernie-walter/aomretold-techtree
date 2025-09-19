@@ -13,6 +13,7 @@ function initDropdown(containerId, onSelect) {
   if (!container) return;
 
   const selected = container.querySelector(".selected");
+  const label = selected.querySelector(".label"); // the text span
   const list = container.querySelector(".dropdown-list");
   const options = list.querySelectorAll("li");
 
@@ -24,7 +25,7 @@ function initDropdown(containerId, onSelect) {
   // If you click on a list item, make that list item -> 'selected'
   options.forEach(option => {
     option.addEventListener("click", () => {
-      selected.innerHTML = option.innerHTML; // show icon + text
+      label.innerHTML = option.innerHTML; // show icon + text
       list.style.display = "none";
       if (onSelect) onSelect(option.dataset.value);
     });
@@ -35,6 +36,38 @@ function initDropdown(containerId, onSelect) {
     if (!container.contains(e.target)) list.style.display = "none";
   });
 }
+
+// Dropdown button changes
+document.querySelectorAll('.dropdown .selected .dropdown-bg').forEach(img => {
+  const off = 'images/Buttons/BtnOrnate_Sml_Light.png';
+  const on  = 'images/Buttons/BtnOrnate_Sml_Gold.png';
+
+  img.addEventListener('mouseenter', () => img.src = on);
+  img.addEventListener('mouseleave', () => img.src = off);
+});
+
+// Dropdown button fade effect
+function addHoverFadeSwap(img, offSrc, onSrc, duration = 300) {
+  img.style.transition = `opacity ${duration}ms ease`;
+  function swap(newSrc) {
+    img.style.opacity = 0;
+    setTimeout(() => {
+      img.src = newSrc;
+      img.style.opacity = 1;
+    }, duration / 2);
+  }
+  img.addEventListener('mouseenter', () => swap(onSrc));
+  img.addEventListener('mouseleave', () => swap(offSrc));
+}
+
+const btnImg = document.querySelector('.dropdown .selected .dropdown-bg');
+addHoverFadeSwap(
+  btnImg,
+  'images/Buttons/BtnOrnate_Sml_Light.png',
+  'images/Buttons/BtnOrnate_Sml_Gold.png',
+  50 // optional fade duration (ms)
+);
+
 
 // Player Colour Dropdown Selection
 const dropdownColour = document.getElementById("PlayerColourToggle");
