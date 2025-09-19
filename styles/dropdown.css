@@ -1,0 +1,108 @@
+/* --------------------------------------------------------- DROPDOWN --------------------------------------------------------*/
+/* Container for .selected and .dropdown-list */
+.dropdown { 
+  position: relative;
+  width: 100%;
+  margin: auto;
+  align-items: center;
+}
+
+/* Main visible button before list is opened */
+.dropdown .selected {
+  position: relative;      /* so text can be positioned over the image */
+  display: inline-flex;   /* shrink-wrap to the image width */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font: var(--h2);
+  font-size: clamp(12px, 1.3vw, 32px);
+  transition: transform 0.3s ease;
+}
+
+.dropdown .selected:hover{
+  transform: scale(1.05);
+}
+
+/* Button image */
+.dropdown .selected .dropdown-bg {
+  display: flex;
+  width: 100%;
+  height: auto;              /* preserves the image’s aspect ratio */
+  transition: opacity 0.2s ease;
+}
+
+.dropdown .selected .label {
+  position: absolute;        /* sits on top of the image */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;     /* flex to allow gap */
+  align-items: center;      /* vertical alignment of icon + text */
+  justify-content: center;  /* horizontal centering */
+  gap: 8px;                 /* separates icon and text */
+  color: #ccc;
+  width: 90%;               /* prevents text from spilling */
+  text-align: center;
+  white-space: nowrap;      /* keep on one line */
+  overflow: hidden;         /* hide overflow */
+  text-overflow: ellipsis;  /* show “…” if text too long */
+  pointer-events: none;      /* so clicks still hit the button */
+  font-size: 90%;
+}
+
+/* Appends arrow to the end of the button text */
+.dropdown .selected .label::after {
+  content: "";
+  display: inline-flex;
+  background-image: url('../images/Buttons/Dropdown_Arrow_Down_Double.png');
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 0.5em;
+}
+
+/* The actual dropdown menu upon clicking */
+.dropdown .dropdown-list {
+  position: absolute;
+  padding-left: 0;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  border: 2px solid #555;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+  color: #333;
+  font: var(--p);
+}
+
+/* Each item in the list */
+.dropdown .dropdown-list li {
+  padding: 8px 25px; /* top&bottom, left&right */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: var(--p);
+}
+
+/* Hovering over individual list items */
+.dropdown .dropdown-list li:hover {
+  background-color: #e0e0e0;
+}
+
+/* Icons within dropdown bars */
+.dropdown-icon {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #b38236;
+  object-fit: contain;
+
+}
