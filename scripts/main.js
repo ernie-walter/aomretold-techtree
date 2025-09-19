@@ -13,25 +13,28 @@ function initDropdown(containerId, onSelect) {
   if (!container) return;
 
   const selected = container.querySelector(".selected");
-  const label = selected.querySelector(".label"); // the text span
+  const label = selected.querySelector(".label");
   const list = container.querySelector(".dropdown-list");
   const options = list.querySelectorAll("li");
 
-  // Make dropdown list appear when you click on button aka 'selected'
+  // Toggle dropdown
   selected.addEventListener("click", () => {
     list.style.display = list.style.display === "block" ? "none" : "block";
   });
 
-  // If you click on a list item, make that list item -> 'selected'
+  // Handle option click
   options.forEach(option => {
     option.addEventListener("click", () => {
-      label.innerHTML = option.innerHTML; // show icon + text
+      label.innerHTML = ""; // clear previous
+      const icon = option.querySelector("img");
+      if (icon) label.appendChild(icon.cloneNode(true)); // clone icon
+      label.appendChild(document.createTextNode(option.textContent.trim())); // add text
       list.style.display = "none";
       if (onSelect) onSelect(option.dataset.value);
     });
   });
 
-  // Close when clicking outside
+  // Close if clicking outside
   document.addEventListener("click", e => {
     if (!container.contains(e.target)) list.style.display = "none";
   });

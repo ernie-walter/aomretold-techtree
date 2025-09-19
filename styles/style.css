@@ -91,7 +91,7 @@ body {
   background-repeat: no-repeat;
 }
 
-.sidebar-text {
+.sidebar-content {
   margin: 0 8% 0 8%;
   text-align: left;
 }
@@ -148,16 +148,18 @@ main {
   position: relative;
   width: 100%;
   margin: auto;
+  align-items: center;
 }
 
 /* Main visible button before list is opened */
 .dropdown .selected {
   position: relative;      /* so text can be positioned over the image */
-  display: inline-block;   /* shrink-wrap to the image width */
+  display: inline-flex;   /* shrink-wrap to the image width */
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font: var(--h2);
+  font-size: clamp(12px, 1.3vw, 32px);
   transition: transform 0.3s ease;
 }
 
@@ -192,20 +194,15 @@ main {
   font-size: 90%;
 }
 
-/* .dropdown .selected .arrow {
-  display: inline;
-  width: 1em;
-  height: auto;
-  margin-left: 0.5em;
-} */
-
-/* Appends ▼ to the end of the button text */
+/* Appends arrow to the end of the button text */
 .dropdown .selected .label::after {
   content: "";
-  display: inline-block;
+  display: inline-flex;
   background-image: url('../images/Buttons/Dropdown_Arrow_Down_Double.png');
   width: 1em;
-  height: auto;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
   margin-left: 0.5em;
 }
 
@@ -213,13 +210,12 @@ main {
 .dropdown .dropdown-list {
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
+  margin: auto;
+  width: max-content;
   border: 2px solid #555;
   border-top: none;
   border-radius: 0 0 8px 8px;
   background: linear-gradient(180deg, #fdd482 0%, #b38236 100%);
-  max-height: 200px;
   overflow-y: auto;
   display: none;
   z-index: 10;
@@ -245,6 +241,7 @@ main {
 .dropdown-icon {
   width: 35px;
   height: 35px;
+  border: 1px solid #b38236;
 }
 
 /* ---------------------------------------------------------– COLUMNS ---------------------------------------------------------*/
@@ -308,7 +305,6 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);  /* center inside frame */
-  /*background-color: transparent; /* default background */
 }
 
 .age-icon { 
@@ -337,23 +333,21 @@ main {
 }
 
 
-
-
-
 /* --------------------------------------------------------- MOBILE ---------------------------------------------------------*/
 
 @media (max-width: 768px) {
   header {
     height: 10vh;
-    left: 30vw;}
+    left: 40vw;}
   main{
     margin-top: 10vh;}
   .key-list {
     column-count: 1;}
   .sidebar {
-    width: 30vw;}
+    width: 40vw;}
   .content{
-    margin-left: 30vw;}
+    margin-left: 40vw;}
   :root{
-    --font-size-p: clamp(10px, 1.3vw, 32px);}
+    --font-size-p: clamp(10px, 1.3vw, 32px);
+    --font-size-h3: clamp(10px, 1.2vw, 32px);}
 }
