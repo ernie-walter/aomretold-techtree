@@ -17,7 +17,7 @@ const majorToMinorMap = {
 };
 
 // Filtering out icons based on Major God selection
-const iconsCiv = document.querySelectorAll('.icon-wrapper[data-civ]');
+const iconsCiv = document.querySelectorAll('.icon-wrapper');
 const dropdownMajor = document.getElementById('MajorGodToggle');
 dropdownMajor.addEventListener('change', filterIcons);
 
@@ -33,6 +33,43 @@ function filterIcons(selectedMajor) {
     }
   });
 }
+
+// Portrait tree in sidebar
+function updateSidebar(selectedMajor) {
+  const gods = majorToMinorMap[selectedMajor] || [];
+
+  // Map gods into age slots
+  const ageSlots = [
+    ["portrait_age1", gods[1]],                   // Age 1
+    ["portrait_age2a", gods[2], "portrait_age2b", gods[3]], // Age 2
+    ["portrait_age3a", gods[4], "portrait_age3b", gods[5]], // Age 3
+    ["portrait_age4a", gods[6], "portrait_age4b", gods[7]]  // Age 4
+  ];
+  ageSlots.forEach(slot => {
+    for (let i = 0; i < slot.length; i += 2) {
+      const imgId = slot[i];
+      const god = slot[i + 1];
+      const img = document.getElementById(imgId);
+      if (img) {
+        img.src = god ? `images/God Pictures/${god}_icon.png` : "";
+      }
+
+    }
+  });
+  
+
+}
+
+// Set player colour onto icon backgrounds
+const dropdownColour = document.getElementById("PlayerColourToggle");
+function changePlayerColour(color) {
+  const wrappers = document.querySelectorAll(".icon:not(.no-background)");
+  wrappers.forEach(wrapper => {wrapper.style.backgroundColor = color;});
+  const panelIcons = document.querySelectorAll("#large-panel-icon");
+  panelIcons.forEach(img => {
+    img.style.backgroundColor = color; 
+  });
+};
 
 // Build icons using populateUnitWrapper() and getUnitData()
 document.addEventListener("DOMContentLoaded", async () => {
@@ -132,18 +169,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       panelImg.parentElement.style.backgroundColor = "";
     }
   });
-  
-  initDropdown("MajorGodToggle", value => {
-    filterIcons(value);
-    const content = document.querySelector('.content');
 
-    // If "all" is selected, hide the watermark
+  // iconsCiv.forEach(icon => icon.style.display = "none");
+
+  initDropdown("MajorGodToggle", value => {
+    // Filter our techs and units
+    filterIcons(value);
+
+    // Populate portrait tree
+    updateSidebar(value);
+
+    // Watermark
+    const content = document.querySelector('.content');
     if (value === 'all') {
         content.style.setProperty('--watermark', 'none');
     } else {
-        content.style.setProperty(
-            '--watermark', `url("/images/Watermarks/watermark_${value}.png")`
-        );
+        content.style.setProperty('--watermark', `url("/images/Watermarks/watermark_${value}.png")`);
     }
   });
 

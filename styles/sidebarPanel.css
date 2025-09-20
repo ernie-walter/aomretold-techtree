@@ -1,7 +1,18 @@
 /* ----------------------------------------------------- TOOLTIP PANEL -----------------------------------------------------*/
 
 /* ----------------------- Frames -----------------------*/
-.panel-frame-1 {
+:root {
+  --fr1-size: 30px; /* full corner size */
+  --fr1-thk: 6px;
+  --fr1-offset: calc((var(--fr1-size)/5 - var(--fr1-thk))/2);
+
+  --fr2-size: 30%;
+  --fr2-thk: 9%;
+  --fr2-offset: calc((var(--fr2-size)/7 - var(--fr2-thk))/2);
+}
+
+/* ---------------- PANEL FRAME SIMPLE ---------------- */
+.panel-frame-simple {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,95 +21,110 @@
   margin: 5% auto;
 }
 
-.panel-frame-2 {
+/* Corners using ::before */
+.panel-frame-simple::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: 
+    url('../images/Frames/frame_ornate_corners_trimmed2_0deg.png'),
+    url('../images/Frames/frame_ornate_corners_trimmed2_270deg.png'),    
+    url('../images/Frames/frame_ornate_corners_trimmed2_180deg.png'),
+    url('../images/Frames/frame_ornate_corners_trimmed2_90deg.png');
+  background-size: var(--fr1-size) var(--fr1-size);
+  background-repeat: no-repeat;
+  background-position: 
+    top left,
+    top right,
+    bottom right,
+    bottom left;
+}
+
+/* Edges using ::after */
+.panel-frame-simple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: 
+    url('../images/Frames/frame_ornate_edgehorizontal.png'),
+    url('../images/Frames/frame_ornate_edgehorizontal.png'),
+    url('../images/Frames/frame_ornate_edgevertical.png'),
+    url('../images/Frames/frame_ornate_edgevertical.png');
+  background-repeat: no-repeat;
+  background-size: 
+    auto var(--fr1-thk), 
+    auto var(--fr1-thk), 
+    var(--fr1-thk) auto, 
+    var(--fr1-thk) auto;
+  background-position: 
+    top var(--fr1-offset) left var(--fr1-thk),
+    bottom var(--fr1-offset) left var(--fr1-thk),
+    top var(--fr1-thk) left var(--fr1-offset),
+    top var(--fr1-thk) right var(--fr1-offset);
+}
+
+/* ---------------- PANEL FRAME FANCY ---------------- */
+.panel-frame-fancy-wrapper {
+  display: inline-block;
+  width: 70%;
+  text-align: center;
+  margin: 10px auto 0 auto;
+}
+
+.panel-frame-fancy {
   position: relative;
-  width: 100%;        /* fixed frame size */
-  aspect-ratio: 1 / 1;  /* height = width */       
-  align-self: center;
+  width: 100%;
+  aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.panel-frame-2-wrapper {
-    display: inline-block;   /* prevents flex stretching in column parent */
-    width: 70%;              /* scales with parent */
-    text-align: center;      /* center child horizontally if needed */
-    margin: 10px auto 0 auto; /* top/bottom = 10px, left/right auto = horizontal center */
-}
-
-:root {
-  --fr1-size: 30px; /* full corner size */
-  --fr1-thk: 6px;
-  --fr1-offset: calc((var(--fr1-size)/5 - var(--fr1-thk))/2);
-  --fr2-size: 30%;
-  --fr2-thk: 9%;
-  --fr2-offset: calc((var(--fr2-size)/7 - var(--fr2-thk))/2);
-}
-
-/* Corners */
-.corner-1 {
+/* Corners using ::before */
+.panel-frame-fancy::before {
+  content: '';
   position: absolute;
-  width: var(--fr1-size); height: var(--fr1-size);
-  background-image: url('../images/Frames/frame_ornate_corners_trimmed2.png');
-  background-repeat: no-repeat; background-size: 100% 100%;
+  inset: 0;
   z-index: 2;
+  background-image: 
+    url('../images/Frames/frame_Portrait_corners_0deg.png'),
+    url('../images/Frames/frame_Portrait_corners_270deg.png'),
+    url('../images/Frames/frame_Portrait_corners_180deg.png'),
+    url('../images/Frames/frame_Portrait_corners_90deg.png');
+  background-size: var(--fr2-size) var(--fr2-size);
+  background-repeat: no-repeat;
+  background-position: 
+    top left,
+    top right,
+    bottom right,
+    bottom left;
 }
 
-.corner-2 {
+/* Edges using ::after */
+.panel-frame-fancy::after {
+  content: '';
   position: absolute;
-  width: var(--fr2-size); height: var(--fr2-size);
-  background-image: url('../images/Frames/frame_Portrait_corners.png');
-  background-repeat: no-repeat; background-size: 100% 100%;
-  z-index: 2;
+  inset: 0;
+  z-index: 1;
+  background-image: 
+    url('../images/Frames/frame_portrait_edgehorizontal.png'),
+    url('../images/Frames/frame_portrait_edgehorizontal.png'),
+    url('../images/Frames/frame_portrait_edgevertical.png'),
+    url('../images/Frames/frame_portrait_edgevertical.png');
+  background-repeat: no-repeat;
+  background-size: 
+    auto var(--fr2-thk),
+    auto var(--fr2-thk),
+    var(--fr2-thk) auto,
+    var(--fr2-thk) auto;
+  background-position: 
+    top var(--fr2-offset) left var(--fr2-thk),
+    bottom var(--fr2-offset) left var(--fr2-thk),
+    top var(--fr2-thk) left var(--fr2-offset),
+    top var(--fr2-thk) right var(--fr2-offset);
 }
-
-.top-left { top: 0; left: 0; rotate:   0deg; }
-.top-right { top: 0; right: 0;rotate: 90deg;}
-.bottom-left { bottom: 0; left: 0; rotate: 270deg;}
-.bottom-right { bottom: 0; right: 0; rotate: 180deg;}
-
-/* Edges */
-.edge {
-  position: relative;
-}
-
-/* Frame for panel */
-.top-1, .bottom-1 {
-  position: absolute; height: var(--fr1-thk);
-  left: var(--fr1-thk); right: var(--fr1-thk);
-  background-image: url('../images/Frames/frame_ornate_edgehorizontal.png');
-  background-size: auto 100%;
-}
-.left-1, .right-1 {
-  position: absolute; width: var(--fr1-thk);
-  top: var(--fr1-thk); bottom: var(--fr1-thk);
-  background-image: url('../images/Frames/frame_ornate_edgevertical.png');
-  background-size: 100% auto;
-}
-.top-1 { top: var(--fr1-offset); }
-.bottom-1 { bottom: var(--fr1-offset); }
-.left-1 { left: var(--fr1-offset); }
-.right-1 { right: var(--fr1-offset); }
-
-/* Frame for large icon */
-.top-2, .bottom-2 {
-  position: absolute; height: var(--fr2-thk);
-  left: var(--fr2-thk); right: var(--fr2-thk);
-  background-image: url('../images/Frames/frame_portrait_edgehorizontal.png');
-  background-size: auto 100%; /* stretch the PNG to fill height */
-}
-
-.left-2, .right-2 {
-  position: absolute; width: var(--fr2-thk);
-  top: var(--fr2-thk); bottom: var(--fr2-thk);
-  background-image: url('../images/Frames/frame_portrait_edgevertical.png');
-  background-size: 100% auto; /* stretch the PNG to fill height */
-}
-.top-2 { top: var(--fr2-offset); }
-.bottom-2 { bottom: var(--fr2-offset); }
-.left-2 { left: var(--fr2-offset); }
-.right-2 { right: var(--fr2-offset); }
 
 #large-panel-icon {
   max-width: 95%; max-height: 95%;
@@ -136,4 +162,37 @@
   flex-wrap: wrap;        /* let them wrap if too many */
   gap: 6px;               /* space between icons/text */
   margin-bottom: 4px;     /* spacing between rows */
+}
+
+.portrait{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3%;
+}
+
+.portrait .age-box{
+  display: flex;
+  width: 33%;
+  align-items: center;
+}
+
+.portrait .age-box .age-branch{
+  width: 40%;
+}
+
+.portrait .age-box .minor-age-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  width: 60%;              /* scales with parent */
+  margin-left: 1%;
+}
+
+.portrait .age-box .minor-age-wrapper img{
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;  /* keeps full icon visible */
+  display: block;
 }

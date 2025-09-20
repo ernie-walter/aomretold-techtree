@@ -44,6 +44,7 @@ body {
   margin-left: 20vw; /* Same as sidebar width */
   padding: 0;
   display: flex;
+  min-width: calc(100vw - 20vw);
   min-height: calc(var(--vh, 1vh) * 100 - 15vh); /* full height minus header */
   overflow: auto;
 
