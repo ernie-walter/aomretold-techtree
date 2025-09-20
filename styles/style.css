@@ -40,6 +40,7 @@ body {
 
 /* --------------------------------------------------------- CONTENT ---------------------------------------------------------*/
 .content {
+  position: relative;
   margin-left: 20vw; /* Same as sidebar width */
   padding: 0;
   display: flex;
@@ -51,23 +52,23 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 
-  --watermark-url: none;  /* CSS variable to control watermark */
+  --watermark: none;  /* CSS variable to control watermark */
 }
 
-  .content::after {
+.content::after {
   content: '';
-  position: absolute;
-  top: 10px;       /* distance from top */
-  right: 10px;     /* distance from right */
-  width: 80px;     /* control watermark width */
-  height: 80px;    /* control watermark height */
-  background-image: var(--watermark-url);
+  position: fixed;
+  bottom: 30px;       /* distance from top */
+  right: 30px;     /* distance from right */
+  width: 400px;     /* control watermark width */
+  height: 400px;    /* control watermark height */
+  background-image: var(--watermark);
+  /* background-image: url('../images/Watermarks/watermark_zeus.png'); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.3;    /* subtle watermark */
   pointer-events: none;  /* so it doesn’t block clicks */
-  z-index: 10;     /* on top of content */
+  z-index: 2;     /* on top of content */
 }
 
 header {
@@ -109,6 +110,7 @@ main {
   margin-top: 15vh; /* push body content below header */
   padding: 20px;
   flex: 1; /* take all remaining vertical space */
+  z-index: 0;
 }
 
 .key-list {

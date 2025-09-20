@@ -124,7 +124,7 @@ function filterIcons(selectedMajor) {
 }
 
 const watermarkNames = [
-  'zeus','poseidon','hades',
+  'Zeus','Poseidon','Hades',
   'ra','isis','set',
   'thor','odin','loki','freyr',
   'kronos','oranos','gaia',
