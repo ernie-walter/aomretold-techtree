@@ -41,6 +41,7 @@ p.footnote { /* used for footnote in sidebar */
 h1 {
   font: var(--h1);
   color: #fff;
+  text-shadow: 0 0 2px #444;
 }
 
 h2{

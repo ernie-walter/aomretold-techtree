@@ -105,9 +105,17 @@
 }
 
 .player-square{
-  display: block;
+  display: inline-flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
   width: 30px;
   height: 30px;
+  font: var(--p);
+  font-size: 80%;
+  color: #fff;
+  font-weight: 800;
+  text-shadow: 0 0 2px #000;
   background-image: 
     url('../images/Buttons/PlayerColorEmboss.png'),
     linear-gradient(var(--playerColour), var(--playerColour)),

@@ -26,9 +26,16 @@ function initDropdown(containerId, onSelect) {
   options.forEach(option => {
     option.addEventListener("click", () => {
       label.innerHTML = ""; // clear previous
-      const icon = option.querySelector("img");
-      if (icon) label.appendChild(icon.cloneNode(true)); // clone icon
-      label.appendChild(document.createTextNode(option.textContent.trim())); // add text
+
+      const img = option.querySelector("img");
+      const square = option.querySelector(".player-square");
+
+      if (img) {
+        label.appendChild(img.cloneNode(true)); // clone icon
+        label.appendChild(document.createTextNode(option.textContent.trim())); // add text
+      } else if (square) {
+        label.appendChild(square.cloneNode(true)); // clone icon
+      }
       list.style.display = "none";
       if (onSelect) onSelect(option.dataset.value);
     });
@@ -115,6 +122,19 @@ function filterIcons(selectedMajor) {
     }
   });
 }
+
+const watermarkNames = [
+  'zeus','poseidon','hades',
+  'ra','isis','set',
+  'thor','odin','loki','freyr',
+  'kronos','oranos','gaia',
+  'fuxi','nuwa','shennong'
+];
+
+const watermarks = Object.fromEntries(
+  watermarkNames.map(name => [name, `url("images/Watermarks/watermark_${name}.png")`])
+);
+watermarks.all = 'none';
 
 // Build icons using populateUnitWrapper() and getUnitData()
 document.addEventListener("DOMContentLoaded", async () => {
@@ -217,6 +237,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   initDropdown("MajorGodToggle", value => {
     filterIcons(value);
+    const content = document.querySelector('.content');
+    content.style.setProperty('--watermark', watermarks[value] || 'none');
   });
 
   initDropdown("PlayerColourToggle", changePlayerColour);
