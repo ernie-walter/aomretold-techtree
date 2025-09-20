@@ -58,17 +58,16 @@ body {
 .content::after {
   content: '';
   position: fixed;
-  bottom: 30px;       /* distance from top */
-  right: 30px;     /* distance from right */
-  width: 400px;     /* control watermark width */
-  height: 400px;    /* control watermark height */
+  bottom: 0;       /* distance from bottom */
+  right: 0;     /* distance from right */
+  width: 40vw;     
+  aspect-ratio: 1/1;
   background-image: var(--watermark);
-  /* background-image: url('../images/Watermarks/watermark_zeus.png'); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   pointer-events: none;  /* so it doesn’t block clicks */
-  z-index: 2;     /* on top of content */
+  z-index: 1;
 }
 
 header {
@@ -110,7 +109,7 @@ main {
   margin-top: 15vh; /* push body content below header */
   padding: 20px;
   flex: 1; /* take all remaining vertical space */
-  z-index: 0;
+  z-index: 2;
 }
 
 .key-list {
