@@ -53,11 +53,8 @@ function updateSidebar(selectedMajor) {
       if (img) {
         img.src = god ? `images/God Pictures/${god}_icon.png` : "";
       }
-
     }
   });
-  
-
 }
 
 // Set player colour onto icon backgrounds
@@ -66,9 +63,7 @@ function changePlayerColour(color) {
   const wrappers = document.querySelectorAll(".icon:not(.no-background)");
   wrappers.forEach(wrapper => {wrapper.style.backgroundColor = color;});
   const panelIcons = document.querySelectorAll("#large-panel-icon");
-  panelIcons.forEach(img => {
-    img.style.backgroundColor = color; 
-  });
+  panelIcons.forEach(img => {img.style.backgroundColor = color;});
 };
 
 // Build icons using populateUnitWrapper() and getUnitData()
@@ -85,8 +80,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Merge LR for both units and techs
-   await mergeLRIntoUnitData(unitDataMap);
+  // // Merge description for both units and techs
+   await mergeDescriptionIntoUnitData(unitDataMap);
 
   // Add god overlays
   wrappers.forEach(wrapper => {
@@ -122,10 +117,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     panelDescription.innerHTML = "";                              // Clear description for now. We will slowly build it up below...
     panelImg.src = `images/${data.icon.replace(/\\/g, "/")}`;
 
-    // Add _LR description if it exists
-    if (data._LR) {
+    // Add description if it exists
+    if (data.description) {
       const span = document.createElement("div");
-      span.textContent = data._LR;
+      span.textContent = data.description;
       span.classList.add("panel-line");
       panelDescription.appendChild(span);
     }
@@ -147,13 +142,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     wrapper.addEventListener("click", (e) => {
-      e.stopPropagation();                 // prevent bubbling to document
-      if (lock === wrapper) {
-      lock = null;              // unlock
-    } else {
-      lock = wrapper;           // lock this one
-      showPanelItem(wrapper);
-    }
+      e.stopPropagation();                  // prevent bubbling to document
+      if (lock === wrapper) {lock = null;}  // unlock
+      else {lock = wrapper; showPanelItem(wrapper);}  // lock this one
     });
   });
   
@@ -189,7 +180,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   initDropdown("PlayerColourToggle", changePlayerColour);
-});
 
+  console.log(unitIndex)
+  console.log(unitDataMap)
+});
 
 

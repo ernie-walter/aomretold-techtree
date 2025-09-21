@@ -1,60 +1,81 @@
-// ======= LR Loader =======
+// =======================
+// Description Loader
+// =======================
+
 const stringTableUrl = 'gamefiles/string_table.txt';
-let LRMapCache = null;
+let descriptionMapCache = null;
 
 /**
- * Prepare a map of all _LR strings (units and techs)
- * Keys are like "UNIT_JASON" or "TECH_HUSBANDRY"
+ * Normalize any name for consistent lookup
+ * Converts to uppercase, spaces/hyphens -> underscores, strips other chars
  */
-async function prepareLRMap() {
-    if (LRMapCache) return LRMapCache;
+function normalizeName(raw) {
+  return raw
+    .toLowerCase()              // hand_axe
+    .replace(/_/g, ' ')         // hand axe
+    .replace(/\b\w/g, c => c.toUpperCase()); // Hand Axe
+}
+
+function removePrefix(key) {
+  return key.replace(/^(UNIT|TECH)_/, '');
+}
+
+
+/**
+ * Load the string table and prepare a map of all unit/tech descriptions
+ * Keys are like "UNIT_HAND_AXE" or "TECH_HUSBANDRY"
+ */
+async function prepareDescriptionMap() {
+    if (descriptionMapCache) return descriptionMapCache;
 
     const response = await fetch(stringTableUrl);
     if (!response.ok) throw new Error("Failed to fetch string table");
 
     const text = await response.text();
-    const lines = text.split('\n');
+    const lines = text.split(/\r?\n/); // handle \r\n or \n
 
-    const LRMap = {};
-    const regex = /ID\s*=\s*"STR_(UNIT|TECH)_(.+?)_LR"\s*;\s*Str\s*=\s*"([^"]+)"/;
+    const descriptionMap = {};
+    const regex = /ID\s*=\s*"STR_(UNIT|TECH)_([^"]+)_LR"\s*;\s*Str\s*=\s*"([^"]+)"/
 
     for (const line of lines) {
         const match = line.match(regex);
         if (match) {
-            const type = match[1];    // UNIT or TECH
-            const name = match[2];    // e.g. JASON or HUSBANDRY
-            const lrString = match[3];
-            LRMap[`${type}_${name}`] = lrString;
+            const type = match[1];            // UNIT or TECH
+            const rawName = match[2];         // raw string table name
+            const descriptionText = match[3]; // text
+
+            const name = normalizeName(rawName);
+            descriptionMap[`${type}_${name}`] = descriptionText;
         }
     }
 
-    LRMapCache = LRMap;
-    return LRMap;
+    // Debug: log all loaded keys
+
+    descriptionMapCache = descriptionMap;
+    return descriptionMap;
 }
 
 /**
- * Merge _LR strings into your existing unitDataMap
- * Handles both units and techs
+ * Merge descriptions into unitDataMap
+ * Adds description property to each unit/tech if a match is found
  */
-async function mergeLRIntoUnitData(unitDataMap) {
-    const LRMap = await prepareLRMap();
+async function mergeDescriptionIntoUnitData(unitDataMap) {
+    const descriptionMap = await prepareDescriptionMap();
 
     for (const [name, data] of Object.entries(unitDataMap)) {
-        
-        let lookupName = (name)
-            .toUpperCase()
-            .replace(/\s+/g, '_'); // handle spaces
+        const lookupName = removePrefix(name);
         // Try UNIT first
         let key = `UNIT_${lookupName}`;
-        if (LRMap[key]) {
-            data._LR = LRMap[key];
+        if (descriptionMap[key]) {
+            data.description = descriptionMap[key];
             continue;
         }
 
         // Then TECH
         key = `TECH_${lookupName}`;
-        if (LRMap[key]) {
-            data._LR = LRMap[key];
+        if (descriptionMap[key]) {
+            data.description = descriptionMap[key];
         }
     }
 }
+

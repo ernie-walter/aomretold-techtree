@@ -1,9 +1,9 @@
 // populateUnitWrapper populates an icon wrapper with unit data
 function populateUnitWrapper(wrapper, unitIndex) {
-  const unitName = wrapper.getAttribute('name');
-  const unitNodeObj = unitIndex[unitName];
+  const unitName = wrapper.getAttribute('name');        // Gets 'name' from wrapper (i.e. what you type in html)
+  const unitNodeObj = unitIndex[unitName];              // Looks for name in unitIndex and creates an empty object (unitNodeObj) for it
   if (!unitNodeObj) return
-  const data = getUnitDataFromNode(unitNodeObj.node, wrapper);
+  const data = getUnitDataFromNode(unitNodeObj.node, wrapper);  // Creates 'data'
 
   // --- Icon ---
   let iconDiv = wrapper.querySelector('.icon');

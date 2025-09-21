@@ -5,6 +5,7 @@ async function loadXML(url) {
   return new DOMParser().parseFromString(text, "application/xml");
 }
 
+// unitIndex is a long list of ALL nodes in proto.xml and techtree.xml, with all their stats nested inside them in childNodes
 async function buildUnitIndex() {
   const protoDoc = await loadXML('https://raw.githubusercontent.com/ernie-walter/aomretold-techtree/main/gamefiles/proto.xml');
   const techtreeDoc = await loadXML('https://raw.githubusercontent.com/ernie-walter/aomretold-techtree/main/gamefiles/techtree.xml');
@@ -24,17 +25,17 @@ async function buildUnitIndex() {
     if (!name) return;
     unitIndex[name] = { node };
   });
-
-  return unitIndex;
+  
 }
 
 
 function getUnitDataFromNode(node, wrapper) {
   if (!node) return null;
 
-  const name = node.getAttribute("name");
+  const name = node.getAttribute("name");     // the name of the node, which is fed from what we typed in html
 
   // --- displayName ---
+  // A simple helper to tidy up display names, to remove civ-specific suffixes
   let displayName = wrapper?.getAttribute("displayName") || name;
   const suffixes = ["Greek", "Egyptian", "Norse", "Atlantean", "Chinese"];
   for (const suffix of suffixes) {
@@ -55,6 +56,27 @@ function getUnitDataFromNode(node, wrapper) {
   else if (rawTypes.includes('Unit') || rawTypes.includes('MilitaryUnit') || rawTypes.includes('Civilian')) category = 'Unit';
   else if (rawTypes.includes('Tech') || node.tagName.toLowerCase() === 'tech') category = 'Techs';
   else if (rawTypes.includes('GodPower') || node.tagName.toLowerCase() === 'effects') category = 'God Power';
+
+  // --- Unit Types ---
+  let unitTypes = [];
+  if (category === 'Unit') {
+    if (rawTypes.includes("HumanSoldier")) unitTypes.push("type_humansoldier");
+    if (rawTypes.includes("AbstractInfantry")) unitTypes.push("type_abstractinfantry");
+    if (rawTypes.includes("AbstractCavalry")) unitTypes.push("type_abstractcavalry");
+    if (rawTypes.includes("AbstractArcher")) unitTypes.push("type_abstractarcher");
+    if (rawTypes.includes("Villager")) unitTypes.push("type_villager");
+    if (rawTypes.includes("Hero")) unitTypes.push("type_hero");
+    if (rawTypes.includes("MythUnit")) unitTypes.push("type_mythunit");
+    if (rawTypes.includes("AbstractTitan")) unitTypes.push("type_abstracttitan");
+    if (rawTypes.includes("Building")) unitTypes.push("type_building");
+    if (rawTypes.includes("Wall")) unitTypes.push("type_wall");
+    if (rawTypes.includes("AbstractTower")) unitTypes.push("type_abstracttower");
+    if (rawTypes.includes("Siege")) unitTypes.push("type_siege");
+    if (rawTypes.includes("Ship")) unitTypes.push("type_ship");
+    if (rawTypes.includes("ShipArcher")) unitTypes.push("type_ship_archer");
+    if (rawTypes.includes("ShipSiege")) unitTypes.push("type_ship_siege");
+    if (rawTypes.includes("ShipMelee")) unitTypes.push("type_ship_melee");
+  }
 
   // Costs
   const cost = {};
