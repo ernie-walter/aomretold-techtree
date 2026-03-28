@@ -25,19 +25,19 @@ function filterIcons(selectedMajor) {
   iconsCiv.forEach(icon => {
     const minorGod = icon.dataset.civ;
 
-    if (!selectedMajor || selectedMajor === "all")
-      {icon.style.display = "block";} 
-    else if ((majorToMinorMap[selectedMajor] || []).includes(minorGod))
-      {icon.style.display = "block";} 
-    else
-      {icon.style.display = "none";}
+    if (!selectedMajor || selectedMajor === "") {
+      icon.classList.add("hidden");
+    }
+    else if (selectedMajor === "all") {
+      icon.classList.remove("hidden");
+    }
+    else if ((majorToMinorMap[selectedMajor] || []).includes(minorGod)) {
+      icon.classList.remove("hidden");
+    }
+    else {
+      icon.classList.add("hidden");
+    }
   });
-
-  // re-apply player colour after visibility changes
-  const color = dropdownColour.value;
-  if (color) {
-    changePlayerColour(color);
-  }
 }
 
 // Portrait tree in sidebar
@@ -68,9 +68,9 @@ const dropdownColour = document.getElementById("PlayerColourToggle");
 function changePlayerColour(color) {
   const wrappers = document.querySelectorAll(".icon:not(.no-background)");
   wrappers.forEach(wrapper => {wrapper.style.backgroundColor = color;});
-  const panelIcons = document.querySelectorAll("#large-panel-icon");
-  panelIcons.forEach(img => {img.style.backgroundColor = color;});
-};
+  const largeIconFrame = document.querySelector(".panel-frame-fancy");
+  if (largeIconFrame) {largeIconFrame.style.backgroundColor = color;}
+}
 
 // Build icons using populateUnitWrapper() and getUnitData()
 document.addEventListener("DOMContentLoaded", async () => {
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const unitDataMap = {};                                             // Top level tooltip data storage
   const wrappers = document.querySelectorAll(".icon-wrapper");
     wrappers.forEach(icon => {
-    icon.style.display = "none";
+    icon.classList.add("hidden");
   });
 
   for (const wrapper of wrappers) {                                   // For each wrapper:
