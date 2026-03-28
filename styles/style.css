@@ -145,8 +145,8 @@ main {
 
 .icon-wrapper {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 3vw;
+  height: 3vw;
   
 }
 .icon-wrapper.no-background {
