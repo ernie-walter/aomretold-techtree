@@ -24,14 +24,20 @@ dropdownMajor.addEventListener('change', filterIcons);
 function filterIcons(selectedMajor) {
   iconsCiv.forEach(icon => {
     const minorGod = icon.dataset.civ;
-    if (selectedMajor === "all") {
-      icon.style.display = "block"; // show everything
-    } else if ((majorToMinorMap[selectedMajor] || []).includes(minorGod)) {
-      icon.style.display = "block"; // show matching icons
-    } else {
-      icon.style.display = "none";  // hide the rest
-    }
+
+    if (!selectedMajor || selectedMajor === "all")
+      {icon.style.display = "block";} 
+    else if ((majorToMinorMap[selectedMajor] || []).includes(minorGod))
+      {icon.style.display = "block";} 
+    else
+      {icon.style.display = "none";}
   });
+
+  // re-apply player colour after visibility changes
+  const color = dropdownColour.value;
+  if (color) {
+    changePlayerColour(color);
+  }
 }
 
 // Portrait tree in sidebar
@@ -71,6 +77,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const unitIndex = await buildUnitIndex();                           // Creates unitIndex used below
   const unitDataMap = {};                                             // Top level tooltip data storage
   const wrappers = document.querySelectorAll(".icon-wrapper");
+    wrappers.forEach(icon => {
+    icon.style.display = "none";
+  });
 
   for (const wrapper of wrappers) {                                   // For each wrapper:
     const unitData = await populateUnitWrapper(wrapper, unitIndex);     // Run populateUnitWrapper() to fill it
