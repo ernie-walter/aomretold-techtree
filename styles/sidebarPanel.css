@@ -68,7 +68,7 @@
 /* ---------------- PANEL FRAME FANCY ---------------- */
 .panel-frame-fancy-wrapper {
   display: inline-block;
-  width: 70%;
+  width: 50%;
   text-align: center;
   margin: 10px auto 0 auto;
 }
@@ -152,8 +152,8 @@
 }
 
 .panel-icon {
-  width: clamp(10px, 1.8vw, 32px);
-  height: clamp(10px, 1.8vw, 32px);
+  width: clamp(10px, 1.2vw, 32px);
+  height: clamp(10px, 1.2vw, 32px);
   vertical-align: middle;
 }
 

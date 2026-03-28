@@ -26,6 +26,8 @@ async function buildUnitIndex() {
     unitIndex[name] = { node };
   });
   
+return unitIndex;
+
 }
 
 
