@@ -37,63 +37,25 @@ const dropdownMajor = document.getElementById('MajorGodToggle');
 dropdownMajor.addEventListener('change', filterIcons);
 
 function filterIcons(selectedMajor) {
-  iconsCiv.forEach(icon => {
-    const minorGod = icon.dataset.civ;
-
-    if (!selectedMajor || selectedMajor === "") {
-      icon.classList.add("hidden");
-    }
-    else if (selectedMajor === "all") {
-      icon.classList.remove("hidden");
-    }
-    else if ((majorToMinorMap[selectedMajor] || []).includes(minorGod)) {
-      icon.classList.remove("hidden");
-    }
-    else {
-      icon.classList.add("hidden");
-    }
-  });
-}
-
-function filterIcons(selectedMajor) {
-  iconsCiv.forEach(icon => {
-    const civs = (icon.dataset.civ || "").split(" "); // ["greek", "egyptian"]
-
-    if (!selectedMajor || selectedMajor === "") {
-      icon.classList.add("hidden");
-    }
-    else if (selectedMajor === "all") {
-      icon.classList.remove("hidden");
-    }
-    else {
-      const allowedMinors = majorToMinorMap[selectedMajor] || [];
-
-      // check if ANY civ on this icon is allowed
-      const match = civs.some(civ => allowedMinors.includes(civ));
-
-      if (match) {
-        icon.classList.remove("hidden");
-      } else {
-        icon.classList.add("hidden");
-      }
-    }
-  });
-}
-
-// filtering rows based on Major God selection
-function filterRows(selectedMajor) {
   document.querySelectorAll(".icon-row").forEach(row => {
-    const civs = (row.dataset.civ || "").split(" ");
-    const allowed = majorToMinorMap[selectedMajor] || [];
+    const icons = row.querySelectorAll(".icon-wrapper");
 
-    const show =
-      selectedMajor === "all" ||
-      (selectedMajor && civs.some(civ => allowed.includes(civ)));
+    icons.forEach(icon => {
+      const civs = (icon.dataset.civ || "")
+        .split(" ")
+        .filter(Boolean); // clean empty strings
 
-    row.classList.toggle("hidden", !show);
+      const allowed = majorToMinorMap[selectedMajor] || [];
+
+      const show =
+        selectedMajor === "all" ||
+        civs.length === 0 || // ✅ Option 2: no data-civ = always visible
+        civs.some(civ => allowed.includes(civ));
+
+      icon.classList.toggle("hidden", !show);
+    });
   });
 }
-
 // Portrait tree in sidebar
 function updateSidebar(selectedMajor) {
   const gods = majorToMinorMap[selectedMajor] || [];
