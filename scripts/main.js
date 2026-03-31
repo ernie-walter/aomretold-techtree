@@ -43,24 +43,26 @@ function filterIcons(selectedMajor) {
     icons.forEach(icon => {
       const civs = (icon.dataset.civ || "")
         .split(" ")
-        .filter(Boolean); // clean empty strings
+        .filter(Boolean);
 
       const allowed = majorToMinorMap[selectedMajor] || [];
 
       const show =
         selectedMajor === "all" ||
-        civs.length === 0 || // no data-civ = always visible
+        civs.length === 0 ||
         civs.some(civ => allowed.includes(civ));
 
       icon.classList.toggle("hidden", !show);
-
-      //check if the row has any visible icons
-      const visibleIcons = row.querySelectorAll(".icon-wrapper:not(.hidden)");
-      if (visibleIcons.length === 0)
-        {row.classList.add("empty");}
-      else
-        {row.classList.remove("empty");}
     });
+
+    // collapse row ONLY if no visible icons AND no spacer
+    const visibleIcons = row.querySelectorAll(".icon-wrapper:not(.hidden)");
+    const hasSpacer = row.querySelector(".icon-wrapper.no-background");
+
+    row.classList.toggle(
+      "empty",
+      visibleIcons.length === 0 && !hasSpacer
+    );
   });
 }
 
@@ -215,7 +217,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initDropdown("PlayerColourToggle", changePlayerColour);
 
   // This just sets a default on Major God dropdown, for ease of building. Can be changed to any god
-  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="ra"]');
+  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="demeter"]');
   if (defaultGod) {defaultGod.click();}
 
   console.log(unitIndex)

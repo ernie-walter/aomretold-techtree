@@ -148,8 +148,8 @@ main {
 
 .icon-wrapper {
   position: relative;
-  width: 3vw;
-  height: 3vw;
+  width: 3.5vw;       /* fixed size for icons */
+  height: 3.5vw;      /* fixed size for icons */
 }
 .icon-wrapper.no-background {
   background-color: transparent; 
