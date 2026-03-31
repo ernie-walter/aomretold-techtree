@@ -26,10 +26,37 @@ async function buildUnitIndex() {
     unitIndex[name] = { node };
   });
   
-return unitIndex;
+  return unitIndex;
 
 }
 
+function getCivFromWrapper(wrapper) {
+  const raw = wrapper?.dataset?.civ || "";
+
+  const civList = raw.split(" ").filter(Boolean);
+
+  const validCivs = [
+    "greek",
+    "egyptian",
+    "norse",
+    "atlantean",
+    "chinese",
+    "japanese"
+  ];
+
+  return civList.find(civ => validCivs.includes(civ)) || null;
+}
+
+function getUnitIcon(node, wrapper) {
+  const civ = getCivFromWrapper(wrapper);
+
+  const iconNode = Array.from(node.querySelectorAll('icon'))
+    .find(i => i.getAttribute('culture') === civ);
+
+  return iconNode?.textContent.trim()
+    || node.querySelector('icon')?.textContent.trim()
+    || null;
+}
 
 function getUnitDataFromNode(node, wrapper) {
   if (!node) return null;
@@ -148,16 +175,16 @@ function getUnitDataFromNode(node, wrapper) {
   });
   
   return {
-    name: node.getAttribute('name'),
-    displayName,
-    icon: node.querySelector('icon')?.textContent.trim() || null,
-    category,
-    cost,
-    armor,
-    population,
-    trainTime,
-    hitPoints,
-    speed,
-    attacks,
-  };
+  name: node.getAttribute('name'),
+  displayName,
+  icon: getUnitIcon(node, wrapper),
+  category,
+  cost,
+  armor,
+  population,
+  trainTime,
+  hitPoints,
+  speed,
+  attacks,
+};
 }

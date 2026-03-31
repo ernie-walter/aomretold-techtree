@@ -142,12 +142,14 @@ main {
   gap: 6px;
   justify-content: flex-start;
 }
+.icon-row.empty {
+  display: none;
+}
 
 .icon-wrapper {
   position: relative;
   width: 3vw;
   height: 3vw;
-  
 }
 .icon-wrapper.no-background {
   background-color: transparent; 

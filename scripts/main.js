@@ -49,13 +49,21 @@ function filterIcons(selectedMajor) {
 
       const show =
         selectedMajor === "all" ||
-        civs.length === 0 || // ✅ Option 2: no data-civ = always visible
+        civs.length === 0 || // no data-civ = always visible
         civs.some(civ => allowed.includes(civ));
 
       icon.classList.toggle("hidden", !show);
+
+      //check if the row has any visible icons
+      const visibleIcons = row.querySelectorAll(".icon-wrapper:not(.hidden)");
+      if (visibleIcons.length === 0)
+        {row.classList.add("empty");}
+      else
+        {row.classList.remove("empty");}
     });
   });
 }
+
 // Portrait tree in sidebar
 function updateSidebar(selectedMajor) {
   const gods = majorToMinorMap[selectedMajor] || [];
