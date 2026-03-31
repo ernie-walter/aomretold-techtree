@@ -55,6 +55,45 @@ function filterIcons(selectedMajor) {
   });
 }
 
+function filterIcons(selectedMajor) {
+  iconsCiv.forEach(icon => {
+    const civs = (icon.dataset.civ || "").split(" "); // ["greek", "egyptian"]
+
+    if (!selectedMajor || selectedMajor === "") {
+      icon.classList.add("hidden");
+    }
+    else if (selectedMajor === "all") {
+      icon.classList.remove("hidden");
+    }
+    else {
+      const allowedMinors = majorToMinorMap[selectedMajor] || [];
+
+      // check if ANY civ on this icon is allowed
+      const match = civs.some(civ => allowedMinors.includes(civ));
+
+      if (match) {
+        icon.classList.remove("hidden");
+      } else {
+        icon.classList.add("hidden");
+      }
+    }
+  });
+}
+
+// filtering rows based on Major God selection
+function filterRows(selectedMajor) {
+  document.querySelectorAll(".icon-row").forEach(row => {
+    const civs = (row.dataset.civ || "").split(" ");
+    const allowed = majorToMinorMap[selectedMajor] || [];
+
+    const show =
+      selectedMajor === "all" ||
+      (selectedMajor && civs.some(civ => allowed.includes(civ)));
+
+    row.classList.toggle("hidden", !show);
+  });
+}
+
 // Portrait tree in sidebar
 function updateSidebar(selectedMajor) {
   const gods = majorToMinorMap[selectedMajor] || [];
@@ -108,23 +147,23 @@ document.addEventListener("DOMContentLoaded", async () => {
    await mergeDescriptionIntoUnitData(unitDataMap);
 
   // Add god overlays
-  wrappers.forEach(wrapper => {
-    if (!wrapper.dataset.civ) return;
+ wrappers.forEach(wrapper => {
+  if (!wrapper.dataset.civ) return;
+  const civs = wrapper.dataset.civ.split(" "); // ["zeus", "ra"]
+  const skipGods = ["greek", "egyptian", "norse", "atlantean", "chinese", "japanese"];
 
-    const god = wrapper.dataset.civ;
-    if (!god) return; // skip if no data-god
+  // keep only actual gods (not pantheons)
+  const gods = civs.filter(civ => !skipGods.includes(civ.toLowerCase()));
 
-    // list of pantheons to skip
-    const skipGods = ["greek", "egyptian", "norse", "atlantean", "chinese"];
+  if (gods.length === 0) return; // nothing to show
+  if (wrapper.querySelector(".god-overlay")) return;
 
-    if (skipGods.includes(god.toLowerCase())) return; // skip pantheon overlays
-    if (wrapper.querySelector(".god-overlay")) return; // prevent duplicates
-
-    const overlay = document.createElement("img");
-    overlay.src = `images/God Pictures/${god}_icon.png`;
-    overlay.classList.add("god-overlay");
-    wrapper.appendChild(overlay);
-  });
+  const god = gods[0]; // pick the first valid god
+  const overlay = document.createElement("img");
+  overlay.src = `images/God Pictures/${god}_icon.png`;
+  overlay.classList.add("god-overlay");
+  wrapper.appendChild(overlay);
+});
 
   // Build sidebar panel
   const panelTitle = document.getElementById("panel-title");
@@ -205,8 +244,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initDropdown("PlayerColourToggle", changePlayerColour);
 
+  // This just sets a default on Major God dropdown, for ease of building. Can be changed to any god
+  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="ra"]');
+  if (defaultGod) {defaultGod.click();}
+
   console.log(unitIndex)
   console.log(unitDataMap)
+
 });
 
 
