@@ -95,12 +95,15 @@ function getUnitDataFromNode(node, wrapper) {
   // Category
   const rawTypes = Array.from(node.querySelectorAll('unittype')).map(u => u.textContent.trim());
   let category = 'Unknown';
-  if (rawTypes.includes('Hero')) category = 'Hero';
+
+  const tag = node.tagName.toLowerCase();
+  if (tag === 'power') {category = 'GodPower';}
+
+  else if (rawTypes.includes('Hero')) category = 'Hero';
   else if (rawTypes.includes('MythUnit')) category = 'Myth Unit';
   else if (rawTypes.includes('Building')) category = 'Building';
   else if (rawTypes.includes('Unit') || rawTypes.includes('MilitaryUnit') || rawTypes.includes('Civilian')) category = 'Unit';
   else if (rawTypes.includes('Tech') || node.tagName.toLowerCase() === 'tech') category = 'Techs';
-  else if (node.querySelector('[power]')) category = 'God Power';
 
   // --- Unit Types ---
   let unitTypes = [];
