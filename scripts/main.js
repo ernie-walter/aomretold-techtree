@@ -31,6 +31,20 @@ const majorToMinorMap = {
   susanoo: ["japanese", "susanoo", "minakatatomi", "inariokami", "raijin", "fujin", "watatsumi", "takemikazuchi"],
 };
 
+// For God Power lookup. God Powers sit outside the proto/techtree node structure, therefore need their own code
+function getCivFromGod(god) {
+  return majorToMinorMap[god]?.[0] || null;
+}
+const civToFile = {
+  greek: "greekgodpowers.xml",
+  egyptian: "egyptiangodpowers.xml",
+  norse: "norsegodpowers.xml",
+  atlantean: "atlanteangodpowers.xml",
+  chinese: "chinesegodpowers.xml",
+  japanese: "japanesegodpowers.xml",
+};
+
+
 // Filtering out icons based on Major God selection
 const iconsCiv = document.querySelectorAll('.icon-wrapper');
 const dropdownMajor = document.getElementById('MajorGodToggle');
@@ -101,6 +115,10 @@ function changePlayerColour(color) {
 // Build icons using populateUnitWrapper() and getUnitData()
 document.addEventListener("DOMContentLoaded", async () => {
   const unitIndex = await buildUnitIndex();                           // Creates unitIndex used below
+  
+  const godPowerIndex = await buildGodPowerIndex();
+  const data = { unitIndex, godPowerIndex }; 
+  
   const unitDataMap = {};                                             // Top level tooltip data storage
   const wrappers = document.querySelectorAll(".icon-wrapper");
     wrappers.forEach(icon => {
@@ -108,8 +126,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   for (const wrapper of wrappers) {                                   // For each wrapper:
-    const unitData = await populateUnitWrapper(wrapper, unitIndex);     // Run populateUnitWrapper() to fill it
     const id = wrapper.getAttribute("name");                            // id = the wrapper's name, passed from getUnitDataFromNode()
+    console.log("Wrapper name:", id);        
+
+    const unitData = await populateUnitWrapper(wrapper, data);      // Run populateUnitWrapper() to fill it
+    if (!unitData) {
+    console.warn("No data for:", id);
+  }
+    
     if (id && unitData) {
       unitDataMap[id] = unitData;                                       // Store that wrapper's data in top level map
     }

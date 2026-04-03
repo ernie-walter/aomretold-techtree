@@ -1,9 +1,11 @@
 // populateUnitWrapper populates an icon wrapper with unit data
-function populateUnitWrapper(wrapper, unitIndex) {
+function populateUnitWrapper(wrapper, data) {
+  const unitIndex = data.unitIndex; // <-- ADD THIS LINE
+
   const unitName = wrapper.getAttribute('name');        // Gets 'name' from wrapper (i.e. what you type in html)
   const unitNodeObj = unitIndex[unitName];              // Looks for name in unitIndex and creates an empty object (unitNodeObj) for it
-  if (!unitNodeObj) return
-  const data = getUnitDataFromNode(unitNodeObj.node, wrapper);  // Creates 'data'
+  if (!unitNodeObj) return null;
+  const unitData = getUnitDataFromNode(unitNodeObj.node, wrapper);  // Creates 'unitData'
 
   // --- Icon ---
   let iconDiv = wrapper.querySelector('.icon');
@@ -33,5 +35,5 @@ function populateUnitWrapper(wrapper, unitIndex) {
     wrapper.appendChild(frame);
   }
 
-  return data;
+return unitData;
 }

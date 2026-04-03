@@ -5,6 +5,22 @@ async function loadXML(url) {
   return new DOMParser().parseFromString(text, "application/xml");
 }
 
+// For God Power lookup. God Powers sit outside the proto/techtree node structure
+async function buildGodPowerIndex() {
+  const index = {};
+  for (const civ in civToFile) {
+    const url = `https://raw.githubusercontent.com/ernie-walter/aomretold-techtree/main/gamefiles/${civToFile[civ]}`;
+    const doc = await loadXML(url);
+    doc.querySelectorAll("power").forEach(p => {
+      const name = p.getAttribute("name");
+      if (!name) return;
+      index[name] = { node: p, civ };
+    });
+  }
+  return index;
+}
+
+
 // unitIndex is a long list of ALL nodes in proto.xml and techtree.xml, with all their stats nested inside them in childNodes
 async function buildUnitIndex() {
   const protoDoc = await loadXML('https://raw.githubusercontent.com/ernie-walter/aomretold-techtree/main/gamefiles/proto.xml');
