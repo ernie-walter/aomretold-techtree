@@ -100,7 +100,7 @@ function getUnitDataFromNode(node, wrapper) {
   else if (rawTypes.includes('Building')) category = 'Building';
   else if (rawTypes.includes('Unit') || rawTypes.includes('MilitaryUnit') || rawTypes.includes('Civilian')) category = 'Unit';
   else if (rawTypes.includes('Tech') || node.tagName.toLowerCase() === 'tech') category = 'Techs';
-  else if (rawTypes.includes('GodPower') || node.tagName.toLowerCase() === 'effects') category = 'God Power';
+  else if (node.querySelector('[power]')) category = 'God Power';
 
   // --- Unit Types ---
   let unitTypes = [];

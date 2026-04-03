@@ -127,13 +127,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   for (const wrapper of wrappers) {                                   // For each wrapper:
     const id = wrapper.getAttribute("name");                            // id = the wrapper's name, passed from getUnitDataFromNode()
-    console.log("Wrapper name:", id);        
-
     const unitData = await populateUnitWrapper(wrapper, data);      // Run populateUnitWrapper() to fill it
-    if (!unitData) {
-    console.warn("No data for:", id);
-  }
-    
+
     if (id && unitData) {
       unitDataMap[id] = unitData;                                       // Store that wrapper's data in top level map
     }
@@ -244,8 +239,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const defaultGod = document.querySelector('#MajorGodToggle li[data-value="demeter"]');
   if (defaultGod) {defaultGod.click();}
 
-  console.log(unitIndex)
-  console.log(unitDataMap)
+  // console.log(unitIndex)
+  // console.log(unitDataMap)
 
 });
 

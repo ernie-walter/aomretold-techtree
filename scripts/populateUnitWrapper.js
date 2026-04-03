@@ -1,10 +1,20 @@
 // populateUnitWrapper populates an icon wrapper with unit data
 function populateUnitWrapper(wrapper, data) {
-  const unitIndex = data.unitIndex; // <-- ADD THIS LINE
-
+  const unitIndex = data.unitIndex;
+  const godPowerIndex = data.godPowerIndex;
   const unitName = wrapper.getAttribute('name');        // Gets 'name' from wrapper (i.e. what you type in html)
-  const unitNodeObj = unitIndex[unitName];              // Looks for name in unitIndex and creates an empty object (unitNodeObj) for it
+
+  let unitNodeObj = unitIndex[unitName];    // Looks for name in unitIndex and creates an empty object (unitNodeObj) for it
+  let isGodPower = false;
+
+  // fallback to god powers if not found in units
+  if (!unitNodeObj && godPowerIndex[unitName]) {
+    unitNodeObj = godPowerIndex[unitName];
+    isGodPower = true;
+  }
+
   if (!unitNodeObj) return null;
+  
   const unitData = getUnitDataFromNode(unitNodeObj.node, wrapper);  // Creates 'unitData'
 
   // --- Icon ---
@@ -24,13 +34,17 @@ function populateUnitWrapper(wrapper, data) {
     img.style.objectFit = "contain";
     iconDiv.appendChild(img);
   }
-  img.src = `images/${data.icon.replace(/\\/g, "/")}`;
+  if (unitData.icon) {
+    img.src = `images/${unitData.icon.replace(/\\/g, "/")}`;
+    } else {
+    console.warn("Missing icon for:", wrapper.getAttribute("name"));
+    }
 
   // --- Frame overlay ---
   const existingFrame = wrapper.querySelector('.frame');
   if (!existingFrame) {
     const frame = document.createElement('img');
-    frame.src = `images/Frames/Frame_${data.category}.png`;
+    frame.src = `images/Frames/Frame_${unitData.category}.png`;
     frame.classList.add('frame');
     wrapper.appendChild(frame);
   }
