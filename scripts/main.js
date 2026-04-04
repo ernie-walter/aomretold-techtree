@@ -51,27 +51,31 @@ const dropdownMajor = document.getElementById('MajorGodToggle');
 dropdownMajor.addEventListener('change', filterIcons);
 
 function filterIcons(selectedMajor) {
+  const allowed = majorToMinorMap[selectedMajor] || [];
+
   document.querySelectorAll(".icon-row").forEach(row => {
     const icons = row.querySelectorAll(".icon-wrapper");
 
     icons.forEach(icon => {
-      const civs = (icon.dataset.civ || "")
-        .split(" ")
-        .filter(Boolean);
-
-      const allowed = majorToMinorMap[selectedMajor] || [];
-
-      const show =
-        selectedMajor === "all" ||
-        civs.length === 0 ||
-        civs.some(civ => allowed.includes(civ));
-
+      const raw = (icon.dataset.civ || "").trim();
+      let show;
+      if (raw.startsWith("except")) {   // exclusion mode
+        const excluded = raw
+          .replace("except", "")
+          .trim()
+          .split(" ")
+          .filter(Boolean);
+        show = !excluded.some(civ => allowed.includes(civ));
+      } else {        // normal inclusion mode
+        const civs = raw.split(" ").filter(Boolean);
+        show = selectedMajor === "all" || civs.length === 0 || civs.some(civ => allowed.includes(civ));
+      }
       icon.classList.toggle("hidden", !show);
     });
 
     // collapse row ONLY if no visible icons AND no spacer
     const visibleIcons = row.querySelectorAll(".icon-wrapper:not(.hidden)");
-    const hasSpacer = row.querySelector(".icon-wrapper.no-background");
+    const hasSpacer = row.querySelector(".icon-wrapper.no-background:not(.hidden)");
 
     row.classList.toggle(
       "empty",
@@ -138,23 +142,27 @@ document.addEventListener("DOMContentLoaded", async () => {
    await mergeDescriptionIntoUnitData(unitDataMap);
 
   // Add god overlays
- wrappers.forEach(wrapper => {
-  if (!wrapper.dataset.civ) return;
-  const civs = wrapper.dataset.civ.split(" "); // ["zeus", "ra"]
-  const skipGods = ["greek", "egyptian", "norse", "atlantean", "chinese", "japanese"];
+  wrappers.forEach(wrapper => {
+    const raw = (wrapper.dataset.civ || "").trim();
+    if (!raw) return;
+    if (wrapper.classList.contains("no-background")) return; // no overlays if "no background"
+    if (raw.startsWith("except")) return;         // no overlays for "except"
+    
+    const civs = wrapper.dataset.civ.split(" ");  // ["zeus", "ra"]
+    const skipGods = ["greek", "egyptian", "norse", "atlantean", "chinese", "japanese"];
 
-  // keep only actual gods (not pantheons)
-  const gods = civs.filter(civ => !skipGods.includes(civ.toLowerCase()));
+    // keep only actual gods (not pantheons)
+    const gods = civs.filter(civ => !skipGods.includes(civ.toLowerCase()));
 
-  if (gods.length === 0) return; // nothing to show
-  if (wrapper.querySelector(".god-overlay")) return;
+    if (gods.length === 0) return; // nothing to show
+    if (wrapper.querySelector(".god-overlay")) return;
 
-  const god = gods[0]; // pick the first valid god
-  const overlay = document.createElement("img");
-  overlay.src = `images/God Pictures/${god}_icon.png`;
-  overlay.classList.add("god-overlay");
-  wrapper.appendChild(overlay);
-});
+    const god = gods[0]; // pick the first valid god
+    const overlay = document.createElement("img");
+    overlay.src = `images/God Pictures/${god}_icon.png`;
+    overlay.classList.add("god-overlay");
+    wrapper.appendChild(overlay);
+  });
 
   // Build sidebar panel
   const panelTitle = document.getElementById("panel-title");
@@ -236,7 +244,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initDropdown("PlayerColourToggle", changePlayerColour);
 
   // This just sets a default on Major God dropdown, for ease of building. Can be changed to any god
-  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="demeter"]');
+  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="thor"]');
   if (defaultGod) {defaultGod.click();}
 
   // console.log(unitIndex)

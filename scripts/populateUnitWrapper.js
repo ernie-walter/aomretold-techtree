@@ -4,8 +4,15 @@ function populateUnitWrapper(wrapper, data) {
   const godPowerIndex = data.godPowerIndex;
   const unitName = wrapper.getAttribute('name');        // Gets 'name' from wrapper (i.e. what you type in html)
 
-  let unitNodeObj = unitIndex[unitName];    // Looks for name in unitIndex and creates an empty object (unitNodeObj) for it
-  let isGodPower = false;
+  function getNode(unitName, wrapper, { unitIndex, godPowerIndex }) {
+  // If it's a god power (has civ like "zeus")
+    if (wrapper.dataset.civ && godPowerIndex[unitName]) {
+    return godPowerIndex[unitName];
+    }
+    return unitIndex[unitName];
+  }
+
+  const unitNodeObj = getNode(unitName, wrapper, data);
 
   // fallback to god powers if not found in units
   if (!unitNodeObj && godPowerIndex[unitName]) {
@@ -35,6 +42,7 @@ function populateUnitWrapper(wrapper, data) {
     iconDiv.appendChild(img);
   }
   if (unitData.icon) {
+    console.log(wrapper.getAttribute("name"), data.icon); // debug
     img.src = `images/${unitData.icon.replace(/\\/g, "/")}`;
     } else {
     console.warn("Missing icon for:", wrapper.getAttribute("name"));
