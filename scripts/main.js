@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initDropdown("PlayerColourToggle", changePlayerColour);
 
   // This just sets a default on Major God dropdown, for ease of building. Can be changed to any god
-  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="thor"]');
+  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="kronos"]');
   if (defaultGod) {defaultGod.click();}
 
   // console.log(unitIndex)
