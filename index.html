@@ -28,6 +28,10 @@
                 </div>
                 <ul class="dropdown-list">
                     <li data-value="all">All</li>
+                    <li data-value="greek">Greek</li>
+                    <li data-value="egyptian">Egyptian</li>
+                    <li data-value="atlantean">Atlantean</li>
+                    <li data-value="norse">Norse</li>
                     <li data-value="zeus"><img src="images/God Pictures/zeus_icon.png" class="dropdown-icon">Zeus</li>
                     <li data-value="poseidon"><img src="images/God Pictures/poseidon_icon.png" class="dropdown-icon">Poseidon</li>
                     <li data-value="hades"><img src="images/God Pictures/hades_icon.png" class="dropdown-icon">Hades</li>
@@ -160,12 +164,15 @@
         </header>
         <main>
             <div class="age-columns-grid">
-
-            <!-- INSTRUCTIONS -->
-            <!-- name must match the unit/tech's name in proto.xml / techtree.xml -->
-            <!--    e.g. 'VillagerGreek' is needed, not just 'Villager' -->
-    
-                 <!-- Age I -->
+                <!-- Age I -->                                             
+      .o.       ooooooooo.     .oooooo.   ooooo   ooooo       .o.       ooooo   .oooooo.   
+     .888.      `888   `Y88.  d8P'  `Y8b  `888'   `888'      .888.      `888'  d8P'  `Y8b  
+    .8"888.      888   .d88' 888           888     888      .8"888.      888  888          
+   .8' `888.     888ooo88P'  888           888ooooo888     .8' `888.     888  888          
+  .88ooo8888.    888`88b.    888           888     888    .88ooo8888.    888  888          
+ .8'     `888.   888  `88b.  `88b    ooo   888     888   .8'     `888.   888  `88b    ooo  
+o88o     o8888o o888o  o888o  `Y8bood8P'  o888o   o888o o88o     o8888o o888o  `Y8bood8P'                                                                                   
+                <!-- Age I -->
                 <div class="age-column Age I">
                     <div class="icon-row"> <!-- Age Symbol -->
                         <div class="icon-wrapper no-background"><img src="images/Shared Techs/archaic_age_icon.png" class="age-icon"></div>
@@ -208,6 +215,7 @@
                         <div class="icon-wrapper" name="FreyrsGift" displayName="Freyr's Gift" data-civ="freyr"></div>
 
                         <div class="icon-wrapper" name="TownCenter" data-civ="atlantean"></div>
+                        <div class="icon-wrapper" name="VillagerAtlantean" displayName="Citizen" data-civ="atlantean"></div>
                     </div>
                     
                     <div class="icon-row"> <!-- Granary -->
@@ -216,11 +224,12 @@
                         <div class="icon-wrapper" name="FloodOfTheNile" data-civ="isis"></div>
                     </div>
 
-                    <div class="icon-row"> <!-- Storehouse / Mining Camp / Lumber Camp / Ox Cart -->
+                    <div class="icon-row"> <!-- Storehouse / Mining Camp / Lumber Camp / Ox Cart / Economic Guild -->
                         <div class="icon-wrapper" name="Storehouse" data-civ="greek"></div>
                         <div class="icon-wrapper" name="MiningCamp" data-civ="egyptian"></div>
                         <div class="icon-wrapper" name="OxCart" data-civ="norse"></div>
-                        <div class="icon-wrapper" name="Husbandry" data-civ="norse"></div>
+                        <div class="icon-wrapper" name="EconomicGuild" data-civ="atlantean"></div>
+                        <div class="icon-wrapper" name="Husbandry" data-civ="norse atlantean"></div>
                         <div class="icon-wrapper" name="Pickaxe"></div>
                         <div class="icon-wrapper no-background" data-civ="egyptian"></div>
                         <div class="icon-wrapper" name="LumberCamp" data-civ="egyptian"></div>
@@ -229,7 +238,8 @@
                     </div>
 
                     <div class="icon-row"> <!-- House -->
-                        <div class="icon-wrapper" name="House"></div>
+                        <div class="icon-wrapper" name="House" data-civ="except atlantean"></div>
+                        <div class="icon-wrapper" name="Manor" data-civ="atlantean"></div>
                         <div class="icon-wrapper" name="Militia" data-civ="poseidon"></div>
                     </div>
 
@@ -238,6 +248,7 @@
                         <div class="icon-wrapper" name="FishingShipGreek" data-civ="greek"></div>
                         <div class="icon-wrapper" name="FishingShipEgyptian" data-civ="egyptian"></div>
                         <div class="icon-wrapper" name="FishingShipNorse" data-civ="norse"></div>
+                        <div class="icon-wrapper" name="FishingShipAtlantean" data-civ="atlantean"></div>
                         <div class="icon-wrapper" name="Hippocampus" data-civ="poseidon"></div>
                     </div>
 
@@ -250,6 +261,10 @@
                         <div class="icon-wrapper" name="HandsOfThePharaoh" data-civ="egyptian"></div>
                         <div class="icon-wrapper" name="Clairvoyance" data-civ="set"></div>
                         <div class="icon-wrapper" name="Hersir" data-civ="norse"></div>
+                        <div class="icon-wrapper" name="Oracle" data-civ="atlantean"></div>
+                        <div class="icon-wrapper" name="TemporalChaos" data-civ="kronos"></div>
+                        <div class="icon-wrapper" name="EmpyrianSpeed" data-civ="oranos"></div>
+                        <div class="icon-wrapper" name="Channels" data-civ="gaia"></div>
                     </div> 
 
                     <div class="icon-row"> <!-- Wall -->
@@ -306,13 +321,19 @@
                         <div class="icon-wrapper" name="Ballistics" data-civ="thor"></div>
                         <div class="icon-wrapper" name="BurningPitch" data-civ="thor"></div>
                     </div>
-
-                    
                 </div>
 
                 <!-- Age II -->
+  .oooooo.   ooooo              .o.        .oooooo..o  .oooooo..o ooooo   .oooooo.         .o.       ooooo        
+ d8P'  `Y8b  `888'             .888.      d8P'    `Y8 d8P'    `Y8 `888'  d8P'  `Y8b       .888.      `888'        
+888           888             .8"888.     Y88bo.      Y88bo.       888  888              .8"888.      888         
+888           888            .8' `888.     `"Y8888o.   `"Y8888o.   888  888             .8' `888.     888         
+888           888           .88ooo8888.        `"Y88b      `"Y88b  888  888            .88ooo8888.    888         
+`88b    ooo   888       o  .8'     `888.  oo     .d8P oo     .d8P  888  `88b    ooo   .8'     `888.   888       o 
+ `Y8bood8P'  o888ooooood8 o88o     o8888o 8""88888P'  8""88888P'  o888o  `Y8bood8P'  o88o     o8888o o888ooooood8 
+                <!-- Age II -->
                 <div class="age-column Age II">
-                    <div class="icon-row"> <!-- Age Symbol -->
+                    <div class="icon-row"> <!-- God Powers -->
                         <div class="icon-wrapper no-background"><img src="images/Shared Techs/classical_age_icon.png" class="age-icon"></div>
                         <div class="icon-wrapper" name="Restoration" data-civ="athena"></div>
                         <div class="icon-wrapper" name="Pestilence" data-civ="ares"></div>
@@ -325,6 +346,9 @@
                         <div class="icon-wrapper" name="HealingSpring" data-civ="forseti"></div>
                         <div class="icon-wrapper" name="Undermine" data-civ="heimdall"></div>
                         <div class="icon-wrapper" name="AsgardianBastion" data-civ="ullr"></div>
+                        <div class="icon-wrapper" name="SpiderLair" data-civ="leto"></div>
+                        <div class="icon-wrapper" name="Valor" data-civ="prometheus"></div>
+                        <div class="icon-wrapper" name="Carnivora" data-civ="oceanus"></div>
                     </div>
                     
                     <div class="icon-row"> <!-- Town Centre -->
@@ -405,6 +429,7 @@
                         <div class="icon-wrapper" name="FeetOfTheJackal" data-civ="anubis"></div>
                         <div class="icon-wrapper" name="Necropolis" data-civ="anubis"></div>
 
+                        <div class="icon-wrapper" name="EyesInTheForest" data-civ="loki"></div>
                         <div class="icon-wrapper" name="Valkyrie" data-civ="freyja"></div>
                         <div class="icon-wrapper" name="Disablot" data-civ="freyja"></div>
                         <div class="icon-wrapper" name="Troll" data-civ="forseti"></div>
@@ -448,6 +473,7 @@
                         <div class="icon-wrapper" name="ThrowingAxeman" data-civ="norse"></div>
                         <div class="icon-wrapper" name="Berserk" data-civ="norse"></div>
                         <div class="icon-wrapper" name="MediumInfantry" data-civ="norse"></div>
+                        <div class="icon-wrapper" name="Hamask" data-civ="odin"></div>
                         <div class="icon-wrapper" name="ServantsOfGlory" data-civ="ullr"></div>
                     </div> 
 
@@ -496,6 +522,14 @@
                 </div>
         
                 <!-- Age III -->
+ooooo   ooooo oooooooooooo ooooooooo.     .oooooo.   ooooo   .oooooo.   
+`888'   `888' `888'     `8 `888   `Y88.  d8P'  `Y8b  `888'  d8P'  `Y8b  
+ 888     888   888          888   .d88' 888      888  888  888          
+ 888ooooo888   888oooo8     888ooo88P'  888      888  888  888          
+ 888     888   888    "     888`88b.    888      888  888  888          
+ 888     888   888       o  888  `88b.  `88b    d88'  888  `88b    ooo  
+o888o   o888o o888ooooood8 o888o  o888o  `Y8bood8P'  o888o  `Y8bood8P'  
+                <!-- Age III -->       
                 <div class="age-column Age III">
                     <div class="icon-row"> <!-- Age Symbol -->
                         <div class="icon-wrapper no-background"><img src="images/Shared Techs/heroic_age_icon.png" class="age-icon"></div>
@@ -682,10 +716,19 @@
                         <div class="icon-wrapper" name="SiegeWorks" data-civ="egyptian"></div> 
                         <div class="icon-wrapper" name="SiegeTower" data-civ="egyptian"></div> 
                         <div class="icon-wrapper" name="DraftHorses" data-civ="egyptian"></div>
+                        <div class="icon-wrapper" name="ForceOfTheWestWind" data-civ="sekhmet"></div>
                     </div> 
 
                 </div>
                 <!-- Age IV -->
+ooo        ooooo oooooo   oooo ooooooooooooo ooooo   ooooo ooooo   .oooooo.   
+`88.       .888'  `888.   .8'  8'   888   `8 `888'   `888' `888'  d8P'  `Y8b  
+ 888b     d'888    `888. .8'        888       888     888   888  888          
+ 8 Y88. .P  888     `888.8'         888       888ooooo888   888  888          
+ 8  `888'   888      `888'          888       888     888   888  888          
+ 8    Y     888       888           888       888     888   888  `88b    ooo  
+o8o        o888o     o888o         o888o     o888o   o888o o888o  `Y8bood8P'                                                                
+                <!-- Age IV -->                                                            
                 <div class="age-column Age IV">
                     <div class="icon-row"> <!-- Age Symbol -->
                         <div class="icon-wrapper no-background"><img src="images/Shared Techs/mythic_age_icon.png" class="age-icon"></div>

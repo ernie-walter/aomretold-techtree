@@ -50,8 +50,26 @@ const iconsCiv = document.querySelectorAll('.icon-wrapper');
 const dropdownMajor = document.getElementById('MajorGodToggle');
 dropdownMajor.addEventListener('change', filterIcons);
 
+function getCivExpandedList(civ) {
+  const result = new Set([civ]);
+  Object.entries(majorToMinorMap).forEach(([major, list]) => {
+    if (list[0] === civ) {
+      list.forEach(x => result.add(x)); // adds civ + major + minors
+    }
+  });
+  return Array.from(result);
+}
+
 function filterIcons(selectedMajor) {
-  const allowed = majorToMinorMap[selectedMajor] || [];
+  let allowed;
+
+  if (selectedMajor === "all") {
+    allowed = null;
+  } else if (majorToMinorMap[selectedMajor]) {
+    allowed = majorToMinorMap[selectedMajor]; // Major god
+  } else {
+    allowed = getCivExpandedList(selectedMajor); // Civ (expanded to include all its gods)
+  }
 
   document.querySelectorAll(".icon-row").forEach(row => {
     const icons = row.querySelectorAll(".icon-wrapper");
@@ -59,21 +77,28 @@ function filterIcons(selectedMajor) {
     icons.forEach(icon => {
       const raw = (icon.dataset.civ || "").trim();
       let show;
-      if (raw.startsWith("except")) {   // exclusion mode
+
+      if (raw.startsWith("except")) {
         const excluded = raw
           .replace("except", "")
           .trim()
           .split(" ")
           .filter(Boolean);
-        show = !excluded.some(civ => allowed.includes(civ));
-      } else {        // normal inclusion mode
+
+        show = !allowed || !excluded.some(civ => allowed.includes(civ));
+
+      } else {
         const civs = raw.split(" ").filter(Boolean);
-        show = selectedMajor === "all" || civs.length === 0 || civs.some(civ => allowed.includes(civ));
+
+        show =
+          !allowed ||                // "all"
+          civs.length === 0 ||
+          civs.some(civ => allowed.includes(civ));
       }
+
       icon.classList.toggle("hidden", !show);
     });
 
-    // collapse row ONLY if no visible icons AND no spacer
     const visibleIcons = row.querySelectorAll(".icon-wrapper:not(.hidden)");
     const hasSpacer = row.querySelector(".icon-wrapper.no-background:not(.hidden)");
 
