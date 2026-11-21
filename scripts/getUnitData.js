@@ -193,6 +193,19 @@ function getUnitDataFromNode(node, wrapper) {
     attacks.push(attack);
   });
   
+ const effects = Array.from(node.querySelectorAll('effects > effect')).map(e => {
+  const attributes = Object.fromEntries(
+    Array.from(e.attributes).map(a => [a.name, a.value])
+  );
+
+  const targets = Array.from(e.querySelectorAll('target')).map(t => ({
+    type: t.getAttribute('type'),
+    name: t.textContent.trim()
+  }));
+
+  return { ...attributes, targets };
+});
+
   return {
   name: node.getAttribute('name'),
   displayName,
@@ -205,5 +218,6 @@ function getUnitDataFromNode(node, wrapper) {
   hitPoints,
   speed,
   attacks,
+  effects
 };
 }

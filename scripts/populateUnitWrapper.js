@@ -42,7 +42,7 @@ function populateUnitWrapper(wrapper, data) {
     iconDiv.appendChild(img);
   }
   if (unitData.icon) {
-    console.log(wrapper.getAttribute("name"), data.icon); // debug
+    // console.log(wrapper.getAttribute("name"), data.icon); // debug
     img.src = `images/${unitData.icon.replace(/\\/g, "/")}`;
     } else {
     console.warn("Missing icon for:", wrapper.getAttribute("name"));

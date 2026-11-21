@@ -11,9 +11,9 @@ let descriptionMapCache = null;
  */
 function normalizeName(raw) {
   return raw
-    .toLowerCase()              // hand_axe
-    .replace(/_/g, ' ')         // hand axe
-    .replace(/\b\w/g, c => c.toUpperCase()); // Hand Axe
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/_/g, ' ')
+    .toLowerCase();
 }
 
 function removePrefix(key) {
@@ -63,7 +63,7 @@ async function mergeDescriptionIntoUnitData(unitDataMap) {
     const descriptionMap = await prepareDescriptionMap();
 
     for (const [name, data] of Object.entries(unitDataMap)) {
-        const lookupName = removePrefix(name);
+        const lookupName = normalizeName(removePrefix(name));
         // Try UNIT first
         let key = `UNIT_${lookupName}`;
         if (descriptionMap[key]) {

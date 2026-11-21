@@ -204,6 +204,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     panelDescription.innerHTML = "";                              // Clear description for now. We will slowly build it up below...
     panelImg.src = `images/${data.icon.replace(/\\/g, "/")}`;
 
+    
+
     // Add description if it exists
     if (data.description) {
       const span = document.createElement("div");
@@ -219,7 +221,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (data.armor) addPanelInfo(panelDescription, data.armor, {prefix: "Armor"});
     if (data.speed) addPanelInfo(panelDescription, data.speed, "Speed", {newline: true});
     if (data.attacks) addPanelAttacks(panelDescription, data.attacks);
-  };
+    addPanelEffects(panel, data.effects);
+  };  
   
   // Hover to show item in panel, click to freeze
   wrappers.forEach(wrapper => {
@@ -272,8 +275,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const defaultGod = document.querySelector('#MajorGodToggle li[data-value="kronos"]');
   if (defaultGod) {defaultGod.click();}
 
-  // console.log(unitIndex)
-  // console.log(unitDataMap)
+  console.log(unitDataMap["HandAxe"].effects);
+  console.log(unitDataMap["HandOfTalos"].effects);
 
 });
 

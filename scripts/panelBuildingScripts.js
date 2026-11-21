@@ -86,5 +86,156 @@ function addPanelAttacks(panel, attacks) {
   
   panel.appendChild(span);
   panel.appendChild(document.createElement("br")); // new line per attack
+  });  
+}
+
+// To display technical effects in the panel
+// Format effect amounts according to their relativity
+function formatTechAmountWithRelativity(effect) {
+  const amount = Number(effect.amount);
+  const relativity = (effect.relativity || "Absolute").toLowerCase();
+
+  if (isNaN(amount)) return "";
+
+  let value = amount;
+
+  if (relativity === "percent" || relativity === "basepercent") {
+    value = (amount - 1) * 100;
+  }
+
+  if (relativity === "assign") {
+    return `set to ${amount}`;
+  }
+
+  if (relativity === "override") {
+    return `sets base value to ${amount}`;
+  }
+
+  const formatted = Number(Math.abs(value).toPrecision(3));
+  const sign = value >= 0 ? "+" : "-";
+
+  if (relativity === "percent" || relativity === "basepercent") {
+    return `${sign}${formatted}%`;
+  }
+
+  return `${sign}${formatted}`;
+}
+// Convert CamelCase into readable words
+function formatEffectName(name) {
+  return name
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/Upgraded$/, "")
+    .trim();
+}
+
+// Convert XML resource names into display names
+function formatEffectResource(resource) {
+  return resource?.replace(/Resource$/, "") || "";
+}
+
+// Get the first target of an effect
+function getEffectTarget(effect) {
+  return formatEffectName(effect.targets?.[0]?.name || "");
+}
+// Individual technology effect handlers
+const DATA_SUBTYPE_HANDLERS = {
+
+  workrate: effect => {
+    const resource = formatEffectResource(effect.unittype);
+    return `${resource} gathering rate`;
+  },
+
+  workratespecific: effect => {
+    const resource = effect.resource;
+    const source = formatEffectName(effect.unittype);
+
+    return `${resource} gathering rate from ${source}`;
+  },
+
+  carrycapacity: effect => {
+    return `${effect.resource} carry capacity`;
+  },
+
+  trainpoints: effect => {
+    return `${getEffectTarget(effect)} training time`;
+  },
+
+  buildpoints: effect => {
+    return `${getEffectTarget(effect)} construction time`;
+  },
+
+  cost: effect => {
+    return `${getEffectTarget(effect)} ${effect.resource} cost`;
+  },
+
+  costbuildingtechs: effect => {
+    return `${getEffectTarget(effect)} technology ${effect.resource} cost`;
+  },
+
+  researchrate: effect => {
+    return `${getEffectTarget(effect)} research speed`;
+  },
+
+  hitpoints: effect => {
+    return `${getEffectTarget(effect)} hitpoints`;
+  }
+
+};
+// Display technology effects
+function addPanelEffects(panel, effects) {
+  if (!effects?.length) return;
+
+  const descriptions = [];
+
+  effects.forEach(effect => {
+
+    // Ignore effects hidden from tooltips
+    if (effect.hidetooltip !== undefined) return;
+
+    // Handle SetName separately
+    if (effect.type === "SetName") {
+      const oldName = formatEffectName(effect.proto);
+
+      const newName = effect.newname
+        .replace(/^STR_UNIT_/, "")
+        .replace(/_NAME$/, "")
+        .replace(/_/g, " ")
+        .toLowerCase()
+        .replace(/\b\w/g, c => c.toUpperCase());
+
+      descriptions.push(`${oldName} becomes ${newName}`);
+      return;
+    }
+
+    // Handle Data effects
+    if (effect.type === "Data") {
+      const handler = DATA_SUBTYPE_HANDLERS[effect.subtype?.toLowerCase()];
+
+      if (!handler) {
+        console.warn("Unhandled tech effect:", effect.subtype);
+        return;
+      }
+
+      const description = handler(effect);
+      const amount = formatTechAmountWithRelativity(effect);
+
+      descriptions.push(`${description}: ${amount}`);
+    }
+  });
+
+  if (!descriptions.length) return;
+
+  const h3 = document.createElement("h3");
+  h3.textContent = "Effects";
+  h3.classList.add("attack-name");
+  panel.appendChild(h3);
+
+  descriptions.forEach(description => {
+    const span = document.createElement("span");
+    span.classList.add("panel-line");
+    span.textContent = description;
+
+    panel.appendChild(span);
+    panel.appendChild(document.createElement("br"));
   });
 }
