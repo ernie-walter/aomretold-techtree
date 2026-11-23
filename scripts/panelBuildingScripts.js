@@ -149,33 +149,35 @@ function getEffectTarget(effect) {
 const DATA_SUBTYPE_HANDLERS = {
 
   workrate: effect => {
-    const resource = formatEffectResource(effect.unittype);
-    return `${resource} gathering rate`;},
+  const resource = formatEffectResource(effect.unittype);
+  return `<img src="${ICONS[resource].src}" class="panel-icon"> ${resource} gather rate`;
+  },
   workratespecific: effect => {
     const resource = effect.resource;
     const source = formatEffectName(effect.unittype);
-    return `${resource} gathering rate from ${source}`;},
-  carrycapacity: effect => {return `${effect.resource} carry capacity`;},
-  trainpoints: effect => {return `${getEffectTarget(effect)} training time`;},
-  buildpoints: effect => {return `${getEffectTarget(effect)} construction time`;},
-  cost: effect => {return `${getEffectTarget(effect)} ${effect.resource} cost`;},
-  costbuildingtechs: effect => {return `${getEffectTarget(effect)} technology ${effect.resource} cost`;},
-  researchrate: effect => {return `${getEffectTarget(effect)} research speed`;},
-  hitpoints: effect => {return `${getEffectTarget(effect)} hitpoints`;},
-  damage: effect => {return `${getEffectTarget(effect)} Damage`;},
-  armorvulnerability: effect => {return `${getEffectTarget(effect)} ${effect.armortype} armour`;},
-  unitregenrate: effect => {return `${getEffectTarget(effect)} regen rate`;},
-  maximumvelocity: effect => {return `${getEffectTarget(effect)} max speed`;},
-  damagebonus: effect => {return `${getEffectTarget(effect)} bonus vs ${effect.unittype}`;},
-  los: effect => {return `${getEffectTarget(effect)} LOS`;},
-  fullcapacitymultiplier: effect => {return `${getEffectTarget(effect)} FullCapacityMultiplier`;},
-  modifyratecap: effect => {return `${getEffectTarget(effect)} ModifyRateCap`;},
-  researchpoints: effect => {return `${getEffectTarget(effect)} ResearchPoints`;},
-  maximumrange: effect => {return `${getEffectTarget(effect)} MaximumRange`;},
-  maximumcontained: effect => {return `${getEffectTarget(effect)} MaximumContained`;},
-  trackrating: effect => {return `${getEffectTarget(effect)} Trackrating`;},
-  rateoffire: effect => {return `${getEffectTarget(effect)} rate of fire`;},
-  rechargetime: effect => {return `${getEffectTarget(effect)} RechargeTime`;},
+    return `${resource} gathering rate from ${source}`;
+  },
+  carrycapacity: effect => `<img src="${ICONS[effect.resource].src}" class="panel-icon"> ${effect.resource} carry capacity`,
+  trainpoints: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} training time`,
+  buildpoints: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} construction time`,
+  cost: effect => `${getEffectTarget(effect)} ${effect.resource} cost`,
+  costbuildingtechs: effect => `${getEffectTarget(effect)} technology ${effect.resource} cost`,
+  researchrate: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} research speed`,
+  hitpoints: effect => `${getEffectTarget(effect)} hitpoints`,
+  damage: effect => `${getEffectTarget(effect)} Damage`,
+  armorvulnerability: effect => `<img src="images/Icons/armor_${effect.armortype.toLowerCase()}.png" class="panel-icon"> ${getEffectTarget(effect)}`,
+  unitregenrate: effect => `${getEffectTarget(effect)} regen rate`,
+  maximumvelocity: effect => `${getEffectTarget(effect)} max speed`,
+  damagebonus: effect => `${getEffectTarget(effect)} bonus vs ${effect.unittype}`,
+  los: effect => `${getEffectTarget(effect)} LOS`,
+  fullcapacitymultiplier: effect => `${getEffectTarget(effect)} FullCapacityMultiplier`,
+  modifyratecap: effect => `${getEffectTarget(effect)} ModifyRateCap`,
+  researchpoints: effect => `${getEffectTarget(effect)} ResearchPoints`,
+  maximumrange: effect => `${getEffectTarget(effect)} MaximumRange`,
+  maximumcontained: effect => `${getEffectTarget(effect)} MaximumContained`,
+  trackrating: effect => `${getEffectTarget(effect)} Trackrating`,
+  rateoffire: effect => `${getEffectTarget(effect)} rate of fire`,
+  rechargetime: effect => `${getEffectTarget(effect)} RechargeTime`,
 };
 
 // Display technology effects
@@ -211,7 +213,7 @@ function addPanelEffects(panel, effects) {
   descriptions.forEach(description => {
     const span = document.createElement("span");
     span.classList.add("panel-line");
-    span.textContent = description;
+    span.innerHTML = description;
     panel.appendChild(span);
     panel.appendChild(document.createElement("br"));
   });
