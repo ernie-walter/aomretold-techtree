@@ -9,10 +9,10 @@ function populateUnitWrapper(wrapper, data) {
     if (wrapper.dataset.civ && godPowerIndex[unitName]) {
     return godPowerIndex[unitName];
     }
-    return unitIndex[unitName];
+    return unitIndex[unitName]?.tech || unitIndex[unitName]?.unit || null;
   }
 
-  const unitNodeObj = getNode(unitName, wrapper, data);
+  let unitNodeObj = getNode(unitName, wrapper, data);
 
   // fallback to god powers if not found in units
   if (!unitNodeObj && godPowerIndex[unitName]) {
@@ -21,8 +21,12 @@ function populateUnitWrapper(wrapper, data) {
   }
 
   if (!unitNodeObj) return null;
-  
   const unitData = getUnitDataFromNode(unitNodeObj.node, wrapper);  // Creates 'unitData'
+
+  if (!unitData) {
+  console.warn("No unit data returned for:", unitName);
+  return null;
+}
 
   // --- Icon ---
   let iconDiv = wrapper.querySelector('.icon');
@@ -42,7 +46,6 @@ function populateUnitWrapper(wrapper, data) {
     iconDiv.appendChild(img);
   }
   if (unitData.icon) {
-    // console.log(wrapper.getAttribute("name"), data.icon); // debug
     img.src = `images/${unitData.icon.replace(/\\/g, "/")}`;
     } else {
     console.warn("Missing icon for:", wrapper.getAttribute("name"));

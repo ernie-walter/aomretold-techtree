@@ -39,7 +39,8 @@ async function buildUnitIndex() {
   [...protoNodes, ...techtreeNodes].forEach(node => {
     const name = node.getAttribute('name');
     if (!name) return;
-    unitIndex[name] = { node };
+    if (!unitIndex[name]) unitIndex[name] = {};
+    unitIndex[name][node.tagName.toLowerCase()] = { node };
   });
   
   return unitIndex;

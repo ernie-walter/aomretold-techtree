@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (data.armor) addPanelInfo(panelDescription, data.armor, {prefix: "Armor"});
     if (data.speed) addPanelInfo(panelDescription, data.speed, "Speed", {newline: true});
     if (data.attacks) addPanelAttacks(panelDescription, data.attacks);
-    addPanelEffects(panel, data.effects);
+    addPanelEffects(panelDescription, data.effects);
   };  
   
   // Hover to show item in panel, click to freeze
@@ -271,13 +271,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initDropdown("PlayerColourToggle", changePlayerColour);
 
-  // This just sets a default on Major God dropdown, for ease of building. Can be changed to any god
-  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="kronos"]');
+  // This just sets a default on Major God dropdown, for ease of website building. Can be changed to any god
+  const defaultGod = document.querySelector('#MajorGodToggle li[data-value="zeus"]');
   if (defaultGod) {defaultGod.click();}
-
-  console.log(unitDataMap["HandAxe"].effects);
-  console.log(unitDataMap["HandOfTalos"].effects);
-
 });
 
 

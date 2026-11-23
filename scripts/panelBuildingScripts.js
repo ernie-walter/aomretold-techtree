@@ -91,35 +91,42 @@ function addPanelAttacks(panel, attacks) {
 
 // To display technical effects in the panel
 // Format effect amounts according to their relativity
+
 function formatTechAmountWithRelativity(effect) {
   const amount = Number(effect.amount);
   const relativity = (effect.relativity || "Absolute").toLowerCase();
 
   if (isNaN(amount)) return "";
+  if (relativity === "assign") {return `set to ${amount}`;}
+  if (relativity === "override") {return `sets base value to ${amount}`;}
 
-  let value = amount;
-
-  if (relativity === "percent" || relativity === "basepercent") {
-    value = (amount - 1) * 100;
+  if (relativity === "percent" && effect.subtype?.toLowerCase() === "armorvulnerability") {
+    const value = amount * -100;
+    const sign = value >= 0 ? "+" : "-";
+    const formatted = Number(Math.abs(value).toPrecision(3));
+    return `${sign}${formatted}% of current`;
   }
 
-  if (relativity === "assign") {
-    return `set to ${amount}`;
+  if (relativity === "percent") {
+    const value = (amount - 1) * 100;
+    const sign = value >= 0 ? "+" : "-";
+    const formatted = Number(Math.abs(value).toPrecision(3));
+    return `${sign}${formatted}% of current`;
   }
 
-  if (relativity === "override") {
-    return `sets base value to ${amount}`;
+  if (relativity === "basepercent") {
+    const value = (amount - 1) * 100;
+    const sign = value >= 0 ? "+" : "-";
+    const formatted = Number(Math.abs(value).toPrecision(3));
+    return `${sign}${formatted}% of base`;
   }
 
-  const formatted = Number(Math.abs(value).toPrecision(3));
-  const sign = value >= 0 ? "+" : "-";
-
-  if (relativity === "percent" || relativity === "basepercent") {
-    return `${sign}${formatted}%`;
-  }
+  const formatted = Number(Math.abs(amount).toPrecision(3));
+  const sign = amount >= 0 ? "+" : "-";
 
   return `${sign}${formatted}`;
 }
+
 // Convert CamelCase into readable words
 function formatEffectName(name) {
   return name
@@ -137,50 +144,40 @@ function formatEffectResource(resource) {
 function getEffectTarget(effect) {
   return formatEffectName(effect.targets?.[0]?.name || "");
 }
+
 // Individual technology effect handlers
 const DATA_SUBTYPE_HANDLERS = {
 
   workrate: effect => {
     const resource = formatEffectResource(effect.unittype);
-    return `${resource} gathering rate`;
-  },
-
+    return `${resource} gathering rate`;},
   workratespecific: effect => {
     const resource = effect.resource;
     const source = formatEffectName(effect.unittype);
-
-    return `${resource} gathering rate from ${source}`;
-  },
-
-  carrycapacity: effect => {
-    return `${effect.resource} carry capacity`;
-  },
-
-  trainpoints: effect => {
-    return `${getEffectTarget(effect)} training time`;
-  },
-
-  buildpoints: effect => {
-    return `${getEffectTarget(effect)} construction time`;
-  },
-
-  cost: effect => {
-    return `${getEffectTarget(effect)} ${effect.resource} cost`;
-  },
-
-  costbuildingtechs: effect => {
-    return `${getEffectTarget(effect)} technology ${effect.resource} cost`;
-  },
-
-  researchrate: effect => {
-    return `${getEffectTarget(effect)} research speed`;
-  },
-
-  hitpoints: effect => {
-    return `${getEffectTarget(effect)} hitpoints`;
-  }
-
+    return `${resource} gathering rate from ${source}`;},
+  carrycapacity: effect => {return `${effect.resource} carry capacity`;},
+  trainpoints: effect => {return `${getEffectTarget(effect)} training time`;},
+  buildpoints: effect => {return `${getEffectTarget(effect)} construction time`;},
+  cost: effect => {return `${getEffectTarget(effect)} ${effect.resource} cost`;},
+  costbuildingtechs: effect => {return `${getEffectTarget(effect)} technology ${effect.resource} cost`;},
+  researchrate: effect => {return `${getEffectTarget(effect)} research speed`;},
+  hitpoints: effect => {return `${getEffectTarget(effect)} hitpoints`;},
+  damage: effect => {return `${getEffectTarget(effect)} Damage`;},
+  armorvulnerability: effect => {return `${getEffectTarget(effect)} ${effect.armortype} armour`;},
+  unitregenrate: effect => {return `${getEffectTarget(effect)} regen rate`;},
+  maximumvelocity: effect => {return `${getEffectTarget(effect)} max speed`;},
+  damagebonus: effect => {return `${getEffectTarget(effect)} bonus vs ${effect.unittype}`;},
+  los: effect => {return `${getEffectTarget(effect)} LOS`;},
+  fullcapacitymultiplier: effect => {return `${getEffectTarget(effect)} FullCapacityMultiplier`;},
+  modifyratecap: effect => {return `${getEffectTarget(effect)} ModifyRateCap`;},
+  researchpoints: effect => {return `${getEffectTarget(effect)} ResearchPoints`;},
+  maximumrange: effect => {return `${getEffectTarget(effect)} MaximumRange`;},
+  maximumcontained: effect => {return `${getEffectTarget(effect)} MaximumContained`;},
+  trackrating: effect => {return `${getEffectTarget(effect)} Trackrating`;},
+  rateoffire: effect => {return `${getEffectTarget(effect)} rate of fire`;},
+  rechargetime: effect => {return `${getEffectTarget(effect)} RechargeTime`;},
 };
+
 // Display technology effects
 function addPanelEffects(panel, effects) {
   if (!effects?.length) return;
@@ -188,37 +185,18 @@ function addPanelEffects(panel, effects) {
   const descriptions = [];
 
   effects.forEach(effect => {
-
-    // Ignore effects hidden from tooltips
+    // Ignore effects hidden from tooltips, and name changes
     if (effect.hidetooltip !== undefined) return;
-
-    // Handle SetName separately
-    if (effect.type === "SetName") {
-      const oldName = formatEffectName(effect.proto);
-
-      const newName = effect.newname
-        .replace(/^STR_UNIT_/, "")
-        .replace(/_NAME$/, "")
-        .replace(/_/g, " ")
-        .toLowerCase()
-        .replace(/\b\w/g, c => c.toUpperCase());
-
-      descriptions.push(`${oldName} becomes ${newName}`);
-      return;
-    }
+    if (effect.type === "SetName") return;
 
     // Handle Data effects
     if (effect.type === "Data") {
       const handler = DATA_SUBTYPE_HANDLERS[effect.subtype?.toLowerCase()];
-
-      if (!handler) {
-        console.warn("Unhandled tech effect:", effect.subtype);
+      if (!handler) {console.warn("Unhandled tech effect:", effect.subtype);
         return;
       }
-
       const description = handler(effect);
       const amount = formatTechAmountWithRelativity(effect);
-
       descriptions.push(`${description}: ${amount}`);
     }
   });
@@ -234,7 +212,6 @@ function addPanelEffects(panel, effects) {
     const span = document.createElement("span");
     span.classList.add("panel-line");
     span.textContent = description;
-
     panel.appendChild(span);
     panel.appendChild(document.createElement("br"));
   });
