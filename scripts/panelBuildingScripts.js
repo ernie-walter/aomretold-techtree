@@ -130,6 +130,7 @@ function formatTechAmountWithRelativity(effect) {
 // Convert CamelCase into readable words
 function formatEffectName(name) {
   return name
+    .replace(/^Abstract/, "")
     .replace(/([a-z])([A-Z])/g, "$1 $2")
     .replace(/Upgraded$/, "")
     .trim();
@@ -137,7 +138,7 @@ function formatEffectName(name) {
 
 // Convert XML resource names into display names
 function formatEffectResource(resource) {
-  return resource?.replace(/Resource$/, "") || "";
+  return resource === "FishResource" ? "Fish" : resource?.replace(/Resource$/, "") || "";
 }
 
 // Get the first target of an effect
@@ -148,14 +149,23 @@ function getEffectTarget(effect) {
 // Individual technology effect handlers
 const DATA_SUBTYPE_HANDLERS = {
 
+  // workrate: effect => {
+  // const resource = formatEffectResource(effect.unittype);
+  // return `<img src="${ICONS[resource].src}" class="panel-icon"> ${resource} gather rate`;
+  // },
+  // workratespecific: effect => {
+  //   const resource = effect.resource;
+  //   const source = formatEffectName(effect.unittype);
+  //   return `${resource} gathering rate from ${source}`;
+  // },
+
   workrate: effect => {
-  const resource = formatEffectResource(effect.unittype);
-  return `<img src="${ICONS[resource].src}" class="panel-icon"> ${resource} gather rate`;
-  },
-  workratespecific: effect => {
-    const resource = effect.resource;
-    const source = formatEffectName(effect.unittype);
-    return `${resource} gathering rate from ${source}`;
+    const resource = ["FishResource", "AbstractFarm", "Herdable", "NonConvertableHerdable"].includes(effect.unittype)
+    ? "Food"
+    : formatEffectResource(effect.unittype);
+    const source = effect.unittype === "AbstractFarm" ? "Farm" : formatEffectResource(effect.unittype);
+    const action = effect.action === "AutoGatherFood" ? "auto-gather" : "gather";
+    return `<img src="${ICONS[resource].src}" class="panel-icon"> ${source} ${action} rate for ${getEffectTarget(effect)}`;
   },
   carrycapacity: effect => `<img src="${ICONS[effect.resource].src}" class="panel-icon"> ${effect.resource} carry capacity`,
   trainpoints: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} training time`,
@@ -163,20 +173,20 @@ const DATA_SUBTYPE_HANDLERS = {
   cost: effect => `${getEffectTarget(effect)} ${effect.resource} cost`,
   costbuildingtechs: effect => `${getEffectTarget(effect)} technology ${effect.resource} cost`,
   researchrate: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} research speed`,
-  hitpoints: effect => `${getEffectTarget(effect)} hitpoints`,
-  damage: effect => `${getEffectTarget(effect)} Damage`,
+  hitpoints: effect => `<img src="images/Icons/hp.png" class="panel-icon"> ${getEffectTarget(effect)} hitpoints`,
+  damage: effect => `<img src="images/Icons/atk_hack.png" class="panel-icon"> ${getEffectTarget(effect)} Damage`,
   armorvulnerability: effect => `<img src="images/Icons/armor_${effect.armortype.toLowerCase()}.png" class="panel-icon"> ${getEffectTarget(effect)}`,
   unitregenrate: effect => `${getEffectTarget(effect)} regen rate`,
   maximumvelocity: effect => `${getEffectTarget(effect)} max speed`,
-  damagebonus: effect => `${getEffectTarget(effect)} bonus vs ${effect.unittype}`,
+  damagebonus: effect => `${getEffectTarget(effect)} bonus vs <img src="images/Icons/type_${effect.unittype.toLowerCase()}.png" class="panel-icon"> ${effect.unittype}`,
   los: effect => `${getEffectTarget(effect)} LOS`,
   fullcapacitymultiplier: effect => `${getEffectTarget(effect)} FullCapacityMultiplier`,
   modifyratecap: effect => `${getEffectTarget(effect)} ModifyRateCap`,
   researchpoints: effect => `${getEffectTarget(effect)} ResearchPoints`,
-  maximumrange: effect => `${getEffectTarget(effect)} MaximumRange`,
+  maximumrange: effect => `<img src="images/Icons/atk_range.png" class="panel-icon">${getEffectTarget(effect)} Maximum Range`,
   maximumcontained: effect => `${getEffectTarget(effect)} MaximumContained`,
   trackrating: effect => `${getEffectTarget(effect)} Trackrating`,
-  rateoffire: effect => `${getEffectTarget(effect)} rate of fire`,
+  rateoffire: effect => `<img src="images/Icons/atk_rof.png" class="panel-icon"> ${getEffectTarget(effect)} rate of fire`,
   rechargetime: effect => `${getEffectTarget(effect)} RechargeTime`,
 };
 

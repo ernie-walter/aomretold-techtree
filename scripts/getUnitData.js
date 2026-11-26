@@ -157,20 +157,22 @@ function getUnitDataFromNode(node, wrapper) {
       name: pa.querySelector('name')?.textContent || "",
       rof: Number(pa.querySelector('rof')?.textContent) || null,
       maxrange: Number(pa.querySelector('maxrange')?.textContent) || null,
-      projectile: pa.querySelector('projectile')?.textContent || null,
+      // projectile: pa.querySelector('projectile')?.textContent.includes("Flaming")
+      //   ? null
+      //   : pa.querySelector('projectile')?.textContent || null,
       damages: {},
       bonus: {},
     };
 
     // damage types
-    pa.querySelectorAll('damage').forEach(d => {
+    pa.querySelectorAll(':scope > damage').forEach(d => {
       const type = d.getAttribute('type');
       const val = Number(d.textContent);
       if (type && !isNaN(val)) attack.damages[type] = val;
     });
 
     // bonus damages
-    pa.querySelectorAll('damagebonus').forEach(db => {
+    pa.querySelectorAll(':scope > damagebonus').forEach(db => {
       const type = db.getAttribute('type');
       const val = Number(db.textContent);
       if (type && !isNaN(val)) attack.bonus[type] = val;

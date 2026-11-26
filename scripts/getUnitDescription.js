@@ -17,9 +17,8 @@ function normalizeName(raw) {
 }
 
 function removePrefix(key) {
-  return key.replace(/^(UNIT|TECH)_/, '');
+  return key.replace(/^(UNIT|TECH|BLD)_/, '');
 }
-
 
 /**
  * Load the string table and prepare a map of all unit/tech descriptions
@@ -35,7 +34,7 @@ async function prepareDescriptionMap() {
     const lines = text.split(/\r?\n/); // handle \r\n or \n
 
     const descriptionMap = {};
-    const regex = /ID\s*=\s*"STR_(UNIT|TECH)_([^"]+)_LR"\s*;\s*Str\s*=\s*"([^"]+)"/
+    const regex = /ID\s*=\s*"STR_(UNIT|TECH|BLD)_([^"]+)_LR"\s*;\s*Str\s*=\s*"([^"]+)"/
 
     for (const line of lines) {
         const match = line.match(regex);
@@ -48,9 +47,7 @@ async function prepareDescriptionMap() {
             descriptionMap[`${type}_${name}`] = descriptionText;
         }
     }
-
     // Debug: log all loaded keys
-
     descriptionMapCache = descriptionMap;
     return descriptionMap;
 }
@@ -73,6 +70,12 @@ async function mergeDescriptionIntoUnitData(unitDataMap) {
 
         // Then TECH
         key = `TECH_${lookupName}`;
+        if (descriptionMap[key]) {
+            data.description = descriptionMap[key];
+        }
+
+        // Then BLD
+        key = `BLD_${lookupName}`;
         if (descriptionMap[key]) {
             data.description = descriptionMap[key];
         }
