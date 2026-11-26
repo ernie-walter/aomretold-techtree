@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     panelDescription.innerHTML = "";                              // Clear description for now. We will slowly build it up below...
     panelImg.src = `images/${data.icon.replace(/\\/g, "/")}`;
 
-    
+    const isGodPower = !!data.repeatCost;
 
     // Add description if it exists
     if (data.description) {
@@ -214,12 +214,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       panelDescription.appendChild(span);
     }
 
-    if (data.cost) addPanelInfo(panelDescription, data.cost, {newline: true});
+    if (data.isGodPower) {panelDescription.appendChild(document.createElement("br")); addPanelGodPowerInfo(panelDescription, data);}
+      else if (data.cost) {panelDescription.appendChild(document.createElement("br")); addPanelInfo(panelDescription, data.cost, {newline: true});}
     if (data.population) addPanelInfo(panelDescription, data.population, "Pop");
     if (data.trainTime) addPanelInfo(panelDescription, data.trainTime, "Time", {newline: true, suffix: "s"});
     if (data.hitPoints) addPanelInfo(panelDescription, data.hitPoints, "Hp");
     if (data.armor) addPanelInfo(panelDescription, data.armor, {prefix: "Armor"});
-    if (data.speed) addPanelInfo(panelDescription, data.speed, "Speed", {newline: true});
+    if (data.speed) addPanelInfo(panelDescription, data.speed, "Speed");
+    if (data.maxContained) appendIconValue(panelDescription, "alt_pop", data.maxContained, "");
     if (data.attacks) addPanelAttacks(panelDescription, data.attacks);
     addPanelEffects(panelDescription, data.effects);
   };  

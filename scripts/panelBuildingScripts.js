@@ -1,7 +1,7 @@
 // List of panel icon names (same as filenames without extension)
 const iconNames = [
   "food", "wood", "gold", "favor", "time",
-  "pop", "speed", "hp",
+  "pop", "speed", "hp", "alt_pop", "los",
   "atk_hack", "atk_pierce", "atk_crush", "atk_divine","atk_rof", "atk_projectiles", "atk_area", "atk_range",
   "armor_hack", "armor_pierce", "armor_crush",
   "type_humansoldier", "type_abstractinfantry", "type_abstractcavalry", "type_abstractarcher",
@@ -89,6 +89,12 @@ function addPanelAttacks(panel, attacks) {
   });  
 }
 
+// For god powers
+function addPanelGodPowerInfo(panel, data) {
+  addPanelInfo(panel, data.cost.Favor, "Favor", {suffix: " (initial)", newline: true});
+  addPanelInfo(panel, data.repeatCost, "Favor", {suffix: " (repeat)", newline: true});
+}
+
 // To display technical effects in the panel
 // Format effect amounts according to their relativity
 
@@ -131,6 +137,7 @@ function formatTechAmountWithRelativity(effect) {
 function formatEffectName(name) {
   return name
     .replace(/^Abstract/, "")
+    .replace(/^LogicalType/, "")
     .replace(/([a-z])([A-Z])/g, "$1 $2")
     .replace(/Upgraded$/, "")
     .trim();
@@ -148,17 +155,6 @@ function getEffectTarget(effect) {
 
 // Individual technology effect handlers
 const DATA_SUBTYPE_HANDLERS = {
-
-  // workrate: effect => {
-  // const resource = formatEffectResource(effect.unittype);
-  // return `<img src="${ICONS[resource].src}" class="panel-icon"> ${resource} gather rate`;
-  // },
-  // workratespecific: effect => {
-  //   const resource = effect.resource;
-  //   const source = formatEffectName(effect.unittype);
-  //   return `${resource} gathering rate from ${source}`;
-  // },
-
   workrate: effect => {
     const resource = ["FishResource", "AbstractFarm", "Herdable", "NonConvertableHerdable"].includes(effect.unittype)
     ? "Food"
@@ -171,23 +167,29 @@ const DATA_SUBTYPE_HANDLERS = {
   trainpoints: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} training time`,
   buildpoints: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} construction time`,
   cost: effect => `${getEffectTarget(effect)} ${effect.resource} cost`,
-  costbuildingtechs: effect => `${getEffectTarget(effect)} technology ${effect.resource} cost`,
-  researchrate: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} research speed`,
   hitpoints: effect => `<img src="images/Icons/hp.png" class="panel-icon"> ${getEffectTarget(effect)} hitpoints`,
   damage: effect => `<img src="images/Icons/atk_hack.png" class="panel-icon"> ${getEffectTarget(effect)} Damage`,
   armorvulnerability: effect => `<img src="images/Icons/armor_${effect.armortype.toLowerCase()}.png" class="panel-icon"> ${getEffectTarget(effect)}`,
   unitregenrate: effect => `${getEffectTarget(effect)} regen rate`,
-  maximumvelocity: effect => `${getEffectTarget(effect)} max speed`,
+  maximumvelocity: effect => `<img src="images/Icons/speed.png" class="panel-icon"> ${getEffectTarget(effect)} max speed`,
   damagebonus: effect => `${getEffectTarget(effect)} bonus vs <img src="images/Icons/type_${effect.unittype.toLowerCase()}.png" class="panel-icon"> ${effect.unittype}`,
-  los: effect => `${getEffectTarget(effect)} LOS`,
-  fullcapacitymultiplier: effect => `${getEffectTarget(effect)} FullCapacityMultiplier`,
-  modifyratecap: effect => `${getEffectTarget(effect)} ModifyRateCap`,
+  los: effect => `<img src="images/Icons/los.png" class="panel-icon"> ${getEffectTarget(effect)} LOS`,
   researchpoints: effect => `${getEffectTarget(effect)} ResearchPoints`,
-  maximumrange: effect => `<img src="images/Icons/atk_range.png" class="panel-icon">${getEffectTarget(effect)} Maximum Range`,
-  maximumcontained: effect => `${getEffectTarget(effect)} MaximumContained`,
-  trackrating: effect => `${getEffectTarget(effect)} Trackrating`,
+  maximumrange: effect => `<img src="images/Icons/atk_range.png" class="panel-icon"> ${getEffectTarget(effect)} max range`,
+  maximumcontained: effect => `<img src="images/Icons/alt_pop.png" class="panel-icon">${getEffectTarget(effect)} carry capacity`,
+  trackrating: effect => `<img src="images/Icons/atk_range.png" class="panel-icon"> ${getEffectTarget(effect)} track rating`,
   rateoffire: effect => `<img src="images/Icons/atk_rof.png" class="panel-icon"> ${getEffectTarget(effect)} rate of fire`,
   rechargetime: effect => `${getEffectTarget(effect)} RechargeTime`,
+  PopulationCapAddition: effect => `${getEffectTarget(effect)} Population Cap Addition`,
+  rechargetime: effect => `${getEffectTarget(effect)} recharge time`,
+  rechargetype: effect => `${getEffectTarget(effect)} recharge type`,
+  rechargeinit: effect => `${getEffectTarget(effect)} recharge init`,
+  actionenable: effect => `${getEffectTarget(effect)} actionenable`,
+  // I have no idea what these are for
+  fullcapacitymultiplier: effect => `${getEffectTarget(effect)} FullCapacityMultiplier`,
+  modifyratecap: effect => `${getEffectTarget(effect)} ModifyRateCap`,
+  costbuildingtechs: effect => `${getEffectTarget(effect)} technology ${effect.resource} cost`,
+  researchrate: effect => `<img src="images/Icons/time.png" class="panel-icon"> ${getEffectTarget(effect)} research speed`,
 };
 
 // Display technology effects

@@ -21,12 +21,16 @@ function populateUnitWrapper(wrapper, data) {
   }
 
   if (!unitNodeObj) return null;
-  const unitData = getUnitDataFromNode(unitNodeObj.node, wrapper);  // Creates 'unitData'
-
+  const unitData = getUnitDataFromNode(unitNodeObj.node, wrapper);
   if (!unitData) {
-  console.warn("No unit data returned for:", unitName);
-  return null;
-}
+    console.warn("No unit data returned for:", unitName);
+    return null;
+  }
+  if (unitNodeObj === godPowerIndex[unitName]) {
+    unitData.cost = { Favor: unitNodeObj.cost };
+    unitData.repeatCost = unitNodeObj.repeatCost;
+    unitData.isGodPower = true;
+  }
 
   // --- Icon ---
   let iconDiv = wrapper.querySelector('.icon');

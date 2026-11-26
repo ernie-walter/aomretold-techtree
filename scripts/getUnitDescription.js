@@ -17,7 +17,7 @@ function normalizeName(raw) {
 }
 
 function removePrefix(key) {
-  return key.replace(/^(UNIT|TECH|BLD)_/, '');
+  return key.replace(/^(UNIT|TECH|BLD|POWER)_/, '');
 }
 
 /**
@@ -34,7 +34,7 @@ async function prepareDescriptionMap() {
     const lines = text.split(/\r?\n/); // handle \r\n or \n
 
     const descriptionMap = {};
-    const regex = /ID\s*=\s*"STR_(UNIT|TECH|BLD)_([^"]+)_LR"\s*;\s*Str\s*=\s*"([^"]+)"/
+    const regex = /ID\s*=\s*"STR_(UNIT|TECH|BLD|POWER)_([^"]+)_LR"\s*;\s*Str\s*=\s*"([^"]+)"/
 
     for (const line of lines) {
         const match = line.match(regex);
@@ -78,6 +78,12 @@ async function mergeDescriptionIntoUnitData(unitDataMap) {
         key = `BLD_${lookupName}`;
         if (descriptionMap[key]) {
             data.description = descriptionMap[key];
+        }
+
+        // Then POWER
+        key = `POWER_${lookupName}`;
+        if (descriptionMap[key]) {
+        data.description = descriptionMap[key];
         }
     }
 }

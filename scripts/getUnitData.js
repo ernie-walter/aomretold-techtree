@@ -14,7 +14,12 @@ async function buildGodPowerIndex() {
     doc.querySelectorAll("power").forEach(p => {
       const name = p.getAttribute("name");
       if (!name) return;
-      index[name] = { node: p, civ };
+      index[name] = {
+        node: p,
+        civ,
+        cost: Number(p.querySelector('cost')?.textContent) || 0,
+        repeatCost: Number(p.querySelector('repeatcost')?.textContent) || 0
+      };
     });
   }
   return index;
@@ -143,11 +148,12 @@ function getUnitDataFromNode(node, wrapper) {
     armor[type] = `${(val * 100).toString().replace(/\.0+$/,"")}%`;
   });
 
-  // Population, Speed, Train Time, HP
+  // Population, Speed, Train Time, HP, carry capacity
   const population = node.querySelector('populationcount')?.textContent || null;
   const speed = Number(node.querySelector('maxvelocity')?.textContent) || null;
   const trainTime = Number(node.querySelector('trainpoints')?.textContent) || null;
   const hitPoints = Number(node.querySelector('maxhitpoints')?.textContent) || null;
+  const maxContained = Number(node.querySelector('maxcontained')?.textContent) || null;
 
   // Attacks
   const attacks = [];
@@ -221,6 +227,7 @@ function getUnitDataFromNode(node, wrapper) {
   hitPoints,
   speed,
   attacks,
+  maxContained,
   effects
 };
 }
