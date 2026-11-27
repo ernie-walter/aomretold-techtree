@@ -96,6 +96,7 @@ function filterIcons(selectedMajor) {
       }
 
       icon.classList.toggle("hidden", !show);
+      if (show) loadWrapperImages(icon);
     });
 
     const visibleIcons = row.querySelectorAll(".icon-wrapper:not(.hidden)");
@@ -140,6 +141,14 @@ function changePlayerColour(color) {
   if (largeIconFrame) {largeIconFrame.style.backgroundColor = color;}
 }
 
+function loadWrapperImages(wrapper) {
+  wrapper.querySelectorAll("img[data-src]").forEach(img => {
+    if (!img.getAttribute("src")) {
+      img.src = img.dataset.src;
+    }
+  });
+}
+
 // Build icons using populateUnitWrapper() and getUnitData()
 document.addEventListener("DOMContentLoaded", async () => {
   const unitIndex = await buildUnitIndex();                           // Creates unitIndex used below
@@ -162,17 +171,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }));
 
-  // for (const wrapper of wrappers) {                                   // For each wrapper:
-  //   const id = wrapper.getAttribute("name");                            // id = the wrapper's name, passed from getUnitDataFromNode()
-  //   const unitData = await populateUnitWrapper(wrapper, data);      // Run populateUnitWrapper() to fill it
-
-  //   if (id && unitData) {
-  //     unitDataMap[id] = unitData;                                       // Store that wrapper's data in top level map
-  //   }
-  // }
-
-  // // Merge description for both units and techs
-   await mergeDescriptionIntoUnitData(unitDataMap);
+  // Merge description for both units and techs
+  await mergeDescriptionIntoUnitData(unitDataMap);
 
   // Add god overlays
   wrappers.forEach(wrapper => {

@@ -50,7 +50,8 @@ function populateUnitWrapper(wrapper, data) {
     iconDiv.appendChild(img);
   }
   if (unitData.icon) {
-    img.src = `images/${unitData.icon.replace(/\\/g, "/")}`;
+    // img.src = `images/${unitData.icon.replace(/\\/g, "/")}`;
+    img.dataset.src = `images/${unitData.icon.replace(/\\/g, "/")}`;
     } else {
     console.warn("Missing icon for:", wrapper.getAttribute("name"));
     }
@@ -59,7 +60,8 @@ function populateUnitWrapper(wrapper, data) {
   const existingFrame = wrapper.querySelector('.frame');
   if (!existingFrame) {
     const frame = document.createElement('img');
-    frame.src = `images/Frames/Frame_${unitData.category}.png`;
+    //frame.src = `images/Frames/Frame_${unitData.category}.png`;
+    frame.dataset.src = `images/Frames/Frame_${unitData.category}.png`;
     frame.classList.add('frame');
     wrapper.appendChild(frame);
   }
