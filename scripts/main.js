@@ -44,7 +44,6 @@ const civToFile = {
   japanese: "japanesegodpowers.xml",
 };
 
-
 // Filtering out icons based on Major God selection
 const iconsCiv = document.querySelectorAll('.icon-wrapper');
 const dropdownMajor = document.getElementById('MajorGodToggle');
@@ -154,14 +153,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     icon.classList.add("hidden");
   });
 
-  for (const wrapper of wrappers) {                                   // For each wrapper:
-    const id = wrapper.getAttribute("name");                            // id = the wrapper's name, passed from getUnitDataFromNode()
-    const unitData = await populateUnitWrapper(wrapper, data);      // Run populateUnitWrapper() to fill it
+  await Promise.all(Array.from(wrappers).map(async wrapper => {
+    const id = wrapper.getAttribute("name");
+    const unitData = await populateUnitWrapper(wrapper, data);
 
     if (id && unitData) {
-      unitDataMap[id] = unitData;                                       // Store that wrapper's data in top level map
+      unitDataMap[id] = unitData;
     }
-  }
+  }));
+
+  // for (const wrapper of wrappers) {                                   // For each wrapper:
+  //   const id = wrapper.getAttribute("name");                            // id = the wrapper's name, passed from getUnitDataFromNode()
+  //   const unitData = await populateUnitWrapper(wrapper, data);      // Run populateUnitWrapper() to fill it
+
+  //   if (id && unitData) {
+  //     unitDataMap[id] = unitData;                                       // Store that wrapper's data in top level map
+  //   }
+  // }
 
   // // Merge description for both units and techs
    await mergeDescriptionIntoUnitData(unitDataMap);
